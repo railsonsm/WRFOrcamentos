@@ -10,13 +10,13 @@
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
 		<property name="hibernate.connection.pool_size">100</property>
-		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		
 		<!-- Usuario -->
-		<mapping class="br.com.parallel.entidade.Usuario" />
-		<mapping class="br.com.parallel.entidade.Sistema" />
+		<mapping class="br.cairu.pi.entidade.Cliente" />
+
 		
 	</session-factory>
 </hibernate-configuration>
