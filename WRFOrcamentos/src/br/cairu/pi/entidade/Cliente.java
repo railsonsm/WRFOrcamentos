@@ -21,7 +21,7 @@ public class Cliente {
 	private String nomeFantasia;
 	
 	@Column(name="cnpj", nullable=false)
-	private Integer cnpj;
+	private String cnpj;
 	
 	@Column(name="rua", nullable=false)
 	private String rua;
@@ -56,11 +56,11 @@ public class Cliente {
 		this.nomeFantasia = nomeFantasia;
 	}
 
-	public Integer getCnpj() {
+	public String getCnpj() {
 		return cnpj;
 	}
 
-	public void setCnpj(Integer cnpj) {
+	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
 

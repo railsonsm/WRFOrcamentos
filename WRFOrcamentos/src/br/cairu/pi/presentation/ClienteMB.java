@@ -7,6 +7,8 @@ import javax.faces.bean.ViewScoped;
 
 import ba.cairu.pi.DAO.ClienteDAO;
 import br.cairu.pi.entidade.Cliente;
+import br.com.parallel.DAO.UsuarioDAO;
+import br.com.parallel.entidade.Usuario;
 
 @ManagedBean
 @SessionScoped
@@ -36,8 +38,9 @@ public class ClienteMB {
 	
 	public String salvar() {
 		try {
-				getClienteDAO().salvar(getCliente());
-				cliente = new Cliente();
+			clienteDAO = new ClienteDAO();
+			clienteDAO.salvar(cliente);
+			cliente = new Cliente();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
