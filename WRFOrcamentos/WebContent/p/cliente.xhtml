@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:decorate template="inicio.xhtml">
+	<ui:define name="centro">
+	<h:form>
+		<h:panelGrid id="cadastro" styleClass="painel">
+			<p:message for="campoorbigatorio" />
+			<p:message for="teste" />
+			<p:outputLabel for="campoorbigatorio" value="Nome" />
+			<p:inputText  id="campoorbigatorio" value="#{clienteMB.cliente.nome}" required="true" requiredMessage="Campo Nome não pode estar vazio"/>
+			<p:outputLabel  for="teste" value="Nome Fantasia" />
+			<p:inputText  id="teste" value="#{clienteMB.cliente.nomeFantasia}" required="true" requiredMessage="Campos Nome Fantasia não pode estar vazio"/>
+			<p:outputLabel value="CNPJ" />
+			<p:inputMask mask="99.999.999/9999-99" value="#{clienteMB.cliente.cnpj}" />
+			<p:outputLabel value="Rua" />
+			<p:inputText value="#{clienteMB.cliente.rua}" />
+			<p:outputLabel value="Numero" />
+			<p:inputText value="#{clienteMB.cliente.numero}" />
+			<p:outputLabel value="Complemento" />
+			<p:inputText value="#{clienteMB.cliente.complemento}" />
+			<p:commandButton style="margin-left: 200px;" value="Salvar" update="cadastro" action="#{clienteMB.salvar}" />  
+		</h:panelGrid>
+	</h:form>
+	</ui:define>
+    </ui:decorate>
+</html>
