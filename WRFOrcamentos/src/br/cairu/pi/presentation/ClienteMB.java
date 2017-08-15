@@ -13,8 +13,7 @@ import br.cairu.pi.entidade.Cliente;
 @SessionScoped
 public class ClienteMB {
 	private ClienteDAO clienteDAO;
-	private Cliente cliente = null;
-	
+	private Cliente cliente;
 	
 	public ClienteDAO getClienteDAO() {
 		if(clienteDAO == null) {
@@ -38,7 +37,7 @@ public class ClienteMB {
 	
 	public String salvar() {
 		try {
-			if(cliente.getComplemento().equals("")) { cliente.setComplemento(null);}
+			//if(cliente.getComplemento().equals("")) { cliente.setComplemento(null);}
 			getClienteDAO().salvar(getCliente());
 			cliente = new Cliente();
 		}catch(Exception e) {
