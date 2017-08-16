@@ -8,22 +8,22 @@
 	<ui:decorate template="inicio.xhtml">
 	<ui:define name="centro">
 	<h:form>
-		<h:panelGrid id="cadastro" styleClass="margempainel">
+		<h:panelGrid id="cadastro" styleClass="painel">
 			<p:message for="campoorbigatorio" />
 			<p:message for="teste" />
 			<p:outputLabel for="campoorbigatorio" value="Nome" />
-			<p:inputText  id="campoorbigatorio" value="#{clienteMB.cliente.nome}" required="true" requiredMessage="Campo Nome não pode estar vazio"/>
+			<p:inputText  id="campoorbigatorio" value="#{fabricanteMB.fabricante.nome}" required="true" requiredMessage="Campo Nome não pode estar vazio"/>
 			<p:outputLabel  for="teste" value="Nome Fantasia" />
-			<p:inputText  id="teste" value="#{clienteMB.cliente.nomeFantasia}" required="true" requiredMessage="Campos Nome Fantasia não pode estar vazio"/>
+			<p:inputText  id="teste" value="#{fabricanteMB.fabricante.nomefantasia}" required="true" requiredMessage="Campos Nome Fantasia não pode estar vazio"/>
 			<p:outputLabel value="CNPJ" />
-			<p:inputMask mask="99.999.999/9999-99" value="#{clienteMB.cliente.cnpj}" />
+			<p:inputMask mask="99.999.999/9999-99" value="#{fabricanteMB.fabricante.cnpj}" />
 			<p:outputLabel value="Rua" />
-			<p:inputText value="#{clienteMB.cliente.rua}" />
+			<p:inputText value="#{fabricanteMB.fabricante.rua}" />
 			<p:outputLabel value="Numero" />
-			<p:inputText value="#{clienteMB.cliente.numero}" />
+			<p:inputText value="#{fabricanteMB.fabricante.numero}" />
 			<p:outputLabel value="Complemento" />
-			<p:inputText value="#{clienteMB.cliente.complemento}" />
-			<p:commandButton style="margin-left: 200px;" value="Salvar" update="cadastro" action="#{clienteMB.salvar}" />  
+			<p:inputText value="#{fabricanteMB.fabricante.complemento}" />
+			<p:commandButton style="margin-left: 200px;" value="Salvar" update="cadastro" actionListener="#{fabricanteMB.salvar}" />  
 		</h:panelGrid>
 	</h:form>
 	</ui:define>

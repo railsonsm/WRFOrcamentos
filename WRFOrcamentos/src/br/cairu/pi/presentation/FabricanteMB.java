@@ -31,5 +31,14 @@ public class FabricanteMB {
 		this.fabricanteDAO = fabricanteDAO;
 	}
 	
+	public String salvar() {
+		try {
+			getFabricanteDAO().salvar(getFabricante());
+			fabricante = new Fabricante();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 }

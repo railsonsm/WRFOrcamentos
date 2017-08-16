@@ -37,8 +37,7 @@ public class ClienteMB {
 	
 	public String salvar() {
 		try {
-			//if(cliente.getComplemento().equals("")) { cliente.setComplemento(null);}
-			getClienteDAO().salvar(getCliente());
+			getClienteDAO().salvar(cliente);
 			cliente = new Cliente();
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -21,16 +21,16 @@ public class Fabricante {
 	private String nomefantasia;
 	
 	@Column(nullable = false)
+	private String cnpj;
+	
+	@Column(nullable = false)
 	private String rua;
 	
 	@Column(nullable = false)
 	private String complemento;
 	
 	@Column(nullable = false)
-	private int numero;
-	
-	@Column(nullable = false)
-	private double valortabela;
+	private Integer numero;
 
 	public Integer getCodigo() {
 		return codigo;
@@ -56,6 +56,14 @@ public class Fabricante {
 		this.nomefantasia = nomefantasia;
 	}
 
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
 	public String getRua() {
 		return rua;
 	}
@@ -72,20 +80,12 @@ public class Fabricante {
 		this.complemento = complemento;
 	}
 
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
-	}
-
-	public double getValortabela() {
-		return valortabela;
-	}
-
-	public void setValortabela(double valortabela) {
-		this.valortabela = valortabela;
 	}
 	
 	
