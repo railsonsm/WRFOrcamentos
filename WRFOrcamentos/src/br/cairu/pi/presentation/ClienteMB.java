@@ -38,7 +38,7 @@ public class ClienteMB {
 	public String salvar() {
 		try {
 			getClienteDAO().salvar(cliente);
-			cliente = new Cliente();
+			//cliente = new Cliente();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

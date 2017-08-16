@@ -1,18 +1,14 @@
 package br.cairu.pi.entidade;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 @Entity
 @Table(name= "fabricante")
 public class Fabricante {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	private Integer codigo;
+	private Integer idFabricante;
 	
 	@Column(name="nome", nullable=false)
 	private String nome;
@@ -32,12 +28,12 @@ public class Fabricante {
 	@Column(nullable = false)
 	private Integer numero;
 
-	public Integer getCodigo() {
-		return codigo;
+	public Integer getIdFabricante() {
+		return idFabricante;
 	}
 
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
+	public void setIdFabricante(Integer idFabricante) {
+		this.idFabricante = idFabricante;
 	}
 
 	public String getNome() {
@@ -87,6 +83,6 @@ public class Fabricante {
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
-	
+
 	
 }

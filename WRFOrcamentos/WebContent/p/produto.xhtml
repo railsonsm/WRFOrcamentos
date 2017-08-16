@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:f="http://java.sun.com/jsf/core"
-xmlns:p="http://primefaces.org/ui">
-<h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Produto</title>
-</h:head>
-<h:body>
-
-</h:body>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:decorate template="inicio.xhtml">
+	<ui:define name="centro">
+	<h:form>
+		<h:panelGrid styleClass="painel">
+			<p:inputText disable="true"/>
+			<p:outputLabel value="Codigo fabricante" />
+			<p:inputText value="#{produtoMB.idSelecao}" />
+			<p:outputLabel value="Descricao" />
+			<p:inputText value="#{produtoMB.produto.descricao}" />
+			<p:outputLabel value="Valor Tabela" />
+			<p:inputText value="#{produtoMB.produto.valortabela}" />
+			<p:commandButton style="margin-left: 200px;" value="Salvar" action="#{produtoMB.salvar}" />  
+		</h:panelGrid>
+	</h:form>
+	</ui:define>
+    </ui:decorate>
 </html>
