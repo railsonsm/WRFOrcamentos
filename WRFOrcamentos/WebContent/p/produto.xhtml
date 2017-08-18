@@ -8,8 +8,13 @@
 	<ui:decorate template="inicio.xhtml">
 	<ui:define name="centro">
 	<h:form>
+		<h:panelGrid>
+			<p:inputText value="#{produtoMB.idSelecao}"/>
+			<p:commandButton value="Ok" action="#{produtoMB.buscarFabricPorId}"/>
+		</h:panelGrid>
+	</h:form>
+	<h:form>	
 		<h:panelGrid styleClass="painel">
-			<p:inputText disable="true"/>
 			<p:outputLabel value="Codigo fabricante" />
 			<p:inputText value="#{produtoMB.idSelecao}" />
 			<p:outputLabel value="Descricao" />

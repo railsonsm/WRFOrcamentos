@@ -62,6 +62,17 @@ public class ProdutoMB {
 		this.idSelecao = idSelecao;
 	}
 	
+	public String buscarFabricPorId() {
+		try {
+			getFabricante();
+			getFabricanteDAO().buscarFabricanteporId(idSelecao); 
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return fabricante.getNome();
+	}
 	
 	public String salvar() {
 		try {
@@ -76,6 +87,8 @@ public class ProdutoMB {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return null;	
 	}
+	
+	
 }

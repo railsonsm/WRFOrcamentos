@@ -5,6 +5,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name= "fabricante")
+@NamedQueries({
+	@NamedQuery(name = "Fabricante.listarPorLoginSenha", query = "SELECT f.nome FROM Fabricante f WHERE f.idFabricante = :idFabricante") })
 public class Fabricante {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
