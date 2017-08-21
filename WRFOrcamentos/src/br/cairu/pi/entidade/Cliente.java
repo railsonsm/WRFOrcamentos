@@ -19,6 +19,9 @@ public class Cliente {
 	@Column(name="cnpj", nullable=false)
 	private String cnpj;
 	
+	@Column(name="cep", nullable=false)
+	private String cep;
+	
 	@Column(name="rua", nullable=false)
 	private String rua;
 	
@@ -27,13 +30,22 @@ public class Cliente {
 	
 	@Column(name="complemento", nullable=false)
 	private String complemento;
+	
+	@Column(name="email", nullable = false)
+	private String email;
+	
+	@Column(name="telefone", nullable=false)
+	private String telefone;
+	
+	@Column(name="celular",  nullable=false)
+	private String celular;
 
-	public Integer getCodigo() {
+	public Integer getIdCliente() {
 		return idCliente;
 	}
 
-	public void setCodigo(Integer codigo) {
-		this.idCliente = codigo;
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public String getNome() {
@@ -60,6 +72,14 @@ public class Cliente {
 		this.cnpj = cnpj;
 	}
 
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
 	public String getRua() {
 		return rua;
 	}
@@ -82,6 +102,30 @@ public class Cliente {
 
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 	
 	

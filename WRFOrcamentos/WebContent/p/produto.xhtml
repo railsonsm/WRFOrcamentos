@@ -8,19 +8,21 @@
 	<ui:decorate template="inicio.xhtml">
 	<ui:define name="centro">
 	<h:form>	
-		<h:panelGrid>
-			<p:inputText value="#{produtoMB.idSelecao}"/>
-			<p:commandButton value="Ok" action="#{produtoMB.buscarFabricPorId}" update="descricaoFabricante"/>
-			<p:outputLabel id="descricaoFabricante" value="#{produtoMB.fabricante.nome}"/>
-		</h:panelGrid>
-		<h:panelGrid styleClass="painel">
-			<p:outputLabel value="Codigo fabricante" />
+		<h:panelGrid  styleClass="painel" id="Cdproduto"  >
+		
 			<p:inputText value="#{produtoMB.idSelecao}" />
+			<p:commandButton value="Ok" action="#{produtoMB.buscarFabricPorId}" update="descricaoFabricante" />
+			
+			<p:outputLabel value="Fabricante"/>
+			<p:inputText  value="#{produtoMB.fabricante.nome}" id="descricaoFabricante" />
+			
 			<p:outputLabel value="Descricao" />
 			<p:inputText value="#{produtoMB.produto.descricao}" />
+			
 			<p:outputLabel value="Valor Tabela" />
 			<p:inputText value="#{produtoMB.produto.valortabela}" />
-			<p:commandButton style="margin-left: 200px;" value="Salvar" action="#{produtoMB.salvar}" />  
+			
+			<p:commandButton style="margin-left: 200px;" value="Salvar" action="#{produtoMB.salvar}" update="Cdproduto"/>  
 		</h:panelGrid>
 	</h:form>
 	</ui:define>
