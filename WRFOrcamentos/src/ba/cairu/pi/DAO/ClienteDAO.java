@@ -1,17 +1,20 @@
 package ba.cairu.pi.DAO;
 
-import org.hibernate.Session;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 
 import br.cairu.pi.entidade.Cliente;
-import br.cairu.pi.util.HibernateUtil;
 
 public class ClienteDAO {
-	final Session session = HibernateUtil.getHibernateSession();
+	EntityManagerFactory factory = Persistence.createEntityManagerFactory("default"); 
+	EntityManager manager = factory.createEntityManager();
 	
 	public Cliente salvar(Cliente c) {
-		session.beginTransaction();
-		session.save(c);
-		session.getTransaction().commit();
+		manager.getTransaction().begin();
+		manager.persist(c);
+		manager.getTransaction().commit();
 		return null;
 	}
 		

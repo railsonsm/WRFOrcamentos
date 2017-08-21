@@ -1,5 +1,6 @@
 package br.cairu.pi.presentation;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -17,22 +18,28 @@ public class ProdutoMB {
 	private ProdutoDAO produtoDAO;
 	private Integer idSelecao;
 	
-	public String buscarFabricPorId() {
+	/*public String buscarFabricPorId() {
 		try {
 			setFabricante(getFabricanteDAO().buscarFabricanteporId(idSelecao));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
+	}*/
+	
+	@PostConstruct
+	public void init() {
+		this.fabricante =  new Fabricante();
+		this.produto = new Produto();
 	}
 	
 	public String salvar() {
 		try {
 			//fabricante =  new Fabricante();
 			//produto = new Produto();
-			getFabricante().setIdFabricante(idSelecao);
-			getProduto().setFabricante(getFabricante());
-			getProdutoDAO().salvar(getProduto());
+			fabricante.setIdFabricante(idSelecao);
+			produto.setFabricante(fabricante);
+			getProdutoDAO().salvar(produto);
 			fabricante =  new Fabricante();
 			produto = new Produto();
 		
@@ -65,9 +72,6 @@ public class ProdutoMB {
 	}
 	
 	public Fabricante getFabricante() {
-		if(fabricante == null) {
-			fabricante = new Fabricante();
-		}
 		return fabricante;
 	}
 	public void setFabricante(Fabricante fabricante) {
@@ -75,9 +79,6 @@ public class ProdutoMB {
 	}
 	
 	public Produto getProduto() {
-		if(produto == null) {
-			produto = new Produto();
-		}
 		return produto;
 	}
 	

@@ -1,24 +1,27 @@
 package ba.cairu.pi.DAO;
 
-import org.hibernate.Session;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import org.hibernate.criterion.Restrictions;
 
 import br.cairu.pi.entidade.Fabricante;
-import br.cairu.pi.util.HibernateUtil;
 
 public class FabricanteDAO {
-	final Session session = HibernateUtil.getHibernateSession();
+	EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
+	EntityManager manager = factory.createEntityManager();
 
-	public Fabricante buscarFabricanteporId(Integer id) {
+	/*public Fabricante buscarFabricanteporId(Integer id) {
 		
 		return(Fabricante) session.createCriteria(Fabricante.class)
 				.add(Restrictions.idEq(id)).uniqueResult();
-	}
+	}*/
 	
 	public Fabricante salvar(Fabricante f) {
-		session.beginTransaction();
-		session.save(f);
-		session.getTransaction().commit();
+		manager.getTransaction().begin();
+		manager.persist(f);
+		manager.getTransaction().commit();
 		return null;
 	}
 }

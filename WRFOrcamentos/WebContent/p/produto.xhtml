@@ -7,14 +7,12 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:decorate template="inicio.xhtml">
 	<ui:define name="centro">
-	<h:form>
+	<h:form>	
 		<h:panelGrid>
 			<p:inputText value="#{produtoMB.idSelecao}"/>
 			<p:commandButton value="Ok" action="#{produtoMB.buscarFabricPorId}" update="descricaoFabricante"/>
 			<p:outputLabel id="descricaoFabricante" value="#{produtoMB.fabricante.nome}"/>
 		</h:panelGrid>
-	</h:form>
-	<h:form>	
 		<h:panelGrid styleClass="painel">
 			<p:outputLabel value="Codigo fabricante" />
 			<p:inputText value="#{produtoMB.idSelecao}" />

@@ -14,6 +14,16 @@ public class ClienteMB {
 	private ClienteDAO clienteDAO;
 	private Cliente cliente;
 	
+	public String salvar() {
+		try {
+			getClienteDAO().salvar(cliente);
+			cliente = new Cliente();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	@PostConstruct
 	public void init() {
 		this.cliente = new Cliente();
@@ -30,22 +40,11 @@ public class ClienteMB {
 	}
 	
 	public Cliente getCliente() {
-		if(cliente == null) {
-			cliente = new Cliente();
-		}
 		return cliente;
 	}
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 	
-	public String salvar() {
-		try {
-			getClienteDAO().salvar(cliente);
-			cliente = new Cliente();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+	
 }

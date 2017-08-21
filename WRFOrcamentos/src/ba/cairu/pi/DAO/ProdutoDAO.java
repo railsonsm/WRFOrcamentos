@@ -1,20 +1,18 @@
 package ba.cairu.pi.DAO;
 
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.mapping.List;
-
-import br.cairu.pi.entidade.Fabricante;
 import br.cairu.pi.entidade.Produto;
-import br.cairu.pi.util.HibernateUtil;
 
 public class ProdutoDAO {
-	final Session session = HibernateUtil.getHibernateSession();
+	EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
+	EntityManager manager = factory.createEntityManager();
 	
 	
 	/*public Fabricante busca(Integer idFabricante) {
@@ -30,13 +28,10 @@ public class ProdutoDAO {
 
     }*/
 	
-
-	
-	
 	public Produto salvar(Produto p) {
-		session.beginTransaction();
-		session.save(p);
-		session.getTransaction().commit();
+		manager.getTransaction().begin();
+		manager.persist(p);
+		manager.getTransaction().commit();
 		return null;
 	}
 }

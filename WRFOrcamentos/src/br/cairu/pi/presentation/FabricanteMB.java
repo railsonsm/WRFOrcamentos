@@ -1,9 +1,11 @@
 package br.cairu.pi.presentation;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import ba.cairu.pi.DAO.FabricanteDAO;
+import br.cairu.pi.entidade.Cliente;
 import br.cairu.pi.entidade.Fabricante;
 
 @ManagedBean
@@ -12,10 +14,22 @@ public class FabricanteMB {
 	private Fabricante fabricante;
 	private FabricanteDAO fabricanteDAO;
 	
-	public Fabricante getFabricante() {
-		if(fabricante == null) {
+	public String salvar() {
+		try {
+			getFabricanteDAO().salvar(fabricante);
 			fabricante = new Fabricante();
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	@PostConstruct
+	public void init() {
+		this.fabricante = new Fabricante();
+	}
+	
+	public Fabricante getFabricante() {
 		return fabricante;
 	}
 	public void setFabricante(Fabricante fabricante) {
@@ -31,14 +45,5 @@ public class FabricanteMB {
 		this.fabricanteDAO = fabricanteDAO;
 	}
 	
-	public String salvar() {
-		try {
-			getFabricanteDAO().salvar(getFabricante());
-			fabricante = new Fabricante();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 	
 }
