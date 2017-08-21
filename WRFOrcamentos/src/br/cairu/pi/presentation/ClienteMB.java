@@ -1,19 +1,23 @@
 package br.cairu.pi.presentation;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
-
+import javax.faces.bean.ViewScoped;
 
 import ba.cairu.pi.DAO.ClienteDAO;
 import br.cairu.pi.entidade.Cliente;
 
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class ClienteMB {
 	private ClienteDAO clienteDAO;
 	private Cliente cliente;
+	
+	@PostConstruct
+	public void init() {
+		this.cliente = new Cliente();
+	}
 	
 	public ClienteDAO getClienteDAO() {
 		if(clienteDAO == null) {
@@ -38,7 +42,7 @@ public class ClienteMB {
 	public String salvar() {
 		try {
 			getClienteDAO().salvar(cliente);
-			//cliente = new Cliente();
+			cliente = new Cliente();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

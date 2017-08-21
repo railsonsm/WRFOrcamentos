@@ -10,7 +10,8 @@
 	<h:form>
 		<h:panelGrid>
 			<p:inputText value="#{produtoMB.idSelecao}"/>
-			<p:commandButton value="Ok" action="#{produtoMB.buscarFabricPorId}"/>
+			<p:commandButton value="Ok" action="#{produtoMB.buscarFabricPorId}" update="descricaoFabricante"/>
+			<p:outputLabel id="descricaoFabricante" value="#{produtoMB.fabricante.nome}"/>
 		</h:panelGrid>
 	</h:form>
 	<h:form>	

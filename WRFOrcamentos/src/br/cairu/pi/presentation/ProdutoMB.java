@@ -15,63 +15,15 @@ public class ProdutoMB {
 	private Fabricante fabricante;
 	private Produto produto;
 	private ProdutoDAO produtoDAO;
-	private Integer idSelecao; 
-	
-	public FabricanteDAO getFabricanteDAO() {
-		if(fabricanteDAO == null) {
-			fabricanteDAO = new FabricanteDAO();
-		}
-		return fabricanteDAO;
-	}
-	public void setFabricanteDAO(FabricanteDAO fabricanteDAO) {
-		this.fabricanteDAO = fabricanteDAO;
-	}
-	public Fabricante getFabricante() {
-		if(fabricante == null) {
-			fabricante = new Fabricante();
-		}
-		return fabricante;
-	}
-	public void setFabricante(Fabricante fabricante) {
-		this.fabricante = fabricante;
-	}
-	public Produto getProduto() {
-		if(produto == null) {
-			produto = new Produto();
-		}
-		return produto;
-	}
-	public void setProduto(Produto produto) {
-		this.produto = produto;
-	}
-	public ProdutoDAO getProdutoDAO() {
-		if(produtoDAO == null)
-		{
-			produtoDAO = new ProdutoDAO();
-		}
-		return produtoDAO;
-	}
-	public void setProdutoDAO(ProdutoDAO produtoDAO) {
-		this.produtoDAO = produtoDAO;
-	}
-		
-	public Integer getIdSelecao() {
-		return idSelecao;
-	}
-	public void setIdSelecao(Integer idSelecao) {
-		this.idSelecao = idSelecao;
-	}
+	private Integer idSelecao;
 	
 	public String buscarFabricPorId() {
 		try {
-			getFabricante();
-			getFabricanteDAO().buscarFabricanteporId(idSelecao); 
-			
-			
-		}catch (Exception e) {
+			setFabricante(getFabricanteDAO().buscarFabricanteporId(idSelecao));
+		} catch (Exception e) {
 			e.printStackTrace();
-		}	
-		return fabricante.getNome();
+		}
+		return null;
 	}
 	
 	public String salvar() {
@@ -90,5 +42,55 @@ public class ProdutoMB {
 		return null;	
 	}
 	
+	public FabricanteDAO getFabricanteDAO() {
+		if (fabricanteDAO == null) {
+			fabricanteDAO = new FabricanteDAO();
+		}
+		return fabricanteDAO;
+	}
+
+	public void setFabricanteDAO(FabricanteDAO fabricanteDAO) {
+		this.fabricanteDAO = fabricanteDAO;
+	}
+
+	public ProdutoDAO getProdutoDAO() {
+		if (produtoDAO == null) {
+			produtoDAO = new ProdutoDAO();
+		}
+		return produtoDAO;
+	}
+
+	public void setProdutoDAO(ProdutoDAO produtoDAO) {
+		this.produtoDAO = produtoDAO;
+	}
+	
+	public Fabricante getFabricante() {
+		if(fabricante == null) {
+			fabricante = new Fabricante();
+		}
+		return fabricante;
+	}
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
+	}
+	
+	public Produto getProduto() {
+		if(produto == null) {
+			produto = new Produto();
+		}
+		return produto;
+	}
+	
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+	
+	public Integer getIdSelecao() {
+		return idSelecao;
+	}
+	
+	public void setIdSelecao(Integer idSelecao) {
+		this.idSelecao = idSelecao;
+	}
 	
 }
