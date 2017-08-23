@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html">
+	<h:head>
+		<link rel="shortcut icon" href="../img/icon.png" ></link>
+		<link rel="stylesheet" type="text/css" href="../style/style.css"></link>
+		<meta http-equiv="Content-Type"
+			content="text/html; charset=ISO-8859-1" />
+		<title>WRF Orçamentos - Login</title>
+	</h:head>
+	<h:body styleClass="login">
+		<p:dataTable value="Teste">
+			<f:facet name="header">
+			       	     WRF - Login
+			        </f:facet>
+			<p:column>
+				<p:graphicImage url="../img/logowrf.png" styleClass="logologin" />
+			</p:column>
+			<p:column>
+				<p:panelGrid>
+					<p:outputLabel  style="margin-left: 19px;" value="Digite o login:" />
+					<br><p:inputText style="margin-left: 19px;"/></br>
+					<br><p:outputLabel  style="margin-left: 19px;" value="Digite a senha:"/></br>
+					<p:inputText style="margin-left: 19px;"/>
+				</p:panelGrid>
+				<p:commandButton value="Entrar" style="margin-top: 10px; margin-left: 120px;"/>
+			</p:column>
+		</p:dataTable>
+	</h:body>
+</f:view>
+</html>

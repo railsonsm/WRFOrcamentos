@@ -40,6 +40,7 @@ public class ProdutoMB {
 			getProdutoDAO().salvar(produto);
 			fabricante =  new Fabricante();
 			produto = new Produto();
+			idSelecao = null;
 		
 		}catch (Exception e) {
 			e.printStackTrace();

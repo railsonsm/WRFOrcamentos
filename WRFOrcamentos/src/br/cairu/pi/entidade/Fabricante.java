@@ -1,15 +1,21 @@
 package br.cairu.pi.entidade;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 
 @Entity
 @Table(name= "fabricante")
-//@NamedQueries({
-	//@NamedQuery(name = "Fabricante.listarPorLoginSenha", query = "SELECT f.nome FROM Fabricante f WHERE f.idFabricante = :idFabricante") })
-public class Fabricante {
+@SequenceGenerator(name = "fac_seq", sequenceName="fabricante_sequencia", initialValue = 1, allocationSize = 1)
+public class Fabricante implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator =  "fac_seq")
 	private Integer idFabricante;
 	
 	@Column(name="nome", nullable=false)

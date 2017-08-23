@@ -1,13 +1,21 @@
 package br.cairu.pi.entidade;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 
 @Entity
 @Table(name = "cliente")
-public class Cliente {
+@SequenceGenerator(name = "cli_seq", sequenceName= "cliente_sequencia", initialValue=1, allocationSize = 1)
+public class Cliente  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="cli_seq")
 	private Integer idCliente;
 	
 	@Column(name="nome", nullable=false) //Nullable = NOT NULL
@@ -127,6 +135,4 @@ public class Cliente {
 	public void setCelular(String celular) {
 		this.celular = celular;
 	}
-	
-	
 }

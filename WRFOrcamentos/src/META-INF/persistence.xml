@@ -14,6 +14,8 @@
    <class>ba.cairu.pi.entidade.Cliente</class>
    <class>ba.cairu.pi.entidade.Fabricante</class>
    <class>ba.cairu.pi.entidade.Produto</class>
+   <class>ba.cairu.pi.entidade.Orcamento</class>
+   <class>ba.cairu.pi.entidade.OrcamentoProduto</class>
 
    <properties>
   <!-- dados da conexao -->
@@ -33,7 +35,7 @@
   <property name="hibernate.format_sql" value="true" />
 
   <!--  atualiza o banco, gera as tabelas se for preciso -->
-  <property name="hibernate.hbm2ddl.auto" value="update" />
+  <property name="hibernate.hbm2ddl.auto" value="create" />
     
    </properties>
  </persistence-unit>
