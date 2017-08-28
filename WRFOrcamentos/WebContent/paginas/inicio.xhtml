@@ -1,24 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<ui:composition template="templatePadrao.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	<ui:define name="titulo">Inicio</ui:define>
-	<ui:define name="centro">
+	
+		<h:head>
+			<link rel="shortcut icon" href="/img/icon.png" ></link>
+			<link rel="stylesheet" type="text/css" href="style.css"></link>
+			<f:facet name="first">
+				<h:outputStylesheet name="style.css" library="/paginas/style.css" />
+				<title>WRF Orçamentos</title>
+			</f:facet>
+		</h:head>
+		
+	<h:body style="background-color: #CDE8FF">	
+			<p:graphicImage url="/img/cabecalhopadrao.png" styleClass="logotemplate" style=" background-size: 100%;
+    background-repeat: no-repeat; "/>
 		<h:form>
 			<p:growl id="messages" />
-
-			<p:menubar>
-				<p:submenu label="File" icon="ui-icon-document">
-					<p:submenu label="New" icon="ui-icon-contact">
-						<p:menuitem value="Project" url="#" />
-						<p:menuitem value="Other" url="#" />
+			
+			<p:menubar style="min-height: 5px; ">
+				<p:menuitem value="Inicio" url="/paginas/"
+					icon="ui-icon-close" />
+				<p:submenu label="Cadastro" icon="ui-icon-document">
+					<p:submenu label="Cliente" icon="ui-icon-contact">
+						<p:menuitem value="Novo" url="cadastrarCliente.xhtml" />
+						<p:menuitem value="Editar" url="#" />
 					</p:submenu>
-					<p:menuitem value="Open" url="#" />
-					<p:separator />
-					<p:menuitem value="Quit" url="#" />
+					<p:submenu label="Fabricante" icon="ui-icon-contact">
+						<p:menuitem value="Novo" url="#" />
+						<p:menuitem value="Editar" url="#" />
+					</p:submenu>
+					<p:submenu label="Produto" icon="ui-icon-contact">
+						<p:menuitem value="Novo" url="#" />
+						<p:menuitem value="Editar" url="#" />
+					</p:submenu>
+
 				</p:submenu>
 
 				<p:submenu label="Edit" icon="ui-icon-pencil">
@@ -61,5 +81,10 @@
 				</f:facet>
 			</p:menubar>
 		</h:form>
-	</ui:define>
-</ui:composition>
+		<h:panelGrid style="background-color: #ffffff; width: 100%;" columnClasses="bordarPanel" >
+		<ui:insert name="centro">
+			</ui:insert>
+		</h:panelGrid>
+			
+	</h:body>
+</html>

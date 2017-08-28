@@ -1,10 +1,24 @@
-.logotemplate{
-	width: 80px; 
-	height: 120px;
-	margin-bottom: 5px;
-	background-color: black;
-	
+.bordarPanel{
+	vertical-align:top;
+	border: solid 1px #A6C9E2;
+    border-radius: 5px;
 }
+
+.logotemplate{
+	width: 102%; 
+	height: 150px;
+	margin-left: -18px;
+	margin-bottom: -5px;
+	margin-top: -10px;
+}
+
+h1{
+	color: #2E90BD;
+	font-size: 20px;	
+	font-family: Helvetica;
+	margin-left:35px;
+}
+
 .logologin{
 	width: 100px; 
 	height: 150px;
@@ -26,6 +40,7 @@
 .panellogin{
 	margin-top: 100px;
 	margin-left:85px;
+	min-width:  
 }
 
 
@@ -35,31 +50,19 @@
 	font-size: 20px;
 
 }
-.padrao {
-	font-size: 15px;
-	font: Courier New;
-	margin-top: 20px;
-    margin-bottom: 30px;
-    margin-right: 30px;
-    margin-left: 30px;
-    background-image: url("../img/back1.jpg");
-    background-size: 100%;
-    background-repeat: no-repeat;  
+body {
+	font-size: 12px;
+	font: Courier New; 
 }
 
 .rotulo{
-	width: 50px;
+	width: 150px;
 }
 .campo{
-	
+	width: 50px;
 }
 
 .painel{
 	margin-top: 50px;
 	margin-left: 50px;
 	
-}
-
-.tabelamenu{
-	
-}

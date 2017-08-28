@@ -1,0 +1,81 @@
+<ui:composition template="inicio.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="titulo">Inicio</ui:define>
+	<ui:define name="centro">
+		<h:form>
+			<h1>Cadastrar Cliente</h1>
+			<p:panelGrid columns="4" style="width:95%; margin-top: 5px; margin-left: 35px; margin" columnClasses="rotulo, campo, rotulo, campo" >
+				
+				<p:outputLabel value="Nome"/>
+				<p:inputText size="35" value=""/>
+				
+				
+				<p:outputLabel value="Nome Fantasia"/>
+				<p:inputText size="35" value=""/>
+				
+				<p:outputLabel value="CNPJ"/>
+				<p:inputMask  size="15" mask="99.999.999/9999-99" value="CNPJ"/>
+					
+				<p:outputLabel value="E-mail"/>
+				<p:inputText value=""/>
+				
+				<p:outputLabel value="CEP"/>
+				<p:inputMask  size="7" mask="99999-999" value="CEP"/>
+				
+				<p:outputLabel value="Rua"/>
+				<p:inputText size="35" value=""/>
+				
+				<p:outputLabel value="Número"/>
+				<p:inputText size="5" value=""/>
+				
+				<p:outputLabel value="Complemento"/>
+				<p:inputText size="35" value=""/>
+				
+				<p:outputLabel value="Telefone"/>
+				<p:inputMask size="15" mask="(99)9999-9999" value=""/>
+				
+				<p:outputLabel value="Celular"/>
+				<p:inputMask size="15" mask="(99)99999-9999" value=""/>
+				
+				<p:outputLabel value="Cidade"/>
+				<p:inputText size="15" value=""/>
+				
+				<p:outputLabel value="Estado"/>
+				<p:inputText size="15" value=""/>
+				
+				<p:outputLabel value="Nome"/>
+				<p:inputText value=""/>
+				
+				
+				<p:outputLabel value="Nome"/>
+				<p:inputText value=""/>
+				
+				<p:outputLabel value="Nome"/>
+				<p:inputText value=""/>
+				
+				<p:outputLabel value="Nome"/>
+				<p:inputText value=""/>
+				
+				<p:outputLabel value="Nome"/>
+				<p:inputText value=""/>
+				
+				<p:outputLabel value="Nome"/>
+				<p:inputText value=""/>
+				
+				<p:outputLabel value="Nome"/>
+				<p:inputText value=""/>
+				
+				<p:outputLabel value="Nome"/>
+				<p:inputText value=""/>
+				
+				
+				
+			</p:panelGrid>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
