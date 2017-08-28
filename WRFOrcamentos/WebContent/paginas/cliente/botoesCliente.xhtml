@@ -1,0 +1,19 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form>
+	<p:toolbar>
+	<p:toolbarGroup>
+    		<p:commandButton value="Novo" action="/paginas/cliente/cadastrarCliente.xhtml"/>
+    		<p:commandButton value="Salvar"/>
+    		<p:commandButton value="Editar" action="/paginas/cliente/editarCliente.xhtml"/>
+    	</p:toolbarGroup>
+    	<p:toolbarGroup align="right">
+				<p:commandButton value="Voltar para menu" action="/paginas/inicio.xhtml"/>
+			</p:toolbarGroup>
+	</p:toolbar>   
+</h:form>	
+</ui:composition>	

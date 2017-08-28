@@ -2,6 +2,8 @@
 	width: 80px; 
 	height: 120px;
 	margin-bottom: 5px;
+	background-color: black;
+	
 }
 .logologin{
 	width: 100px; 
@@ -45,7 +47,19 @@
     background-repeat: no-repeat;  
 }
 
+.rotulo{
+	width: 50px;
+}
+.campo{
+	
+}
+
 .painel{
 	margin-top: 50px;
 	margin-left: 50px;
+	
+}
+
+.tabelamenu{
+	
 }

@@ -15,7 +15,7 @@ public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Prod_seq")
 	private Integer idProduto;
 
 	@Column
