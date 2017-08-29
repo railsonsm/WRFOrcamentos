@@ -6,84 +6,82 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	
-		<h:head>
-			<link rel="shortcut icon" href="img/icon.png" ></link>
-			<link rel="stylesheet" type="text/css" href="style.css"></link>
-			<f:facet name="first">
-				<h:outputStylesheet name="style.css" library="/paginas/style.css" />
-				<title>WRF Orçamentos</title>
-			</f:facet>
-		</h:head>
-		
-	<h:body style="background-color: #CDE8FF">	
-			<p:graphicImage url="/img/cabecalhopadrao.png" styleClass="logotemplate" style=" background-size: 100%;
-    background-repeat: no-repeat; "/>
-		<h:form>
-			<p:growl id="messages" />
-			
-			<p:menubar style="min-height: 5px; ">
-				<p:menuitem value="Inicio" url="/paginas/"
-					icon="ui-icon-close" />
-				<p:submenu label="Cadastro" icon="ui-icon-document">
-					<p:submenu label="Cliente" icon="ui-icon-contact">
-						<p:menuitem value="Novo" url="cadastrarCliente.xhtml" />
-						<p:menuitem value="Editar/Excluir" url="#" />
-					</p:submenu>
-					<p:submenu label="Fabricante" icon="ui-icon-contact">
-						<p:menuitem value="Novo" url="cadastrarFabricante.xhtml" />
-						<p:menuitem value="Editar/Excluir" url="#" />
-					</p:submenu>
-					<p:submenu label="Produto" icon="ui-icon-contact">
-						<p:menuitem value="Novo" url="cadastrarProduto.xhtml" />
-						<p:menuitem value="Editar/Excluir" url="#" />
-					</p:submenu>
 
-				</p:submenu>
-				
-				<p:submenu label="Orçamento" icon="ui-icon-document">
-					<p:menuitem value="Novo" url="registrarOrcamento.xhtml" />
+<h:head>
+	<link rel="shortcut icon" href="../img/icon.png"></link>
+	<link rel="stylesheet" type="text/css" href="style.css"></link>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<f:facet name="first">
+		<title>WRF Orçamentos</title>
+	</f:facet>
+</h:head>
+
+<h:body style="background-color: #CDE8FF">
+	<p:graphicImage url="/img/cabecalhopadrao.png" styleClass="logotemplate"/>
+	<h:form>
+		<p:growl id="messages" />
+
+		<p:menubar style="min-height: 5px; ">
+			<p:menuitem value="Inicio" url="/paginas/" icon="ui-icon-close" />
+			<p:submenu label="Cadastro" icon="ui-icon-document">
+				<p:submenu label="Cliente" icon="ui-icon-contact">
+					<p:menuitem value="Novo" url="cadastrarCliente.xhtml" />
 					<p:menuitem value="Editar/Excluir" url="#" />
 				</p:submenu>
-
-				<p:submenu label="Edit" icon="ui-icon-pencil">
-					<p:menuitem value="Undo" url="#"
-						icon="ui-icon-arrowreturnthick-1-w" />
-					<p:menuitem value="Redo" url="#"
-						icon="ui-icon-arrowreturnthick-1-e" />
+				<p:submenu label="Fabricante" icon="ui-icon-contact">
+					<p:menuitem value="Novo" url="cadastrarFabricante.xhtml" />
+					<p:menuitem value="Editar/Excluir" url="#" />
 				</p:submenu>
-
-				<p:submenu label="Help" icon="ui-icon-help">
-					<p:menuitem value="Contents" url="#" />
-					<p:submenu label="Search" icon="ui-icon-search">
-						<p:submenu label="Text">
-							<p:menuitem value="Workspace" url="#" />
-						</p:submenu>
-						<p:menuitem value="File" url="#" />
-					</p:submenu>
+				<p:submenu label="Produto" icon="ui-icon-contact">
+					<p:menuitem value="Novo" url="cadastrarProduto.xhtml" />
+					<p:menuitem value="Editar/Excluir" url="#" />
 				</p:submenu>
+			</p:submenu>
 
-				<p:submenu label="Actions" icon="ui-icon-gear">
-					<p:submenu label="Ajax" icon="ui-icon-refresh">
-						<p:menuitem value="Save" actionListener="#{menuView.save}"
-							icon="ui-icon-disk" update="messages" />
-						<p:menuitem value="Update" actionListener="#{menuView.update}"
-							icon="ui-icon-arrowrefresh-1-w" update="messages" />
+			<p:submenu label="Orçamento" icon="ui-icon-document">
+				<p:menuitem value="Novo" url="registrarOrcamento.xhtml" />
+				<p:menuitem value="Editar/Excluir" url="#" />
+			</p:submenu>
+
+			<p:submenu label="Teste" icon="ui-icon-pencil">
+				<p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />
+				<p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			</p:submenu>
+
+			<p:submenu label="Teste" icon="ui-icon-help">
+				<p:menuitem value="Contents" url="#" />
+				<p:submenu label="Search" icon="ui-icon-search">
+					<p:submenu label="Text">
+						<p:menuitem value="Workspace" url="#" />
 					</p:submenu>
-					<p:submenu label="Non-Ajax" icon="ui-icon-newwin">
-						<p:menuitem value="Delete" actionListener="#{menuView.delete}"
-							icon="ui-icon-close" update="messages" ajax="false" />
-					</p:submenu>
+					<p:menuitem value="File" url="#" />
 				</p:submenu>
+			</p:submenu>
 
-				<p:menuitem value="Quit" url="http://www.primefaces.org"
-					icon="ui-icon-close" />
-			</p:menubar>
-		</h:form>
-		<h:panelGrid style="background-color: #ffffff; width: 100%;" columnClasses="bordarPanel" >
+			<p:submenu label="Teste" icon="ui-icon-gear">
+				<p:submenu label="Ajax" icon="ui-icon-refresh">
+					<p:menuitem value="Save" actionListener="#{menuView.save}"
+						icon="ui-icon-disk" update="messages" />
+					<p:menuitem value="Update" actionListener="#{menuView.update}"
+						icon="ui-icon-arrowrefresh-1-w" update="messages" />
+				</p:submenu>
+				<p:submenu label="Non-Ajax" icon="ui-icon-newwin">
+					<p:menuitem value="Delete" actionListener="#{menuView.delete}"
+						icon="ui-icon-close" update="messages" ajax="false" />
+				</p:submenu>
+			</p:submenu>
+
+			<p:menuitem value="Quit" url="http://www.primefaces.org"
+				icon="ui-icon-close" />
+		</p:menubar>
+	</h:form>
+	<h:panelGrid
+		style="background-color: #ffffff; width: 100%; min-height: 100px"
+		columnClasses="bordarPanel">
 		<ui:insert name="centro">
-			</ui:insert>
-		</h:panelGrid>
-			
-	</h:body>
+		</ui:insert>
+
+	</h:panelGrid>
+	<div class="rodape">Projeto Integrador 3 - Curso de Analise e Deselvolvimento de Sistemas.</div>
+</h:body>
 </html>

@@ -5,7 +5,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.cairu.pi.DAO.FabricanteDAO;
-import br.cairu.pi.entidade.Cliente;
 import br.cairu.pi.entidade.Fabricante;
 
 @ManagedBean

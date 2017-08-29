@@ -15,18 +15,21 @@
 	<h:body>
 		<h:form>
 			<p:layout fullPage="true">
-			<p:layoutUnit position="north" size="100" resizable="true"
+				<p:layoutUnit position="north" size="100" resizable="true"
 					closable="true" collapsible="true">
                     Header
                 </p:layoutUnit>
 
-				<p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    <p:commandButton value="Non-Ajax Submit" id="nonAjax"  ajax="false" />
- 	
-                    <p:commandButton value="Voltar" title="Voltar para página inicial" action="/inicio.xhtml"/>
-                </p:layoutUnit>
+				<p:layoutUnit position="south" size="100" closable="true"
+					collapsible="true">
+					<p:commandButton value="Non-Ajax Submit" id="nonAjax" ajax="false" />
 
-				<p:layoutUnit position="west" size="242" header="Left" collapsible="true">
+					<p:commandButton value="Voltar" title="Voltar para página inicial"
+						action="/inicio.xhtml" />
+				</p:layoutUnit>
+
+				<p:layoutUnit position="west" size="242" header="Left"
+					collapsible="true">
 					<p:menu>
 						<p:submenu label="Resources">
 							<p:menuitem title="Cadastro Cliente" value="Demo"
@@ -39,11 +42,11 @@
 						</p:submenu>
 					</p:menu>
 				</p:layoutUnit>
-				
+
 				<p:layoutUnit position="center">
 					RAILSON
 				</p:layoutUnit>
-				
+
 			</p:layout>
 		</h:form>
 	</h:body>
