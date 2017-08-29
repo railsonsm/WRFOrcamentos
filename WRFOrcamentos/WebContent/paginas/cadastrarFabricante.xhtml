@@ -7,16 +7,15 @@
 	<ui:define name="titulo">Inicio</ui:define>
 	<ui:define name="centro">
 		<h:form>
-			<h1>Cadastrar Cliente</h1>
+			<h1>Cadastrar Fabricante</h1>
 			<p:panelGrid columns="2" style="margin-left: 35px;">
-				<p:outputLabel value="Código Cliente" style="width:45%" /> 
+				<p:outputLabel value="Código Fabricante" style="width:45%" /> 
 				<p:inputText size="12" value="123456" disabled="true" style="color: black;"/>
 			</p:panelGrid>
 			<p:panelGrid columns="4" style="width:95%; margin-left: 35px;" columnClasses="rotulo, campo, rotulo, campo" >
 				<p:outputLabel value="Nome"/>
 				<p:inputText size="35" value=""/>
-				
-				
+	
 				<p:outputLabel value="Nome Fantasia"/>
 				<p:inputText size="35" value=""/>
 				
@@ -29,7 +28,7 @@
 				<p:outputLabel value="CEP"/>
 				<p:inputMask  size="7" mask="99999-999" value="CEP"/>
 				
-				<p:outputLabel value="Logradouro(Rua)"/>
+				<p:outputLabel value="Longradouro(Rua)"/>
 				<p:inputText size="35" value=""/>
 				
 				<p:outputLabel value="Número"/>
@@ -56,18 +55,18 @@
 				<p:outputLabel value="Celular 2"/>
 				<p:inputMask size="15" mask="(99)99999-9999" value=""/>
 				
-				<p:outputLabel value="Contato  de engenharia"/>
+				<p:outputLabel value="Contato comercial"/>
 				<p:inputText size="35" value=""/>
 				
-				<p:outputLabel value="E-mail de engenharia"/>
+				<p:outputLabel value="E-mail comercial"/>
 				<p:inputText size="25" value=""/>
 				
-				<p:outputLabel value="Contato  de suprimentos/compras"/>
+				<p:outputLabel value="Contato técnico"/>
 				<p:inputText size="35" value=""/>
 				
-				<p:outputLabel value="E-mail de suprimentos/compras"/>
+				<p:outputLabel value="E-mail técnico"/>
 				<p:inputText size="25" value=""/>
-						
+		
 			</p:panelGrid>
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options" >

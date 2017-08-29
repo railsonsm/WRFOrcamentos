@@ -1,10 +1,10 @@
-package br.cairu.pi.presentation;
+package br.cairu.pi.apresentacao;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import ba.cairu.pi.DAO.FabricanteDAO;
+import br.cairu.pi.DAO.FabricanteDAO;
 import br.cairu.pi.entidade.Cliente;
 import br.cairu.pi.entidade.Fabricante;
 

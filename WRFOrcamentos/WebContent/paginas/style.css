@@ -3,6 +3,13 @@
 	border: solid 1px #A6C9E2;
     border-radius: 5px;
 }
+.toolbarCadastro{
+	margin-left: 35px; 
+	margin-right: 35px;
+	margin-top: 10px;
+	margin-bottom: 20px; 
+	font-size: 16px;
+}
 
 .logotemplate{
 	width: 102%; 
@@ -37,6 +44,10 @@ h1{
 	font: Courier New;
 }
 
+.produto-tabela input{
+	width: 100%;
+}
+
 .panellogin{
 	margin-top: 100px;
 	margin-left:85px;
@@ -53,14 +64,18 @@ h1{
 body {
 	font-size: 12px;
 	font: Courier New; 
+	
 }
 
 .rotulo{
 	width: 150px;
 }
+
 .campo{
 	width: 50px;
 }
+
+
 
 .painel{
 	margin-top: 50px;
