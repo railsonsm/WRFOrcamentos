@@ -5,77 +5,80 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="centro">
-		<h:form>
+		<h:form>	
 			<h1>Cadastrar Fabricante</h1>
+			
 			<p:panelGrid columns="2" style="margin-left: 35px;">
 				<p:outputLabel value="Código Fabricante" style="width:45%" />
-				<p:inputText size="12" value="123456" readonly="true"/>
+				<p:inputText size="12" value="#{fabricanteMB.sequenciaFabricante.next_val}" readonly="true"/>
 			</p:panelGrid>
+			
 			<p:panelGrid columns="4" style="width:95%; margin-left: 35px;"
 				columnClasses="rotulo, campo, rotulo, campo">
-				<p:outputLabel value="Nome" />
-				<p:inputText size="35" value="" />
+				
+					<p:outputLabel for="nome" value="Nome" />
+				<p:inputText id="nome" size="35" value="#{fabricanteMB.fabricante.nome}" required="true" />
 
-				<p:outputLabel value="Nome Fantasia" />
-				<p:inputText size="35" value="" />
+				<p:outputLabel for="nomef" value="Nome Fantasia" />
+				<p:inputText id="nomef" size="35" value="#{fabricanteMB.fabricante.nomefantasia}" required="true"/>
 
-				<p:outputLabel value="CNPJ" />
-				<p:inputMask size="15" mask="99.999.999/9999-99" value="CNPJ" />
+				<p:outputLabel for="cnpj" value="CNPJ" />
+				<p:inputMask id="cnpj" size="15" mask="99.999.999/9999-99" value="#{fabricanteMB.fabricante.cnpj}" required="true" />
 
 				<p:outputLabel value="E-mail" />
-				<p:inputText size="25" value="" />
+				<p:inputText size="25" value="#{fabricanteMB.fabricante.email}" />
 
 				<p:outputLabel value="CEP" />
-				<p:inputMask size="7" mask="99999-999" value="CEP" />
+				<p:inputMask size="7" mask="99999-999" value="#{fabricanteMB.fabricante.cep}" />
 
-				<p:outputLabel value="Longradouro(Rua)" />
-				<p:inputText size="35" value="" />
+				<p:outputLabel value="Logradouro(Rua)" />
+				<p:inputText size="35" value="#{fabricanteMB.fabricante.rua}" />
 
 				<p:outputLabel value="Número" />
-				<p:inputText size="5" value="" />
+				<p:inputText size="5" value="#{fabricanteMB.fabricante.numero}" />
 
 				<p:outputLabel value="Complemento" />
-				<p:inputText size="35" value="" />
+				<p:inputText size="35" value="#{fabricanteMB.fabricante.complemento}" />
 
 				<p:outputLabel value="Cidade" />
-				<p:inputText size="15" value="" />
+				<p:inputText size="15" value="#{fabricanteMB.fabricante.cidade}" />
 
 				<p:outputLabel value="Estado" />
-				<p:inputText size="15" value="" />
+				<p:inputText size="15" value="#{fabricanteMB.fabricante.estado}" />
 
 				<p:outputLabel value="Telefone 1" />
-				<p:inputMask size="15" mask="(99)9999-9999" value="" />
+				<p:inputMask size="15" mask="(99)9999-9999" value="#{fabricanteMB.fabricante.telefone1}" />
 
 				<p:outputLabel value="Celular 1" />
-				<p:inputMask size="15" mask="(99)99999-9999" value="" />
+				<p:inputMask size="15" mask="(99)99999-9999" value="#{fabricanteMB.fabricante.telefone2}" />
 
 				<p:outputLabel value="Telefone 2" />
-				<p:inputMask size="15" mask="(99)9999-9999" value="" />
+				<p:inputMask size="15" mask="(99)9999-9999" value="#{fabricanteMB.fabricante.celular1}" />
 
 				<p:outputLabel value="Celular 2" />
-				<p:inputMask size="15" mask="(99)99999-9999" value="" />
+				<p:inputMask size="15" mask="(99)99999-9999" value="#{fabricanteMB.fabricante.celular2}" />
 
-				<p:outputLabel value="Contato comercial" />
-				<p:inputText size="35" value="" />
+				<p:outputLabel value="Contato Comercial" />
+				<p:inputText size="35" value="#{fabricanteMB.fabricante.contatoComer}" />
 
-				<p:outputLabel value="E-mail comercial" />
-				<p:inputText size="25" value="" />
+				<p:outputLabel value="E-mail Comercial" />
+				<p:inputText size="25" value="#{fabricanteMB.fabricante.emailComer}" />
 
-				<p:outputLabel value="Contato técnico" />
-				<p:inputText size="35" value="" />
+				<p:outputLabel value="Contato Técnico" />
+				<p:inputText size="35" value="#{fabricanteMB.fabricante.contatoTec}" />
 
-				<p:outputLabel value="E-mail técnico" />
-				<p:inputText size="25" value="" />
+				<p:outputLabel value="E-mail Técnico" />
+				<p:inputText size="25" value="#{fabricanteMB.fabricante.emailTec}" />
 
 			</p:panelGrid>
+			
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
-					<p:commandButton type="button" value="Cancelar"
-						icon="ui-icon-extlink" />
-					<p:commandButton type="button" style="margin-left: 30px;"
-						value="Salvar" icon="ui-icon-extlink" />
+					<p:commandButton value="Cancelar" icon="ui-icon-extlink" immediate="true" action="inicio.xhtml"/>
+					<p:commandButton action="#{fabricanteMB.salvar}" style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" />
 				</f:facet>
 			</p:menubar>
+			
 		</h:form>
 	</ui:define>
 </ui:composition>

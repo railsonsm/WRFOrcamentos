@@ -18,10 +18,29 @@ public class Produto implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Prod_seq")
 	private Integer idProduto;
 
-	@Column
+	@Column(nullable = false)
 	private String descricao;
-	@Column
-	private Double valortabela;
+	
+	@Column(nullable = false)
+	private Integer unidade;
+	
+	@Column(nullable = false)
+	private Integer qtdembalagem;
+	
+	@Column(nullable = false)
+	private String tamanho;
+	
+	@Column(nullable = false)
+	private String peso;
+	
+	@Column(nullable = false)
+	private Double fretecif;
+	
+	@Column(nullable = false)
+	private Double fretefob;
+	
+	@Column(nullable = false)
+	private String ambiente;	
 
 	@JoinColumn(name = "idFabricante", referencedColumnName = "idFabricante",  foreignKey = @ForeignKey(name = "fk_fabricante"), nullable=false)
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -32,7 +51,7 @@ public class Produto implements Serializable{
 				joinColumns= {@JoinColumn(name = "idOrcamento"),}, 
 				inverseJoinColumns={@JoinColumn(name="idProduto" )})
 	private List<Orcamento> orcamentos;
-	
+
 	public Integer getIdProduto() {
 		return idProduto;
 	}
@@ -49,12 +68,52 @@ public class Produto implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public Double getValortabela() {
-		return valortabela;
+	public Integer getUnidade() {
+		return unidade;
 	}
 
-	public void setValortabela(Double valortabela) {
-		this.valortabela = valortabela;
+	public void setUnidade(Integer unidade) {
+		this.unidade = unidade;
+	}
+
+	public String getTamanho() {
+		return tamanho;
+	}
+
+	public void setTamanho(String tamanho) {
+		this.tamanho = tamanho;
+	}
+
+	public String getPeso() {
+		return peso;
+	}
+
+	public void setPeso(String peso) {
+		this.peso = peso;
+	}
+
+	public Double getFretecif() {
+		return fretecif;
+	}
+
+	public void setFretecif(Double fretecif) {
+		this.fretecif = fretecif;
+	}
+
+	public Double getFretefob() {
+		return fretefob;
+	}
+
+	public void setFretefob(Double fretefob) {
+		this.fretefob = fretefob;
+	}
+
+	public String getAmbiente() {
+		return ambiente;
+	}
+
+	public void setAmbiente(String ambiente) {
+		this.ambiente = ambiente;
 	}
 
 	public Fabricante getFabricante() {
@@ -72,6 +131,14 @@ public class Produto implements Serializable{
 	public void setOrcamentos(List<Orcamento> orcamentos) {
 		this.orcamentos = orcamentos;
 	}
-	
-	 
+
+	public Integer getQtdembalagem() {
+		return qtdembalagem;
+	}
+
+	public void setQtdembalagem(Integer qtdembalagem) {
+		this.qtdembalagem = qtdembalagem;
+	}
+
+		
 }

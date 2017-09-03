@@ -35,7 +35,43 @@ public class Fabricante implements Serializable {
 	
 	@Column(nullable = false)
 	private Integer numero;
+	
+	@Column(nullable = false)
+	private String cidade;
+	
+	@Column(nullable = false)
+	private String estado;
+	
+	@Column(nullable = false)
+	private String telefone1;
+	
+	@Column(nullable = false)
+	private String telefone2;
+	
+	@Column(nullable = false)	
+	private String celular1;
+	
+	@Column(nullable = false)	
+	private String celular2;
+	
+	@Column(nullable = false)	
+	private String contatoComer;
+	
+	@Column(nullable = false)
+	private String emailComer;
+	
+	@Column(nullable = false)	
+	private String contatoTec;
+	
+	@Column(nullable = false)
+	private String emailTec;
 
+	@Column(nullable = false)
+	private String email;
+	
+	@Column(nullable = false)
+	private String cep;
+	
 	public Integer getIdFabricante() {
 		return idFabricante;
 	}
@@ -92,5 +128,101 @@ public class Fabricante implements Serializable {
 		this.numero = numero;
 	}
 
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getTelefone1() {
+		return telefone1;
+	}
+
+	public void setTelefone1(String telefone1) {
+		this.telefone1 = telefone1;
+	}
+
+	public String getTelefone2() {
+		return telefone2;
+	}
+
+	public void setTelefone2(String telefone2) {
+		this.telefone2 = telefone2;
+	}
+
+	public String getCelular1() {
+		return celular1;
+	}
+
+	public void setCelular1(String celular1) {
+		this.celular1 = celular1;
+	}
+
+	public String getCelular2() {
+		return celular2;
+	}
+
+	public void setCelular2(String celular2) {
+		this.celular2 = celular2;
+	}
+
+	public String getContatoComer() {
+		return contatoComer;
+	}
+
+	public void setContatoComer(String contatoComer) {
+		this.contatoComer = contatoComer;
+	}
+
+	public String getEmailComer() {
+		return emailComer;
+	}
+
+	public void setEmailComer(String emailComer) {
+		this.emailComer = emailComer;
+	}
+
+	public String getContatoTec() {
+		return contatoTec;
+	}
+
+	public void setContatoTec(String contatoTec) {
+		this.contatoTec = contatoTec;
+	}
+
+	public String getEmailTec() {
+		return emailTec;
+	}
+
+	public void setEmailTec(String emailTec) {
+		this.emailTec = emailTec;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+		
 	
 }

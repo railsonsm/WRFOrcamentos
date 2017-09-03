@@ -77,10 +77,8 @@
 			
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
-					<p:commandButton value="Cancelar"
-						icon="ui-icon-extlink" />
-					<p:commandButton style="margin-left: 30px;"
-						value="Salvar" icon="ui-icon-extlink" action="#{clienteMB.salvar}" update="cadastroCliente, mostrarid"/>
+					<p:commandButton value="Cancelar" icon="ui-icon-extlink" immediate="true" action="inicio.xhtml"/>
+					<p:commandButton style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" action="#{clienteMB.salvar}" update="cadastroCliente, mostrarid"/>
 				</f:facet>
 			</p:menubar>
 			

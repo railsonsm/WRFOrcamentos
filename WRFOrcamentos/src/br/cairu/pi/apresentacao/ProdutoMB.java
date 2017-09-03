@@ -18,7 +18,14 @@ public class ProdutoMB {
 	private ProdutoDAO produtoDAO;
 	private Integer idSelecao;
 	
-	public String buscarFabricPorId() {
+	@PostConstruct
+	public void init() {
+		this.fabricante =  new Fabricante();
+		this.produto = new Produto();
+	}
+	
+	
+	public String mostraFabricPorId() {
 		try {
 			fabricante = getFabricanteDAO().buscarFabricPorId(idSelecao);
 		} catch (Exception e) {
@@ -27,11 +34,6 @@ public class ProdutoMB {
 		return null;
 	}
 	
-	@PostConstruct
-	public void init() {
-		this.fabricante =  new Fabricante();
-		this.produto = new Produto();
-	}
 	
 	public String salvar() {
 		try {

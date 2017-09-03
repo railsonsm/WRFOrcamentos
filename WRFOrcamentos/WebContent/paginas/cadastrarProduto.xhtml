@@ -8,51 +8,51 @@
 	<ui:define name="centro">
 		<h:form>
 			<h1>Cadastrar Produto</h1>
+			
 			<p:panelGrid columns="2" style="margin-left: 35px;">
 				<p:outputLabel value="Código Produto" style="width:45%" />
 				<p:inputText size="12" value="123456" readonly="true"/>
 			</p:panelGrid>
-			<p:panelGrid columns="4" style="width:95%; margin-left: 35px; margin"
-				columnClasses="rotulo, campo, rotulo, campo">
+			
+			<p:panelGrid columns="4" style="width:95%; margin-left: 35px; margin" columnClasses="rotulo, campo, rotulo, campo">
+			
 				<p:outputLabel value="Código Fabricante" />
-				<p:inputText size="10" value="">
-					<p:commandButton icon="ui-icon-search" />
+				<p:inputText size="10" value="#{produtoMB.idSelecao}">
+					<p:commandButton action="#{produtoMB.mostraFabricPorId}" icon="ui-icon-search" update="descricaoFabricante" />
 				</p:inputText>
 
 				<p:outputLabel value="Fabricante" />
-				<p:inputText size="35" value="" readonly="true" />
+				<p:inputText size="35" value="#{produtoMB.fabricante.nomefantasia}" readonly="true" id="descricaoFabricante"/>
 
 				<p:outputLabel value="Descrição" />
-				<p:inputText size="35" value="" />
+				<p:inputText size="35" value="#{produtoMB.produto.descricao}" />
 
 				<p:outputLabel value="Unidade" />
-				<p:inputText value="" />
+				<p:inputText value="#{produtoMB.produto.unidade}" />
 
 				<p:outputLabel value="Tamanho" />
-				<p:inputText value="" />
+				<p:inputText value="#{produtoMB.produto.tamanho}" />
 
 				<p:outputLabel value="Peso" />
-				<p:inputText value="" />
+				<p:inputText value="#{produtoMB.produto.peso}" />
 
 				<p:outputLabel value="Embalagem/Quant." />
-				<p:inputText value="" />
+				<p:inputText value="#{produtoMB.produto.qtdembalagem}" />
 
 				<p:outputLabel value="Frete CIF" />
-				<p:inputText value="" />
+				<p:inputText value="#{produtoMB.produto.fretecif}" />
 
 				<p:outputLabel value="Frente FOB" />
-				<p:inputText value="" />
+				<p:inputText value="#{produtoMB.produto.fretefob}" />
 
 				<p:outputLabel value="Ambiente" />
-				<p:inputText size="35" value="" />
+				<p:inputText size="35" value="#{produtoMB.produto.ambiente}" />
 
 			</p:panelGrid>
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
-					<p:commandButton type="button" value="Cancelar"
-						icon="ui-icon-extlink" />
-					<p:commandButton type="button" style="margin-left: 30px;"
-						value="Salvar" icon="ui-icon-extlink" />
+					<p:commandButton type="button" value="Cancelar" icon="ui-icon-extlink" />
+					<p:commandButton action="#{produtoMB.salvar}" type="button" style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" />
 				</f:facet>
 			</p:menubar>
 		</h:form>
