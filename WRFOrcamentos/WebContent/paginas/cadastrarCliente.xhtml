@@ -11,76 +11,79 @@
 	<ui:define name="centro">
 		<h:form>
 			<h1>Cadastrar Cliente</h1>
-			<p:panelGrid columns="2" style="margin-left: 35px;">
+			
+			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarid">
 				<p:outputLabel value="Código Cliente" style="width:45%" />
-				<p:inputText size="12" value="123456" disabled="true"
-					style="color: black;" />
+				<p:inputText  size="12" value="#{clienteMB.sequenciaCliente.next_val}" readonly="true"/>
 			</p:panelGrid>
-			<p:panelGrid id="cadastroCliente" columns="4" style="width:95%; margin-left: 35px;"
-				columnClasses="rotulo, campo, rotulo, campo">
+			
+			<p:panelGrid id="cadastroCliente" columns="4" style="width:95%; margin-left: 35px;" columnClasses="rotulo, campo, rotulo, campo">
+				
 				<p:outputLabel for="nome" value="Nome" />
-				<p:inputText id="nome" size="35" value="" required="true" />
+				<p:inputText id="nome" size="35" value="#{clienteMB.cliente.nome}" required="true" />
 
 				<p:outputLabel for="nomef" value="Nome Fantasia" />
-				<p:inputText id="nomef" size="35" value="" required="true"/>
+				<p:inputText id="nomef" size="35" value="#{clienteMB.cliente.nomeFantasia}" required="true"/>
 
 				<p:outputLabel for="cnpj" value="CNPJ" />
-				<p:inputMask id="cnpj" size="15" mask="99.999.999/9999-99" value="CNPJ" required="true" />
+				<p:inputMask id="cnpj" size="15" mask="99.999.999/9999-99" value="#{clienteMB.cliente.cnpj}" required="true" />
 
 				<p:outputLabel value="E-mail" />
-				<p:inputText size="25" value="" />
+				<p:inputText size="25" value="#{clienteMB.cliente.email}" />
 
 				<p:outputLabel value="CEP" />
-				<p:inputMask size="7" mask="99999-999" value="CEP" />
+				<p:inputMask size="7" mask="99999-999" value="#{clienteMB.cliente.cep}" />
 
 				<p:outputLabel value="Logradouro(Rua)" />
-				<p:inputText size="35" value="" />
+				<p:inputText size="35" value="#{clienteMB.cliente.rua}" />
 
 				<p:outputLabel value="Número" />
-				<p:inputText size="5" value="" />
+				<p:inputText size="5" value="#{clienteMB.cliente.numero}" />
 
 				<p:outputLabel value="Complemento" />
-				<p:inputText size="35" value="" />
+				<p:inputText size="35" value="#{clienteMB.cliente.complemento}" />
 
 				<p:outputLabel value="Cidade" />
-				<p:inputText size="15" value="" />
+				<p:inputText size="15" value="#{clienteMB.cliente.cidade}" />
 
 				<p:outputLabel value="Estado" />
-				<p:inputText size="15" value="" />
+				<p:inputText size="15" value="#{clienteMB.cliente.estado}" />
 
 				<p:outputLabel value="Telefone 1" />
-				<p:inputMask size="15" mask="(99)9999-9999" value="" />
+				<p:inputMask size="15" mask="(99)9999-9999" value="#{clienteMB.cliente.telefone1}" />
 
 				<p:outputLabel value="Celular 1" />
-				<p:inputMask size="15" mask="(99)99999-9999" value="" />
+				<p:inputMask size="15" mask="(99)99999-9999" value="#{clienteMB.cliente.celular1}" />
 
 				<p:outputLabel value="Telefone 2" />
-				<p:inputMask size="15" mask="(99)9999-9999" value="" />
+				<p:inputMask size="15" mask="(99)9999-9999" value="#{clienteMB.cliente.telefone2}" />
 
 				<p:outputLabel value="Celular 2" />
-				<p:inputMask size="15" mask="(99)99999-9999" value="" />
+				<p:inputMask size="15" mask="(99)99999-9999" value="#{clienteMB.cliente.celular2}" />
 
 				<p:outputLabel value="Contato  de engenharia" />
-				<p:inputText size="35" value="" />
+				<p:inputText size="35" value="#{clienteMB.cliente.contatoEng}" />
 
 				<p:outputLabel value="E-mail de engenharia" />
-				<p:inputText size="25" value="" />
+				<p:inputText size="25" value="#{clienteMB.cliente.emailEng}" />
 
 				<p:outputLabel value="Contato  de suprimentos/compras" />
-				<p:inputText size="35" value="" />
+				<p:inputText size="35" value="#{clienteMB.cliente.contatoSupr}" />
 
 				<p:outputLabel value="E-mail de suprimentos/compras" />
-				<p:inputText size="25" value="" />
+				<p:inputText size="25" value="#{clienteMB.cliente.emailSupr}" />
 
 			</p:panelGrid>
+			
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
-					<p:commandButton type="button" value="Cancelar"
+					<p:commandButton value="Cancelar"
 						icon="ui-icon-extlink" />
-					<p:commandButton type="button" style="margin-left: 30px;"
-						value="Salvar" icon="ui-icon-extlink" update="cadastroCliente"/>
+					<p:commandButton style="margin-left: 30px;"
+						value="Salvar" icon="ui-icon-extlink" action="#{clienteMB.salvar}" update="cadastroCliente, mostrarid"/>
 				</f:facet>
 			</p:menubar>
+			
 		</h:form>
 	</ui:define>
 </ui:composition>

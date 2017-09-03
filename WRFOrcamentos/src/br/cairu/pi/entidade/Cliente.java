@@ -42,11 +42,35 @@ public class Cliente  implements Serializable{
 	@Column(name="email", nullable = false)
 	private String email;
 	
-	@Column(name="telefone", nullable=false)
-	private String telefone;
+	@Column(nullable=false)
+	private String cidade;
 	
-	@Column(name="celular",  nullable=false)
-	private String celular;
+	@Column(nullable=false)
+	private String estado;
+	
+	@Column(nullable=false)
+	private String telefone1;
+	
+	@Column(nullable=false)
+	private String telefone2;
+	
+	@Column(nullable=false)
+	private String celular1;
+	
+	@Column(nullable=false)
+	private String celular2;
+	
+	@Column(nullable=false)
+	private String contatoEng;
+	
+	@Column(nullable=false)
+	private String emailEng;
+	
+	@Column(nullable=false)
+	private String contatoSupr;
+	
+	@Column(nullable=false)
+	private String emailSupr;
 
 	public Integer getIdCliente() {
 		return idCliente;
@@ -120,19 +144,86 @@ public class Cliente  implements Serializable{
 		this.email = email;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public String getCidade() {
+		return cidade;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
-	public String getCelular() {
-		return celular;
+	public String getEstado() {
+		return estado;
 	}
 
-	public void setCelular(String celular) {
-		this.celular = celular;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
+
+	public String getTelefone1() {
+		return telefone1;
+	}
+
+	public void setTelefone1(String telefone1) {
+		this.telefone1 = telefone1;
+	}
+
+	public String getTelefone2() {
+		return telefone2;
+	}
+
+	public void setTelefone2(String telefone2) {
+		this.telefone2 = telefone2;
+	}
+
+	public String getCelular1() {
+		return celular1;
+	}
+
+	public void setCelular1(String celular1) {
+		this.celular1 = celular1;
+	}
+
+	public String getCelular2() {
+		return celular2;
+	}
+
+	public void setCelular2(String celular2) {
+		this.celular2 = celular2;
+	}
+
+	public String getContatoEng() {
+		return contatoEng;
+	}
+
+	public void setContatoEng(String contatoEng) {
+		this.contatoEng = contatoEng;
+	}
+
+	public String getEmailEng() {
+		return emailEng;
+	}
+
+	public void setEmailEng(String emailEng) {
+		this.emailEng = emailEng;
+	}
+
+	public String getContatoSupr() {
+		return contatoSupr;
+	}
+
+	public void setContatoSupr(String contatoSupr) {
+		this.contatoSupr = contatoSupr;
+	}
+
+	public String getEmailSupr() {
+		return emailSupr;
+	}
+
+	public void setEmailSupr(String emailSupr) {
+		this.emailSupr = emailSupr;
+	}
+	
+	
+	
 }

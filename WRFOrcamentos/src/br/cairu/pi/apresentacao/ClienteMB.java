@@ -5,7 +5,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.cairu.pi.DAO.ClienteDAO;
+import br.cairu.pi.DAO.SequenciaClienteDAO;
 import br.cairu.pi.entidade.Cliente;
+import br.cairu.pi.entidade.SequenciaCliente;
 
 
 @ManagedBean
@@ -13,6 +15,15 @@ import br.cairu.pi.entidade.Cliente;
 public class ClienteMB {
 	private ClienteDAO clienteDAO;
 	private Cliente cliente;
+	private SequenciaCliente sequenciaCliente;
+	private SequenciaClienteDAO sequenciaClienteDAO;
+	private Integer exibirId;
+	
+	@PostConstruct
+	public void init() {
+		this.cliente = new Cliente();
+		mostraSequencia();
+	}
 	
 	public String salvar() {
 		try {
@@ -21,14 +32,16 @@ public class ClienteMB {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		return "cadastrarCliente.xhtml";
+	}
+	
+	public String mostraSequencia() {
+		sequenciaCliente = new SequenciaCliente();
+		sequenciaCliente = getSequenciaClienteDAO().buscaSequencia();
 		return null;
 	}
 	
-	@PostConstruct
-	public void init() {
-		this.cliente = new Cliente();
-	}
-	
+
 	public ClienteDAO getClienteDAO() {
 		if(clienteDAO == null) {
 			clienteDAO = new ClienteDAO();
@@ -44,6 +57,33 @@ public class ClienteMB {
 	}
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public SequenciaCliente getSequenciaCliente() {
+		return sequenciaCliente;
+	}
+	
+	public void setSequenciaCliente(SequenciaCliente sequenciaCliente) {
+		this.sequenciaCliente = sequenciaCliente;
+	}
+
+	public SequenciaClienteDAO getSequenciaClienteDAO() {
+		if(sequenciaClienteDAO == null) {
+			sequenciaClienteDAO = new SequenciaClienteDAO();
+		}
+		return sequenciaClienteDAO;
+	}
+
+	public void setSequenciaClienteDAO(SequenciaClienteDAO sequenciaClienteDAO) {
+		this.sequenciaClienteDAO = sequenciaClienteDAO;
+	}
+
+	public Integer getExibirId() {
+		return exibirId;
+	}
+
+	public void setExibirId(Integer exibirId) {
+		this.exibirId = exibirId;
 	}
 	
 	

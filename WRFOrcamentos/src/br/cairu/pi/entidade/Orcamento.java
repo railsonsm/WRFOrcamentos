@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-@SequenceGenerator(name = "orc_seq", sequenceName = "sequencia_orcamento", initialValue =1,allocationSize =1)
+@SequenceGenerator(name = "orc_seq", sequenceName = "orcamento_sequencia", initialValue =1,allocationSize =1)
 public class Orcamento implements Serializable{
 	/**
 	 * 
