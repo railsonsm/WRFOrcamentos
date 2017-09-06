@@ -12,5 +12,6 @@ public class SequenciaClienteDAO {
 	
 	public SequenciaCliente buscaSequencia() {
 		return manager.createQuery("select sc from SequenciaCliente sc", SequenciaCliente.class).getSingleResult();
+		
 	}
 }

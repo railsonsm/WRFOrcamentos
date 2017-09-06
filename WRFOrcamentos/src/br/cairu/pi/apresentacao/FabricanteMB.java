@@ -24,7 +24,7 @@ public class FabricanteMB {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return "cadastrarFabricante.xhtml";
 	}
 	
 	@PostConstruct

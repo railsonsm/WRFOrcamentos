@@ -26,6 +26,7 @@ public class FabricanteDAO {
 		manager.getTransaction().begin();
 		manager.persist(f);
 		manager.getTransaction().commit();
+		manager.close();
 		return null;
 	}
 }

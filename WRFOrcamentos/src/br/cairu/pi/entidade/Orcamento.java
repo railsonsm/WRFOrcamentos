@@ -32,9 +32,9 @@ public class Orcamento implements Serializable{
 	
 	@Column
 	private Double valorOrcamento;	
-	
+	/*
 	@ManyToMany(mappedBy="orcamentos", cascade = CascadeType.ALL)
-	private List<Produto> produtos;
+	private List<Produto> produtos;*/
 
 	@JoinColumn(name="idCliente",referencedColumnName= "idCliente", foreignKey = @ForeignKey (name = "fk_cliente"), nullable=false )
 	@ManyToOne(fetch=FetchType.EAGER)
@@ -55,14 +55,14 @@ public class Orcamento implements Serializable{
 	public void setValorOrcamento(Double valorOrcamento) {
 		this.valorOrcamento = valorOrcamento;
 	}
-
+/*
 	public List<Produto> getProdutos() {
 		return produtos;
 	}
 
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
-	}
+	}*/
 
 	public Cliente getCliente() {
 		return cliente;

@@ -12,7 +12,7 @@
 		<h:form>
 			<h1>Cadastrar Cliente</h1>
 			
-			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarid">
+			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarId">
 				<p:outputLabel value="Código Cliente" style="width:45%" />
 				<p:inputText  size="12" value="#{clienteMB.sequenciaCliente.next_val}" readonly="true"/>
 			</p:panelGrid>
@@ -78,7 +78,8 @@
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
 					<p:commandButton value="Cancelar" icon="ui-icon-extlink" immediate="true" action="inicio.xhtml"/>
-					<p:commandButton style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" action="#{clienteMB.salvar}" update="cadastroCliente, mostrarid"/>
+					<p:commandButton style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" action="#{clienteMB.salvar}" update="cadastroCliente, mostrarId"/>
+						
 				</f:facet>
 			</p:menubar>
 			

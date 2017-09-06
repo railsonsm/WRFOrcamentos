@@ -6,8 +6,10 @@ import javax.faces.bean.ViewScoped;
 
 import br.cairu.pi.DAO.FabricanteDAO;
 import br.cairu.pi.DAO.ProdutoDAO;
+import br.cairu.pi.DAO.SequenciaProdutoDAO;
 import br.cairu.pi.entidade.Fabricante;
 import br.cairu.pi.entidade.Produto;
+import br.cairu.pi.entidade.SequenciaProduto;
 
 @ManagedBean
 @ViewScoped
@@ -17,14 +19,20 @@ public class ProdutoMB {
 	private Produto produto;
 	private ProdutoDAO produtoDAO;
 	private Integer idSelecao;
+	private SequenciaProduto SequenciaProduto;
+	private SequenciaProdutoDAO SequenciaProdutoDAO;
 	
 	@PostConstruct
 	public void init() {
 		this.fabricante =  new Fabricante();
 		this.produto = new Produto();
+		mostraSequencia();
 	}
 	
-	
+	public void mostraSequencia() {
+		SequenciaProduto = new SequenciaProduto();
+		SequenciaProduto = getSequenciaProdutoDAO().buscaSequencia();
+	}
 	public String mostraFabricPorId() {
 		try {
 			fabricante = getFabricanteDAO().buscarFabricPorId(idSelecao);
@@ -47,7 +55,7 @@ public class ProdutoMB {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;	
+		return "cadastrarProduto.xhtml";	
 	}
 	
 	public FabricanteDAO getFabricanteDAO() {
@@ -93,6 +101,25 @@ public class ProdutoMB {
 	
 	public void setIdSelecao(Integer idSelecao) {
 		this.idSelecao = idSelecao;
+	}
+
+	public SequenciaProduto getSequenciaProduto() {
+		return SequenciaProduto;
+	}
+
+	public void setSequenciaProduto(SequenciaProduto sequenciaProduto) {
+		SequenciaProduto = sequenciaProduto;
+	}
+
+	public SequenciaProdutoDAO getSequenciaProdutoDAO() {
+		if(SequenciaProdutoDAO == null) {
+			SequenciaProdutoDAO = new SequenciaProdutoDAO();
+		}
+		return SequenciaProdutoDAO;
+	}
+
+	public void setSequenciaProdutoDAO(SequenciaProdutoDAO sequenciaProdutoDAO) {
+		SequenciaProdutoDAO = sequenciaProdutoDAO;
 	}
 
 	

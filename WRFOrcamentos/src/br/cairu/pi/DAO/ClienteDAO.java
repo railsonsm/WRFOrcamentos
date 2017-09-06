@@ -15,6 +15,7 @@ public class ClienteDAO {
 		manager.getTransaction().begin();
 		manager.persist(c);
 		manager.getTransaction().commit();
+		manager.close();
 		return null;
 	}
 		

@@ -46,11 +46,11 @@ public class Produto implements Serializable{
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Fabricante fabricante;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	/*@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "OrcamentoProduto",
 				joinColumns= {@JoinColumn(name = "idOrcamento"),}, 
 				inverseJoinColumns={@JoinColumn(name="idProduto" )})
-	private List<Orcamento> orcamentos;
+	private List<Orcamento> orcamentos;*/
 
 	public Integer getIdProduto() {
 		return idProduto;
@@ -123,15 +123,14 @@ public class Produto implements Serializable{
 	public void setFabricante(Fabricante fabricante) {
 		this.fabricante = fabricante;
 	}
-
+/*
 	public List<Orcamento> getOrcamentos() {
 		return orcamentos;
 	}
 
 	public void setOrcamentos(List<Orcamento> orcamentos) {
 		this.orcamentos = orcamentos;
-	}
-
+	}*/
 	public Integer getQtdembalagem() {
 		return qtdembalagem;
 	}

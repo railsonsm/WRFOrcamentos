@@ -8,15 +8,14 @@
 		<h:form>	
 			<h1>Cadastrar Fabricante</h1>
 			
-			<p:panelGrid columns="2" style="margin-left: 35px;">
-				<p:outputLabel value="Código Fabricante" style="width:45%" />
+			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarId">
+				<p:outputLabel value="Código Fabricante" style="width:45%"/>
 				<p:inputText size="12" value="#{fabricanteMB.sequenciaFabricante.next_val}" readonly="true"/>
 			</p:panelGrid>
 			
-			<p:panelGrid columns="4" style="width:95%; margin-left: 35px;"
-				columnClasses="rotulo, campo, rotulo, campo">
+			<p:panelGrid id="cadastroFabricante" columns="4" style="width:95%; margin-left: 35px;" columnClasses="rotulo, campo, rotulo, campo">
 				
-					<p:outputLabel for="nome" value="Nome" />
+				<p:outputLabel for="nome" value="Nome" />
 				<p:inputText id="nome" size="35" value="#{fabricanteMB.fabricante.nome}" required="true" />
 
 				<p:outputLabel for="nomef" value="Nome Fantasia" />
@@ -75,7 +74,7 @@
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
 					<p:commandButton value="Cancelar" icon="ui-icon-extlink" immediate="true" action="inicio.xhtml"/>
-					<p:commandButton action="#{fabricanteMB.salvar}" style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" />
+					<p:commandButton action="#{fabricanteMB.salvar}" style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" update="cadastroFabricante,mostrarId" />
 				</f:facet>
 			</p:menubar>
 			
