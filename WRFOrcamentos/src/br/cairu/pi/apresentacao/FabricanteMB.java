@@ -3,6 +3,7 @@ package br.cairu.pi.apresentacao;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ComponentSystemEvent;
 
 import br.cairu.pi.DAO.FabricanteDAO;
 import br.cairu.pi.DAO.SequenciaFabricanteDAO;
@@ -16,6 +17,13 @@ public class FabricanteMB {
 	private FabricanteDAO fabricanteDAO;
 	private SequenciaFabricante sequenciaFabricante;
 	private SequenciaFabricanteDAO sequenciaFabricanteDAO;
+	private Integer idSelecao;
+	
+	
+	@PostConstruct
+	public void init() {
+		this.fabricante = new Fabricante();
+	}
 	
 	public String salvar() {
 		try {
@@ -27,22 +35,43 @@ public class FabricanteMB {
 		return "cadastrarFabricante.xhtml";
 	}
 	
-	@PostConstruct
-	public void init() {
-		this.fabricante = new Fabricante();
-		mostraSequencia();
+	public String editar() {
+		try {
+			getFabricanteDAO().alterar(fabricante);
+			fabricante = new Fabricante();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
-	public String mostraSequencia() {
+	public String excluir() {
+		try {
+			getFabricanteDAO().excluir(idSelecao);
+			fabricante = new Fabricante();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void mostraSequencia(ComponentSystemEvent evento) {
 		sequenciaFabricante = new SequenciaFabricante();
 		sequenciaFabricante = getSequenciaFabricanteDAO().buscaSequencia();
+	}
+	
+	public String mostraFabricPorId() {
+		try {
+			fabricante = getFabricanteDAO().buscarFabricPorId(idSelecao);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
 	
 	
-	
-	
+
 	public Fabricante getFabricante() {
 		return fabricante;
 	}
@@ -76,6 +105,14 @@ public class FabricanteMB {
 
 	public void setSequenciaFabricanteDAO(SequenciaFabricanteDAO sequenciaFabricanteDAO) {
 		this.sequenciaFabricanteDAO = sequenciaFabricanteDAO;
+	}
+
+	public Integer getIdSelecao() {
+		return idSelecao;
+	}
+
+	public void setIdSelecao(Integer idSelecao) {
+		this.idSelecao = idSelecao;
 	}
 	
 	

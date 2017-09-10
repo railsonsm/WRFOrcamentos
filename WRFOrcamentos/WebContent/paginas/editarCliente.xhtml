@@ -10,25 +10,25 @@
 	</h:head>
 	<ui:define name="centro">
 		<h:form>
-			<h1>Cadastrar Cliente</h1>
-			<f:metadata>
-				<f:event type="preRenderView" listener="#{clienteMB.mostraSequencia}"/>
-			</f:metadata>
+			<h1>Editar Cliente</h1>
+			
 			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarId">
 				<p:outputLabel value="Código Cliente" style="width:45%" />
-				<p:inputText  size="12" value="#{clienteMB.sequenciaCliente.next_val}" readonly="true"/>
+				<p:inputText size="10" value="#{clienteMB.idSelecao}">
+					<p:commandButton action="#{clienteMB.mostrarCliPorId}" icon="ui-icon-search" update="editarCliente" />
+				</p:inputText>
 			</p:panelGrid>
 			
-			<p:panelGrid id="cadastroCliente" columns="4" style="width:95%; margin-left: 35px;" columnClasses="rotulo, campo, rotulo, campo">
+			<p:panelGrid id="editarCliente" columns="4" style="width:95%; margin-left: 35px;" columnClasses="rotulo, campo, rotulo, campo">
 				
-				<p:outputLabel for="nome" value="Nome" />
-				<p:inputText id="nome" size="35" value="#{clienteMB.cliente.nome}" required="true" />
+				<p:outputLabel value="Nome" />
+				<p:inputText size="35" value="#{clienteMB.cliente.nome}"/>
 
-				<p:outputLabel for="nomef" value="Nome Fantasia" />
-				<p:inputText id="nomef" size="35" value="#{clienteMB.cliente.nomeFantasia}" required="true"/>
+				<p:outputLabel value="Nome Fantasia" />
+				<p:inputText size="35" value="#{clienteMB.cliente.nomeFantasia}"/>
 
-				<p:outputLabel for="cnpj" value="CNPJ" />
-				<p:inputMask id="cnpj" size="15" mask="99.999.999/9999-99" value="#{clienteMB.cliente.cnpj}" required="true" />
+				<p:outputLabel value="CNPJ" />
+				<p:inputMask size="15" mask="99.999.999/9999-99" value="#{clienteMB.cliente.cnpj}"/>
 
 				<p:outputLabel value="E-mail" />
 				<p:inputText size="25" value="#{clienteMB.cliente.email}" />
@@ -79,8 +79,10 @@
 			
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
+					<p:commandButton style="margin-right: 30px;" value="Excluir" icon="ui-icon-extlink" actionListener="#{clienteMB.excluir}"/>
 					<p:commandButton value="Cancelar" icon="ui-icon-extlink" immediate="true" action="inicio.xhtml"/>
-					<p:commandButton style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" action="#{clienteMB.salvar}" update="cadastroCliente, mostrarId"/>						
+					<p:commandButton style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" actionListener="#{clienteMB.alterar}" update="editarCliente"/>
+						
 				</f:facet>
 			</p:menubar>
 			

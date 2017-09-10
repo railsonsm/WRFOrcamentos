@@ -3,6 +3,7 @@ package br.cairu.pi.apresentacao;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ComponentSystemEvent;
 
 import br.cairu.pi.DAO.FabricanteDAO;
 import br.cairu.pi.DAO.ProdutoDAO;
@@ -26,13 +27,13 @@ public class ProdutoMB {
 	public void init() {
 		this.fabricante =  new Fabricante();
 		this.produto = new Produto();
-		mostraSequencia();
 	}
 	
-	public void mostraSequencia() {
+	public void mostraSequencia(ComponentSystemEvent evento) {
 		SequenciaProduto = new SequenciaProduto();
 		SequenciaProduto = getSequenciaProdutoDAO().buscaSequencia();
 	}
+	
 	public String mostraFabricPorId() {
 		try {
 			fabricante = getFabricanteDAO().buscarFabricPorId(idSelecao);

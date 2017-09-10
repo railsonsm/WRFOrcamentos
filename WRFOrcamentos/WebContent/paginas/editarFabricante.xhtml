@@ -7,15 +7,15 @@
 	<ui:define name="centro">
 		<h:form>	
 			<h1>Cadastrar Fabricante</h1>
-			<f:metadata>
-				<f:event type="preRenderView" listener="#{fabricanteMB.mostraSequencia}"/>
-			</f:metadata>
+			
 			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarId">
-				<p:outputLabel value="Código Fabricante" style="width:45%"/>
-				<p:inputText size="12" value="#{fabricanteMB.sequenciaFabricante.next_val}" readonly="true"/>
+				<p:outputLabel value="Código Fabricante" style="width:45%" />
+				<p:inputText size="10" value="#{fabricanteMB.idSelecao}">
+					<p:commandButton action="#{fabricanteMB.mostraFabricPorId}" icon="ui-icon-search" update="editarFabricante" immediate="true" />
+				</p:inputText>
 			</p:panelGrid>
 			
-			<p:panelGrid id="cadastroFabricante" columns="4" style="width:95%; margin-left: 35px;" columnClasses="rotulo, campo, rotulo, campo">
+			<p:panelGrid id="editarFabricante" columns="4" style="width:95%; margin-left: 35px;" columnClasses="rotulo, campo, rotulo, campo">
 				
 				<p:outputLabel for="nome" value="Nome" />
 				<p:inputText id="nome" size="35" value="#{fabricanteMB.fabricante.nome}" required="true" />
@@ -75,8 +75,10 @@
 			
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
+					<p:commandButton style="margin-right: 30px;" value="Excluir" icon="ui-icon-extlink" actionListener="#{fabricanteMB.excluir}"/>
 					<p:commandButton value="Cancelar" icon="ui-icon-extlink" immediate="true" action="inicio.xhtml"/>
-					<p:commandButton action="#{fabricanteMB.salvar}" style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" update="cadastroFabricante,mostrarId" />
+					<p:commandButton action="#{fabricanteMB.salvar}" style="margin-left: 30px;" value="Salvar" 
+					icon="ui-icon-extlink" update="editarFabricante" />
 				</f:facet>
 			</p:menubar>
 			

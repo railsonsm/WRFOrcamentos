@@ -16,15 +16,29 @@ public class FabricanteDAO {
         setParameter("idFabricante", idFabricante).getSingleResult();
 
 	}
-	/*public Fabricante buscarFabricanteporId(Integer id) {
-		
-		return(Fabricante) session.createCriteria(Fabricante.class)
-				.add(Restrictions.idEq(id)).uniqueResult();
-	}*/
-	
+
 	public Fabricante salvar(Fabricante f) {
 		manager.getTransaction().begin();
 		manager.persist(f);
+		manager.getTransaction().commit();
+		manager.close();
+		return null;
+	}
+	
+
+	public Fabricante alterar(Fabricante f) {
+		manager.getTransaction().begin();
+		manager.merge(f);
+		manager.getTransaction().commit();
+		manager.close();
+		return null;
+	}
+	
+
+	public Fabricante excluir(Integer idSelecionado) {
+		Fabricante fabricanteSelecionado = manager.find(Fabricante.class, idSelecionado);
+		manager.getTransaction().begin();
+		manager.persist(fabricanteSelecionado);
 		manager.getTransaction().commit();
 		manager.close();
 		return null;
