@@ -3,20 +3,16 @@ package br.cairu.pi.apresentacao;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.event.ComponentSystemEvent;
-
 import br.cairu.pi.DAO.FabricanteDAO;
-import br.cairu.pi.DAO.SequenciaFabricanteDAO;
+
 import br.cairu.pi.entidade.Fabricante;
-import br.cairu.pi.entidade.SequenciaFabricante;
 
 @ManagedBean
 @ViewScoped
 public class FabricanteMB {
 	private Fabricante fabricante;
 	private FabricanteDAO fabricanteDAO;
-	private SequenciaFabricante sequenciaFabricante;
-	private SequenciaFabricanteDAO sequenciaFabricanteDAO;
+
 	private Integer idSelecao;
 	
 	
@@ -37,7 +33,7 @@ public class FabricanteMB {
 	
 	public String editar() {
 		try {
-			getFabricanteDAO().alterar(fabricante);
+			getFabricanteDAO().editar(fabricante);
 			fabricante = new Fabricante();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -55,10 +51,6 @@ public class FabricanteMB {
 		return null;
 	}
 
-	public void mostraSequencia(ComponentSystemEvent evento) {
-		sequenciaFabricante = new SequenciaFabricante();
-		sequenciaFabricante = getSequenciaFabricanteDAO().buscaSequencia();
-	}
 	
 	public String mostraFabricPorId() {
 		try {
@@ -88,24 +80,6 @@ public class FabricanteMB {
 		this.fabricanteDAO = fabricanteDAO;
 	}
 
-	public SequenciaFabricante getSequenciaFabricante() {
-		return sequenciaFabricante;
-	}
-
-	public void setSequenciaFabricante(SequenciaFabricante sequenciaFabricante) {
-		this.sequenciaFabricante = sequenciaFabricante;
-	}
-
-	public SequenciaFabricanteDAO getSequenciaFabricanteDAO() {
-		if(sequenciaFabricanteDAO == null) {
-			sequenciaFabricanteDAO = new SequenciaFabricanteDAO();
-		}
-		return sequenciaFabricanteDAO;
-	}
-
-	public void setSequenciaFabricanteDAO(SequenciaFabricanteDAO sequenciaFabricanteDAO) {
-		this.sequenciaFabricanteDAO = sequenciaFabricanteDAO;
-	}
 
 	public Integer getIdSelecao() {
 		return idSelecao;

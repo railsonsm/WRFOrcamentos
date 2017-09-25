@@ -26,7 +26,7 @@ public class FabricanteDAO {
 	}
 	
 
-	public Fabricante alterar(Fabricante f) {
+	public Fabricante editar(Fabricante f) {
 		manager.getTransaction().begin();
 		manager.merge(f);
 		manager.getTransaction().commit();

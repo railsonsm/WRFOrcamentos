@@ -1,0 +1,111 @@
+<ui:composition template="inicio.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="centro">
+		<h:form>
+			<h1>Novo Orçamento</h1>
+			<p:panelGrid columns="2" style="margin-left: 35px;">
+				<p:outputLabel value="Código Orçamento" style="width:45%" />
+				<p:inputText size="12" value="123456" readonly="true"/>
+			</p:panelGrid>
+			<p:panelGrid columns="4" style="width:95%; margin-left: 35px; margin"
+				columnClasses="rotulo, campo, rotulo, campo">
+				<p:outputLabel value="Código Fabricante" />
+				<p:inputText size="10" value="">
+					<p:commandButton icon="ui-icon-search" />
+				</p:inputText>
+
+				<p:outputLabel value="Fabricante" />
+				<p:inputText size="35" value="" readonly="true" />
+
+				<p:outputLabel value="Código Cliente" />
+				<p:inputText size="10" value="">
+					<p:commandButton icon="ui-icon-search" style="button" />
+				</p:inputText>
+
+				<p:outputLabel value="Cliente" />
+				<p:inputText size="35" value="" readonly="true" />
+
+				<p:outputLabel value="Forma de pagamento" for="formaPagamento" />
+				<p:selectOneMenu id="formaPagamento" value="" style="width:125px">
+					<f:selectItem itemLabel="Selecione"/>
+		            <f:selectItem itemLabel="Transferencia" itemValue="Transferencia" />
+		            <f:selectItem itemLabel="Cartão" itemValue="Cartão" />
+		        </p:selectOneMenu>
+
+				<p:outputLabel value="Prazo de entrega" />
+				<p:inputText value="" />
+
+				<p:outputLabel value="Frete" />
+				<p:selectManyCheckbox id="basic"
+					value="#{caixaFreteView.selectedConsoles}">
+					<f:selectItem itemLabel="CIF" itemValue="CIF" />
+					<f:selectItem itemLabel="FOB" itemValue="FOB" />
+				</p:selectManyCheckbox>
+
+				<p:outputLabel value="Obra" />
+				<p:inputText size="35" value="" />
+
+				<p:outputLabel value="Data" />
+				<p:inputText value="" readonly="true" />
+
+			</p:panelGrid>
+			<p:tabView
+				style="margin-left: 35px; margin-right: 35px; margin-top: 10px">
+				<p:tab title="Itens">
+					<p:dataTable var="itens" value="" id="tabitens"
+						style="margin-top: 10px;">
+						<p:column headerText="Cod"
+							style="text-align: center; width: 100px">
+							<p:inputText size="8" />
+						</p:column>
+
+						<p:column headerText="Produto">
+							<p:autoComplete styleClass="produto-tabela" />
+						</p:column>
+
+						<p:column headerText="Valor Orç."
+							style="text-align: center; width: 100px;">
+							<p:inputText value="R$ 0,00" size="8" />
+						</p:column>
+
+						<p:column headerText="Valor Tabela"
+							style="text-align: center; width: 100px ">
+							<p:inputText size="8" />
+						</p:column>
+
+						<p:column headerText="Quantidade"
+							style="text-align: center; width: 100px ">
+							<p:inputText size="8" />
+						</p:column>
+
+						<p:column headerText="Valor Total"
+							style="text-align: center; width: 100px ">
+							<p:inputText size="8" />
+						</p:column>
+
+						<p:columnGroup type="footer">
+							<p:row>
+								<p:column colspan="5" footerText="Subtotal"
+									style="text-align: right;" />
+								<p:column footerText="R$ 0,00" style="text-align: center" />
+							</p:row>
+
+						</p:columnGroup>
+					</p:dataTable>
+				</p:tab>
+			</p:tabView>
+			<p:menubar styleClass="toolbarCadastro">
+				<f:facet name="options">
+					<p:commandButton type="button" value="Cancelar"
+						icon="ui-icon-extlink" />
+					<p:commandButton type="button" style="margin-left: 30px;"
+						value="Salvar" icon="ui-icon-extlink" />
+				</f:facet>
+			</p:menubar>
+		</h:form>
+	</ui:define>
+</ui:composition>

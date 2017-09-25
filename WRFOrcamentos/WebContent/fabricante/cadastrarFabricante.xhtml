@@ -1,0 +1,116 @@
+<ui:composition template="/templates/principal.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="titulo">WRFOçamentos - Cadastrar Fabricante</ui:define>
+	<ui:define name="corpo">
+		<h:form>	
+			<h1>Cadastrar Fabricante</h1>
+			
+			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarId">
+				<p:outputLabel value="Código Fabricante" style="width:45%"/>
+				<p:inputText size="12" value="" readonly="true"/>
+			</p:panelGrid>
+			
+			<p:panelGrid id="cadastroFabricante" columns="4" style="width:95%; margin-left: 35px;" columnClasses="rotulo, campo, rotulo, campo">
+				
+				<p:outputLabel for="nome" value="Nome" />
+				<p:inputText id="nome" size="35" value="#{fabricanteMB.fabricante.nome}" required="true" requiredMessage="Nome Obrigatório">
+					<p:message for="nome"/>
+				</p:inputText>
+
+				<p:outputLabel for="nomef" value="Nome Fantasia" />
+				<p:inputText id="nomef" size="35" value="#{fabricanteMB.fabricante.nomefantasia}" required="true" requiredMessage="Nome Fantasia Obrigatório">
+					<p:message for="nomef"/>
+				</p:inputText>
+
+				<p:outputLabel for="cnpj" value="CNPJ" />
+				<p:inputMask id="cnpj" size="15" mask="99.999.999/9999-99" value="#{fabricanteMB.fabricante.cnpj}" required="true" requiredMessage="Digite o número do CNPJ">
+					<p:message for="cnpj"/>
+				</p:inputMask>
+
+				<p:outputLabel for="email" value="E-mail" />
+				<p:inputText id="email" size="25" value="#{fabricanteMB.fabricante.email}" required="true" requiredMessage="E-Mail Obrigatório">
+					<p:message for="email"/>
+				</p:inputText>
+
+				<p:outputLabel for="cep" value="CEP" />
+				<p:inputMask id="cep" size="7" mask="99999-999" value="#{fabricanteMB.fabricante.cep}" required="true" requiredMessage="CEP Obrigatório" >
+					<p:message for="cep"/>
+				</p:inputMask>
+
+				<p:outputLabel for="lrua" value="Logradouro(Rua)" />
+				<p:inputText id="lrua" size="35" value="#{fabricanteMB.fabricante.rua}" required="true" requiredMessage="Logradouro/Rua Obrigatório">
+					<p:message for="lrua"/>
+				</p:inputText>
+
+				<p:outputLabel for="num" value="Número" />
+				<p:inputText id="num" size="5" value="#{fabricanteMB.fabricante.numero}" required="true" requiredMessage="Número obrigatório">
+					<p:message for="num"/>
+				</p:inputText>
+
+				<p:outputLabel for="comp" value="Complemento" />
+				<p:inputText id="comp" size="35" value="#{fabricanteMB.fabricante.complemento}" required="true" requiredMessage="Digite o complemento.">
+					<p:message for="comp"/>
+				</p:inputText>
+
+				<p:outputLabel for="cidade" value="Cidade" />
+				<p:inputText id="cidade" size="15" value="#{fabricanteMB.fabricante.cidade}" required="true" requiredMessage="Informe a Cidade.">
+					<p:message for="cidade"/>
+				</p:inputText>
+
+				<p:outputLabel for="estado" value="Estado" />
+				<p:inputText id="estado" size="15" value="#{fabricanteMB.fabricante.estado}" required="true" requiredMessage="Informe o Estado.">
+					<p:message for="estado"/>
+				</p:inputText>
+
+				<p:outputLabel for="tel1" value="Telefone 1" />
+				<p:inputMask id="tel1" size="15" mask="(99)9999-9999" value="#{fabricanteMB.fabricante.telefone1}" required="true" requiredMessage="Informe pelo menos um numero de telefone.">
+					<p:message for="tel1"/>
+				</p:inputMask>
+
+				<p:outputLabel for="cel1" value="Celular 1" />
+				<p:inputMask id="cel1" size="15" mask="(99)99999-9999" value="#{fabricanteMB.fabricante.celular1}" required="true" requiredMessage="Informe pelo menos um numero celular.">
+					<p:message for="cel1"/>
+				</p:inputMask>
+
+				<p:outputLabel value="Telefone 2" />
+				<p:inputMask size="15" mask="(99)9999-9999" value="#{fabricanteMB.fabricante.telefone2}" />
+
+				<p:outputLabel value="Celular 2" />
+				<p:inputMask size="15" mask="(99)99999-9999" value="#{fabricanteMB.fabricante.celular2}" />
+
+				<p:outputLabel for="comercial" value="Contato Comercial" />
+				<p:inputText id="comercial" size="35" value="#{fabricanteMB.fabricante.contatoComer}" required="true" requiredMessage="Informe o contato Comercial na Fábrica.">
+					<p:message for="comercial"/>
+				</p:inputText>
+
+				<p:outputLabel for="emailcom" value="E-mail Comercial" />
+				<p:inputText id="emailcom" size="25" value="#{fabricanteMB.fabricante.emailComer}" required="true" requiredMessage="Informe o e-mail do Comercial.">
+					<p:message for="emailcom"/>
+				</p:inputText>
+
+				<p:outputLabel for="tecnico" value="Contato Técnico/Fabril" />
+				<p:inputText id="tecnico" size="35" value="#{fabricanteMB.fabricante.contatoTec}" required="true" requiredMessage="Informe o contato técnico/fabril.">
+					<p:message for="tecnico"/>
+				</p:inputText>
+
+				<p:outputLabel for="emailtec" value="E-mail Técnico" />
+				<p:inputText id="emailtec" size="25" value="#{fabricanteMB.fabricante.emailTec}" required="true" requiredMessage="Informe o e-mail técnico.">
+					<p:message for="emailtec"/>
+				</p:inputText>
+
+			</p:panelGrid>
+			
+			<p:menubar styleClass="toolbarCadastro">
+				<f:facet name="options">
+					<p:commandButton value="Cancelar" icon="ui-icon-extlink" immediate="true" action="inicio.xhtml"/>
+					<p:commandButton action="#{fabricanteMB.salvar}" style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" update="cadastroFabricante,mostrarId" />
+				</f:facet>
+			</p:menubar>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

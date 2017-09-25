@@ -1,0 +1,62 @@
+<ui:composition template="/templates/principal.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="titulo">WRFOçamentos - Editar Produto</ui:define>
+	<ui:define name="corpo">
+		<h:form>
+			<h1>Cadastrar Produto</h1>
+			
+			<p:panelGrid columns="2" style="margin-left: 35px;">
+				<p:outputLabel value="Código Produto" style="width:45%" />
+				<p:inputText size="10" value="#{produtoMB.idSelecao}">
+					<p:commandButton action="#{produtoMB.mostrarProdutoPorId}" icon="ui-icon-search" update="editarProduto" />
+				</p:inputText>
+			</p:panelGrid>
+			
+			<p:panelGrid id="editarProduto" columns="4" style="width:95%; margin-left: 35px; margin" columnClasses="rotulo, campo, rotulo, campo">
+			
+				<p:outputLabel value="Código Fabricante" />
+				<p:inputText size="10" value="#{produtoMB.fabricante.idFabricante}">
+					
+				</p:inputText>
+
+				<p:outputLabel value="Fabricante" />
+				<p:inputText size="35" value="#{produtoMB.fabricante.nomefantasia}" readonly="true"/>
+
+				<p:outputLabel value="Descrição" />
+				<p:inputText size="35" value="#{produtoMB.produto.descricao}" />
+
+				<p:outputLabel value="Unidade" />
+				<p:inputText value="#{produtoMB.produto.unidade}" />
+
+				<p:outputLabel value="Tamanho" />
+				<p:inputText value="#{produtoMB.produto.tamanho}" />
+
+				<p:outputLabel value="Peso" />
+				<p:inputText value="#{produtoMB.produto.peso}" />
+
+				<p:outputLabel value="Embalagem/Quant." />
+				<p:inputText value="#{produtoMB.produto.qtdembalagem}" />
+
+				<p:outputLabel value="Frete CIF" />
+				<p:inputText value="#{produtoMB.produto.fretecif}" />
+
+				<p:outputLabel value="Frente FOB" />
+				<p:inputText value="#{produtoMB.produto.fretefob}" />
+
+				<p:outputLabel value="Ambiente" />
+				<p:inputText size="35" value="#{produtoMB.produto.ambiente}" />
+
+			</p:panelGrid>
+			<p:menubar styleClass="toolbarCadastro">
+				<f:facet name="options">
+					<p:commandButton value="Cancelar" icon="ui-icon-extlink" />
+					<p:commandButton action="#{produtoMB.salvar}" style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" update="editarProduto" />
+				</f:facet>
+			</p:menubar>
+		</h:form>
+	</ui:define>
+</ui:composition>

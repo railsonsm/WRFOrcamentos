@@ -29,7 +29,7 @@ public class ClienteDAO {
 		return null;
 	}
 	
-	public Cliente alterar(Cliente c) {
+	public Cliente editar(Cliente c) {
 		manager.getTransaction().begin();
 		manager.merge(c);
 		manager.getTransaction().commit();

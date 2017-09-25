@@ -19,6 +19,9 @@ public class Produto implements Serializable{
 	private Integer idProduto;
 
 	@Column(nullable = false)
+	private Integer codOriginal;
+		
+	@Column(nullable = false)
 	private String descricao;
 	
 	@Column(nullable = false)
@@ -139,5 +142,12 @@ public class Produto implements Serializable{
 		this.qtdembalagem = qtdembalagem;
 	}
 
+	public Integer getCodOriginal() {
+		return codOriginal;
+	}
+
+	public void setCodOriginal(Integer codOriginal) {
+		this.codOriginal = codOriginal;
+	}
 		
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="shortcut icon" href="../img/icon.png"></link>
+	<h:outputStylesheet library="css" name="style.css"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title><ui:insert name="titulo"></ui:insert></title>
+</h:head>
+<h:body style="background-color: #CDE8FF">
+	<p:graphicImage library="img" name="cabecalhopadrao.png" styleClass="logotemplate"/>
+	<div id="barra_menu">
+		<ui:insert name="barra_menu">
+			<ui:include src="/WEB-INF/restrito/menu.xhtml"></ui:include>
+		</ui:insert>
+	</div>
+	<h:panelGrid style="background-color: #ffffff; width: 100%; min-height: 100px"
+		columnClasses="bordarPanel">
+		<ui:insert name="corpo">
+		</ui:insert>
+	</h:panelGrid>
+	<div class="rodape">Projeto Integrador 3 - Curso de Analise e Deselvolvimento de Sistemas.</div>
+</h:body>
+</html>
