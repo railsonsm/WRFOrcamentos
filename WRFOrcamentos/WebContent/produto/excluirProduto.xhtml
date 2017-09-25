@@ -9,37 +9,66 @@
 		<h:form>
 			<h1>Cadastrar Produto</h1>
 			
-			<p:panelGrid columns="2" style="margin-left: 35px;">
-				<p:outputLabel value="Código Produto" style="width:45%" />
-				<p:inputText size="10" value="#{produtoMB.idSelecao}">
-					<p:commandButton action="#{produtoMB.mostrarProdutoPorId}" icon="ui-icon-search" update="excluirProduto" />
-				</p:inputText>
+			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarId">
+				<p:outputLabel value="Código Cliente" style="width:45%" />
+				<h:panelGroup>
+					<p:inputText size="10" value="#{clienteMB.cliente.idCliente}" />
+					<p:commandButton icon="ui-icon-search" title="Pesquisar"
+						action="#{clienteMB.abrirDialogo}" process="@this" update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{clienteMB.clienteSelecionado}" process="@this"
+							update="mostrarId, excluirCliente" />
+						<p:resetInput target="mostrarId" />
+					</p:commandButton>
+				</h:panelGroup>
 			</p:panelGrid>
 			
-			<p:panelGrid id="excluirProduto" columns="4" style="width:95%; margin-left: 35px; margin" columnClasses="rotulo, campo, rotulo, campo">
-			
+			<p:panelGrid id="excluirCliente" columns="4" style="width:95%; margin-left: 35px; margin" columnClasses="rotulo, campo, rotulo, campo">
+
 				<p:outputLabel value="Código Fabricante" />
-				<p:inputText size="10" value="#{produtoMB.fabricante.idFabricante}">
-					
+				<h:panelGroup>
+					<p:inputText size="12" id="mostrarId"
+						value="#{produtoMB.fabricante.idFabricante}" />
+					<p:commandButton icon="ui-icon-search" title="Pesquisar"
+						action="#{produtoMB.abrirDialogo}" process="@this" update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{produtoMB.fabricanteSelecionado}" process="@this"
+							update="mostrarId,nome" />
+						<p:resetInput target="mostrarId" />
+					</p:commandButton>
+				</h:panelGroup>
+
+				<p:outputLabel for="nome" value="Fabricante" />
+				<p:inputText size="35" value="#{produtoMB.fabricante.nome}" readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" id="nome" 
+				required="true" requiredMessage="Selecione o fabricante.">
+					<p:message for="nome"/>
+				</p:inputText>
+				
+				<p:outputLabel value="Código original/Fabric." />
+				<p:inputText size="35" value="#{produtoMB.produto.codOriginal}"/>
+
+				<p:outputLabel for="descricao" value="Descrição" />
+				<p:inputText id="descricao" size="35" value="#{produtoMB.produto.descricao}" required="true" requiredMessage="Informe o produto a cadastrar.">
+					<p:message for="descricao"/>
 				</p:inputText>
 
-				<p:outputLabel value="Fabricante" />
-				<p:inputText size="35" value="#{produtoMB.fabricante.nomefantasia}" readonly="true"/>
+				<p:outputLabel for="unid" value="Unidade" />
+				<p:inputText id="unid" value="#{produtoMB.produto.unidade}"  required="true" requiredMessage="Uma unidade de medição deve ser informada.">
+					<p:message for="unid"/>
+				</p:inputText>
 
-				<p:outputLabel value="Descrição" />
-				<p:inputText size="35" value="#{produtoMB.produto.descricao}" />
+				<p:outputLabel for="tam" value="Tamanho" />
+				<p:inputText id="tam" value="#{produtoMB.produto.tamanho}" required="true" requiredMessage="Informe o tamanho do produto.">
+					<p:message for="tam"/>
+				</p:inputText>
 
-				<p:outputLabel value="Unidade" />
-				<p:inputText value="#{produtoMB.produto.unidade}" />
+				<p:outputLabel for="peso" value="Peso" />
+				<p:inputText id="peso" value="#{produtoMB.produto.peso}" />
 
-				<p:outputLabel value="Tamanho" />
-				<p:inputText value="#{produtoMB.produto.tamanho}" />
-
-				<p:outputLabel value="Peso" />
-				<p:inputText value="#{produtoMB.produto.peso}" />
-
-				<p:outputLabel value="Embalagem/Quant." />
-				<p:inputText value="#{produtoMB.produto.qtdembalagem}" />
+				<p:outputLabel for="emb" value="Embalagem/Quant." />
+				<p:inputText id="emb" value="#{produtoMB.produto.qtdembalagem}" required="true" requiredMessage="Informe a quantidade por embalagem.">
+					<p:message for="emb"/>
+				</p:inputText>
 
 				<p:outputLabel value="Frete CIF" />
 				<p:inputText value="#{produtoMB.produto.fretecif}" />
@@ -54,7 +83,7 @@
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
 					<p:commandButton value="Cancelar" icon="ui-icon-extlink" />
-					<p:commandButton action="#{produtoMB.excluir}" style="margin-left: 30px;" value="Excluir" icon="ui-icon-extlink" update="excluirProduto" />
+					<p:commandButton action="#{produtoMB.excluir}" style="margin-left: 30px;" value="Excluir" icon="ui-icon-extlink" update="excluirProduto, " />
 				</f:facet>
 			</p:menubar>
 		</h:form>

@@ -7,80 +7,98 @@
 	<ui:define name="titulo">WRFOçamentos - Excluir Cliente</ui:define>
 	<ui:define name="corpo">
 		<h:form>
-			<h1>Editar Cliente</h1>
-			
+			<h1>Excluir Cliente</h1>
+
 			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarId">
 				<p:outputLabel value="Código Cliente" style="width:45%" />
-				<p:inputText size="10" value="#{clienteMB.idSelecao}">
-					<p:commandButton action="#{clienteMB.mostrarCliPorId}" icon="ui-icon-search" update="excluirCliente" />
-				</p:inputText>
+				<h:panelGroup>
+					<p:inputText size="10" value="#{clienteMB.cliente.idCliente}" />
+					<p:commandButton icon="ui-icon-search" title="Pesquisar"
+						action="#{clienteMB.abrirDialogo}" process="@this" update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{clienteMB.clienteSelecionado}" process="@this"
+							update="mostrarId, excluirCliente" />
+						<p:resetInput target="mostrarId" />
+					</p:commandButton>
+				</h:panelGroup>
 			</p:panelGrid>
-			
-			<p:panelGrid id="excluirCliente" columns="4" style="width:95%; margin-left: 35px;" columnClasses="rotulo, campo, rotulo, campo">
-				
+
+			<p:panelGrid id="excluirCliente" columns="4"
+				style="width:95%; margin-left: 35px;"
+				columnClasses="rotulo, campo, rotulo, campo">
+
 				<p:outputLabel value="Nome" />
-				<p:inputText size="35" value="#{clienteMB.cliente.nome}"/>
+				<p:inputText size="35" value="#{clienteMB.cliente.nome}" readonly="true"/>
 
 				<p:outputLabel value="Nome Fantasia" />
-				<p:inputText size="35" value="#{clienteMB.cliente.nomeFantasia}"/>
+				<p:inputText size="35" value="#{clienteMB.cliente.nomeFantasia}" readonly="true"/>
 
 				<p:outputLabel value="CNPJ" />
-				<p:inputMask size="15" mask="99.999.999/9999-99" value="#{clienteMB.cliente.cnpj}"/>
+				<p:inputMask size="15" mask="99.999.999/9999-99"
+					value="#{clienteMB.cliente.cnpj}" readonly="true"/>
 
 				<p:outputLabel value="E-mail" />
-				<p:inputText size="25" value="#{clienteMB.cliente.email}" />
+				<p:inputText size="25" value="#{clienteMB.cliente.email}" readonly="true"/>
 
 				<p:outputLabel value="CEP" />
-				<p:inputMask size="7" mask="99999-999" value="#{clienteMB.cliente.cep}" />
+				<p:inputMask size="7" mask="99999-999"
+					value="#{clienteMB.cliente.cep}" readonly="true"/>
 
 				<p:outputLabel value="Logradouro(Rua)" />
-				<p:inputText size="35" value="#{clienteMB.cliente.rua}" />
+				<p:inputText size="35" value="#{clienteMB.cliente.rua}" readonly="true"/>
 
-				<p:outputLabel value="Número" />
-				<p:inputText size="5" value="#{clienteMB.cliente.numero}" />
+				<p:outputLabel value="Número" readonly="true"/>
+				<p:inputText size="5" value="#{clienteMB.cliente.numero}" readonly="true"/>
 
-				<p:outputLabel value="Complemento" />
-				<p:inputText size="35" value="#{clienteMB.cliente.complemento}" />
+				<p:outputLabel value="Complemento" readonly="true"/>
+				<p:inputText size="35" value="#{clienteMB.cliente.complemento}" readonly="true"/>
 
 				<p:outputLabel value="Cidade" />
-				<p:inputText size="15" value="#{clienteMB.cliente.cidade}" />
+				<p:inputText size="15" value="#{clienteMB.cliente.cidade}" readonly="true"/>
 
 				<p:outputLabel value="Estado" />
-				<p:inputText size="15" value="#{clienteMB.cliente.estado}" />
+				<p:inputText size="15" value="#{clienteMB.cliente.estado}" readonly="true"/>
 
 				<p:outputLabel value="Telefone 1" />
-				<p:inputMask size="15" mask="(99)9999-9999" value="#{clienteMB.cliente.telefone1}" />
+				<p:inputMask size="15" mask="(99)9999-9999"
+					value="#{clienteMB.cliente.telefone1}" readonly="true"/>
 
 				<p:outputLabel value="Celular 1" />
-				<p:inputMask size="15" mask="(99)99999-9999" value="#{clienteMB.cliente.celular1}" />
+				<p:inputMask size="15" mask="(99)99999-9999"
+					value="#{clienteMB.cliente.celular1}" readonly="true"/>
 
 				<p:outputLabel value="Telefone 2" />
-				<p:inputMask size="15" mask="(99)9999-9999" value="#{clienteMB.cliente.telefone2}" />
+				<p:inputMask size="15" mask="(99)9999-9999"
+					value="#{clienteMB.cliente.telefone2}" readonly="true"/>
 
 				<p:outputLabel value="Celular 2" />
-				<p:inputMask size="15" mask="(99)99999-9999" value="#{clienteMB.cliente.celular2}" />
+				<p:inputMask size="15" mask="(99)99999-9999"
+					value="#{clienteMB.cliente.celular2}" readonly="true"/>
 
 				<p:outputLabel value="Contato  de engenharia" />
-				<p:inputText size="35" value="#{clienteMB.cliente.contatoEng}" />
+				<p:inputText size="35" value="#{clienteMB.cliente.contatoEng}" readonly="true"/>
 
 				<p:outputLabel value="E-mail de engenharia" />
-				<p:inputText size="25" value="#{clienteMB.cliente.emailEng}" />
+				<p:inputText size="25" value="#{clienteMB.cliente.emailEng}" readonly="true"/>
 
 				<p:outputLabel value="Contato  de suprimentos/compras" />
-				<p:inputText size="35" value="#{clienteMB.cliente.contatoSupr}" />
+				<p:inputText size="35" value="#{clienteMB.cliente.contatoSupr}" readonly="true"/>
 
 				<p:outputLabel value="E-mail de suprimentos/compras" />
-				<p:inputText size="25" value="#{clienteMB.cliente.emailSupr}" />
+				<p:inputText size="25" value="#{clienteMB.cliente.emailSupr}" readonly="true"/>
 
 			</p:panelGrid>
-			
+
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
-					<p:commandButton value="Cancelar" icon="ui-icon-extlink" immediate="true" action="inicio.xhtml"/>
-					<p:commandButton style="margin-left: 30px;" value="Excluir" icon="ui-icon-extlink" actionListener="#{clienteMB.excluir}" update="excluirCliente"/>		
+					<p:commandButton value="Cancelar" icon="ui-icon-extlink"
+						immediate="true" action="inicio.xhtml" />
+					<p:commandButton style="margin-left: 30px;" value="Excluir"
+						icon="ui-icon-extlink" actionListener="#{clienteMB.excluir}"
+						update="excluirCliente,mostrarId" />
 				</f:facet>
 			</p:menubar>
-			
+
 		</h:form>
 	</ui:define>
 </ui:composition>

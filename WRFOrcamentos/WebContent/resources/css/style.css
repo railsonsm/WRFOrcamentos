@@ -15,6 +15,11 @@
 	text-align: center;
 }
 
+.tableSelecao{
+	font-size: 10px;
+	font: Courier New;
+}
+
 .toolbarCadastro {
 	margin-left: 35px;
 	margin-right: 35px;
@@ -49,7 +54,7 @@ h1 {
 }
 
 .login {
-	background-image: url("../img/background.jpg");
+	background-image: url("../resources/img/background.jpg");
 	background-size: 100%;
 	background-repeat: no-repeat;
 	margin-top: 205px;
@@ -75,7 +80,7 @@ h1 {
 	font-size: 20px;
 }
 
-body {
+.padrao {
 	font-size: 12px;
 	font: Courier New;
 }

@@ -1,12 +1,13 @@
 package br.cairu.pi.DAO;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 
 import br.cairu.pi.entidade.Cliente;
-import br.cairu.pi.entidade.Fabricante;
 
 public class ClienteDAO {
 	EntityManagerFactory factory = Persistence.createEntityManagerFactory("default"); 
@@ -37,9 +38,19 @@ public class ClienteDAO {
 		return null;
 	}
 	
+	public Cliente contarId() {
+        return manager.createQuery("select count(*) from Cliente", Cliente.class).getSingleResult();
+	}
+	
 	public Cliente buscarCliPorId(Integer idCliente) {
         return manager.createQuery("select c from Cliente c where c.idCliente = :idCliente", Cliente.class).
         setParameter("idCliente", idCliente).getSingleResult();
 
+	}
+	
+	public List<Cliente> porNomeSemelhante(String nome) {
+		return manager.createQuery("from Cliente where nome like :nome", Cliente.class)
+				.setParameter("nome", "%" + nome + "%")
+				.getResultList();
 	}
 }

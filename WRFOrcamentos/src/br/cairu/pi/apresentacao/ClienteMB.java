@@ -1,13 +1,22 @@
 package br.cairu.pi.apresentacao;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
+
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 import br.cairu.pi.DAO.ClienteDAO;
 import br.cairu.pi.entidade.Cliente;
+import br.cairu.pi.entidade.Fabricante;
 
 
 @ManagedBean
@@ -15,9 +24,11 @@ import br.cairu.pi.entidade.Cliente;
 public class ClienteMB {
 	private ClienteDAO clienteDAO;
 	private Cliente cliente;
-
 	private Integer exibirId;
 	private Integer idSelecao;
+	private String nomeCliente;
+	private List<Cliente> clientesFiltrados;
+	private Integer contadorId;
 
 	@PostConstruct
 	public void init() {
@@ -27,6 +38,31 @@ public class ClienteMB {
 	public String mostrarCliPorId() {
 		cliente = getClienteDAO().buscarCliPorId(idSelecao);
 		return null;
+	}
+	
+	public void teste (ComponentSystemEvent event) {
+		cliente = getClienteDAO().contarId();
+	}
+	
+	public void abrirDialogo() {
+		Map<String, Object> opcoes = new HashMap<String, Object>();
+		opcoes.put("modal", true);
+		opcoes.put("resizable", false);
+		opcoes.put("contentHeight", 420);
+		RequestContext.getCurrentInstance().openDialog("selecaoCliente", opcoes, null);
+	}
+	
+	public void clienteSelecionado(SelectEvent event) {
+		Cliente cliente = (Cliente) event.getObject();
+		setCliente(cliente);
+	}
+	
+	public void pesquisarCliente() {
+		clientesFiltrados = getClienteDAO().porNomeSemelhante(nomeCliente);
+	}
+	
+	public void selecionarCliente(Cliente cliente) {
+		RequestContext.getCurrentInstance().closeDialog(cliente);
 	}
 	
 	public void destroyWorld() {
@@ -55,18 +91,50 @@ public class ClienteMB {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "cadastrarCliente.xhtml";
+		return null;
 	}
 	
 	public String excluir() {
 		try {
-			getClienteDAO().excluir(idSelecao);
+			getClienteDAO().excluir(cliente.getIdCliente());
 			cliente = new Cliente();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public Integer getContadorId() {
+		return contadorId;
+	}
+
+	public void setContadorId(Integer contadorId) {
+		this.contadorId = contadorId;
+	}
+
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+
+	public List<Cliente> getClientesFiltrados() {
+		return clientesFiltrados;
+	}
+
+	public void setClientesFiltrados(List<Cliente> clientesFiltrados) {
+		this.clientesFiltrados = clientesFiltrados;
+	}
+
 	public ClienteDAO getClienteDAO() {
 		if (clienteDAO == null) {
 			clienteDAO = new ClienteDAO();

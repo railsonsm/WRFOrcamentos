@@ -12,17 +12,27 @@
 			<p:panelGrid columns="2" style="margin-left: 35px;">
 				<p:outputLabel value="Código Produto" style="width:45%" />
 				<p:inputText  size="12" value="" readonly="true"/>
-			</p:panelGrid>
-			
+			</p:panelGrid>			
 			<p:panelGrid id="cadastrarProduto" columns="4" style="width:95%; margin-left: 35px; margin" columnClasses="rotulo, campo, rotulo, campo">
-			
-				<p:outputLabel  value="Código Fabricante" />
-				<p:inputText size="10" value="#{produtoMB.idSelecao}">
-					<p:commandButton  actionListener="#{produtoMB.mostraFabricPorId}" icon="ui-icon-search" update="descricaoFabricante"  immediate="true"/>
-				</p:inputText>
 
-				<p:outputLabel value="Fabricante" />
-				<p:inputText size="35" value="#{produtoMB.fabricante.nomefantasia}" readonly="true" id="descricaoFabricante"/>
+				<p:outputLabel value="Código Fabricante" />
+				<h:panelGroup>
+					<p:inputText size="12" id="fabricante"
+						value="#{produtoMB.fabricante.idFabricante}" />
+					<p:commandButton icon="ui-icon-search" title="Pesquisar"
+						action="#{produtoMB.abrirDialogo}" process="@this" update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{produtoMB.fabricanteSelecionado}" process="@this"
+							update="fabricante,nome" />
+						<p:resetInput target="fabricante" />
+					</p:commandButton>
+				</h:panelGroup>
+
+				<p:outputLabel for="nome" value="Fabricante" />
+				<p:inputText size="35" value="#{produtoMB.fabricante.nome}" readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" id="nome" 
+				required="true" requiredMessage="Selecione o fabricante.">
+					<p:message for="nome"/>
+				</p:inputText>
 				
 				<p:outputLabel value="Código original/Fabric." />
 				<p:inputText size="35" value="#{produtoMB.produto.codOriginal}"/>
@@ -33,7 +43,7 @@
 				</p:inputText>
 
 				<p:outputLabel for="unid" value="Unidade" />
-				<p:inputText id="unid" value="#{produtoMB.produto.unidade}" required="true" requiredMessage="Uma unidade de medição deve ser informada.">
+				<p:inputText id="unid" value="#{produtoMB.produto.unidade}"  required="true" requiredMessage="Uma unidade de medição deve ser informada.">
 					<p:message for="unid"/>
 				</p:inputText>
 

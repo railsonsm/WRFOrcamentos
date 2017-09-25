@@ -6,81 +6,113 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="titulo">WRFOçamentos - Excluir Fabricante</ui:define>
 	<ui:define name="corpo">
-		<h:form>	
+		<h:form>
 			<h1>Excluir Fabricante</h1>
-			
+
 			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarId">
-				<p:outputLabel value="Código Fabricante" style="width:45%" />
-				<p:inputText size="10" value="#{fabricanteMB.idSelecao}">
-					<p:commandButton action="#{fabricanteMB.mostraFabricPorId}" icon="ui-icon-search" update="editarFabricante" immediate="true" />
-				</p:inputText>
+				<p:outputLabel value="Código Cliente" style="width:45%" />
+				<h:panelGroup>
+					<p:inputText size="10"
+						value="#{fabricanteMB.fabricante.idFabricante}" />
+					<p:commandButton icon="ui-icon-search" title="Pesquisar"
+						action="#{fabricanteMB.abrirDialogo}" process="@this"
+						update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{fabricanteMB.fabricanteSelecionado}" process="@this"
+							update="mostrarId, excluirFabricante" />
+						<p:resetInput target="mostrarId" />
+					</p:commandButton>
+				</h:panelGroup>
 			</p:panelGrid>
-			
-			<p:panelGrid id="editarFabricante" columns="4" style="width:95%; margin-left: 35px;" columnClasses="rotulo, campo, rotulo, campo">
-				
+
+			<p:panelGrid id="excluirFabricante" columns="4"
+				style="width:95%; margin-left: 35px;"
+				columnClasses="rotulo, campo, rotulo, campo">
+
 				<p:outputLabel for="nome" value="Nome" />
-				<p:inputText id="nome" size="35" value="#{fabricanteMB.fabricante.nome}" required="true" />
+				<p:inputText id="nome" size="35"
+					value="#{fabricanteMB.fabricante.nome}" readonly="true" />
 
 				<p:outputLabel for="nomef" value="Nome Fantasia" />
-				<p:inputText id="nomef" size="35" value="#{fabricanteMB.fabricante.nomefantasia}" required="true"/>
+				<p:inputText id="nomef" size="35"
+					value="#{fabricanteMB.fabricante.nomefantasia}" readonly="true" />
 
 				<p:outputLabel for="cnpj" value="CNPJ" />
-				<p:inputMask id="cnpj" size="15" mask="99.999.999/9999-99" value="#{fabricanteMB.fabricante.cnpj}" required="true" />
+				<p:inputMask id="cnpj" size="15" mask="99.999.999/9999-99"
+					value="#{fabricanteMB.fabricante.cnpj}" readonly="true" />
 
 				<p:outputLabel value="E-mail" />
-				<p:inputText size="25" value="#{fabricanteMB.fabricante.email}" />
+				<p:inputText size="25" value="#{fabricanteMB.fabricante.email}"
+					readonly="true" />
 
 				<p:outputLabel value="CEP" />
-				<p:inputMask size="7" mask="99999-999" value="#{fabricanteMB.fabricante.cep}" />
+				<p:inputMask size="7" mask="99999-999"
+					value="#{fabricanteMB.fabricante.cep}" readonly="true" />
 
 				<p:outputLabel value="Logradouro(Rua)" />
-				<p:inputText size="35" value="#{fabricanteMB.fabricante.rua}" />
+				<p:inputText size="35" value="#{fabricanteMB.fabricante.rua}"
+					readonly="true" />
 
 				<p:outputLabel value="Número" />
-				<p:inputText size="5" value="#{fabricanteMB.fabricante.numero}" />
+				<p:inputText size="5" value="#{fabricanteMB.fabricante.numero}"
+					readonly="true" />
 
 				<p:outputLabel value="Complemento" />
-				<p:inputText size="35" value="#{fabricanteMB.fabricante.complemento}" />
+				<p:inputText size="35"
+					value="#{fabricanteMB.fabricante.complemento}" readonly="true" />
 
 				<p:outputLabel value="Cidade" />
-				<p:inputText size="15" value="#{fabricanteMB.fabricante.cidade}" />
+				<p:inputText size="15" value="#{fabricanteMB.fabricante.cidade}"
+					readonly="true" />
 
 				<p:outputLabel value="Estado" />
-				<p:inputText size="15" value="#{fabricanteMB.fabricante.estado}" />
+				<p:inputText size="15" value="#{fabricanteMB.fabricante.estado}"
+					readonly="true" />
 
 				<p:outputLabel value="Telefone 1" />
-				<p:inputMask size="15" mask="(99)9999-9999" value="#{fabricanteMB.fabricante.telefone1}" />
+				<p:inputMask size="15" mask="(99)9999-9999"
+					value="#{fabricanteMB.fabricante.telefone1}" readonly="true" />
 
 				<p:outputLabel value="Celular 1" />
-				<p:inputMask size="15" mask="(99)99999-9999" value="#{fabricanteMB.fabricante.telefone2}" />
+				<p:inputMask size="15" mask="(99)99999-9999"
+					value="#{fabricanteMB.fabricante.telefone2}" readonly="true" />
 
 				<p:outputLabel value="Telefone 2" />
-				<p:inputMask size="15" mask="(99)9999-9999" value="#{fabricanteMB.fabricante.celular1}" />
+				<p:inputMask size="15" mask="(99)9999-9999"
+					value="#{fabricanteMB.fabricante.celular1}" readonly="true" />
 
 				<p:outputLabel value="Celular 2" />
-				<p:inputMask size="15" mask="(99)99999-9999" value="#{fabricanteMB.fabricante.celular2}" />
+				<p:inputMask size="15" mask="(99)99999-9999"
+					value="#{fabricanteMB.fabricante.celular2}" readonly="true" />
 
 				<p:outputLabel value="Contato Comercial" />
-				<p:inputText size="35" value="#{fabricanteMB.fabricante.contatoComer}" />
+				<p:inputText size="35"
+					value="#{fabricanteMB.fabricante.contatoComer}" readonly="true" />
 
 				<p:outputLabel value="E-mail Comercial" />
-				<p:inputText size="25" value="#{fabricanteMB.fabricante.emailComer}" />
+				<p:inputText size="25" value="#{fabricanteMB.fabricante.emailComer}"
+					readonly="true" />
 
 				<p:outputLabel value="Contato Técnico" />
-				<p:inputText size="35" value="#{fabricanteMB.fabricante.contatoTec}" />
+				<p:inputText size="35" value="#{fabricanteMB.fabricante.contatoTec}"
+					readonly="true" />
 
 				<p:outputLabel value="E-mail Técnico" />
-				<p:inputText size="25" value="#{fabricanteMB.fabricante.emailTec}" />
+				<p:inputText size="25" value="#{fabricanteMB.fabricante.emailTec}"
+					readonly="true" />
 
 			</p:panelGrid>
-			
+
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
-					<p:commandButton style="margin-right: 30px;" value="Excluir" icon="ui-icon-extlink" actionListener="#{fabricanteMB.excluir}"/>
-					<p:commandButton value="Cancelar" icon="ui-icon-extlink" immediate="true" action="inicio.xhtml"/>
+					<p:commandButton style="margin-right: 30px;" value="Excluir"
+						icon="ui-icon-extlink" actionListener="#{fabricanteMB.excluir}"
+						update="excluirFabricante, mostrarId" />
+					<p:commandButton value="Cancelar" icon="ui-icon-extlink"
+						immediate="true" action="inicio.xhtml" />
 				</f:facet>
 			</p:menubar>
-			
+
 		</h:form>
 	</ui:define>
 </ui:composition>

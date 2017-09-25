@@ -1,5 +1,7 @@
 package br.cairu.pi.DAO;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -42,5 +44,11 @@ public class FabricanteDAO {
 		manager.getTransaction().commit();
 		manager.close();
 		return null;
+	}
+	
+	public List<Fabricante> porNomeSemelhante(String nome) {
+		return manager.createQuery("from Fabricante where nome like :nome", Fabricante.class)
+				.setParameter("nome", "%" + nome + "%")
+				.getResultList();
 	}
 }
