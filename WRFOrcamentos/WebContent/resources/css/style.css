@@ -15,6 +15,17 @@
 	text-align: center;
 }
 
+.ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
+	background: #ffffff;
+	color: black;
+}
+
+.ui-messages-info, .ui-messages-warn, .ui-messages-error, .ui-messages-fatal, .ui-message-error{
+    color: #b94a48;
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
 .tableSelecao{
 	font-size: 10px;
 	font: Courier New;
