@@ -8,11 +8,9 @@
 	<ui:define name="corpo">
 		<h:form>
 			<h1>Cadastrar Produto</h1>
+			
+			<p:messages id="msgs" autoUpdate="true" style="width:95%; margin-left: 35px"/>
 
-			<p:panelGrid columns="2" style="margin-left: 35px;">
-				<p:outputLabel value="Código Produto" style="width:45%" />
-				<p:inputText  size="12" value="" readonly="true"/>
-			</p:panelGrid>			
 			<p:panelGrid id="cadastrarProduto" columns="4" style="width:95%; margin-left: 35px; margin" columnClasses="rotulo, campo, rotulo, campo">
 
 				<p:outputLabel value="Código Fabricante" />
@@ -30,35 +28,28 @@
 
 				<p:outputLabel for="nome" value="Fabricante" />
 				<p:inputText size="35" value="#{produtoMB.fabricante.nome}" readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" id="nome" 
-				required="true" requiredMessage="Selecione o fabricante.">
-					<p:message for="nome"/>
-				</p:inputText>
+				required="true" requiredMessage="Selecione o fabricante."/>
 				
 				<p:outputLabel value="Código original/Fabric." />
 				<p:inputText size="35" value="#{produtoMB.produto.codOriginal}"/>
 
 				<p:outputLabel for="descricao" value="Descrição" />
-				<p:inputText id="descricao" size="35" value="#{produtoMB.produto.descricao}" required="true" requiredMessage="Informe o produto a cadastrar.">
-					<p:message for="descricao"/>
-				</p:inputText>
+				<p:inputText id="descricao" size="35"
+					value="#{produtoMB.produto.descricao}" required="true"
+					requiredMessage="Informe o produto a cadastrar."/>
+
 
 				<p:outputLabel for="unid" value="Unidade" />
-				<p:inputText id="unid" value="#{produtoMB.produto.unidade}"  required="true" requiredMessage="Uma unidade de medição deve ser informada.">
-					<p:message for="unid"/>
-				</p:inputText>
+				<p:inputText id="unid" value="#{produtoMB.produto.unidade}"  required="true" requiredMessage="Uma unidade de medição deve ser informada."/>
 
 				<p:outputLabel for="tam" value="Tamanho" />
-				<p:inputText id="tam" value="#{produtoMB.produto.tamanho}" required="true" requiredMessage="Informe o tamanho do produto.">
-					<p:message for="tam"/>
-				</p:inputText>
+				<p:inputText id="tam" value="#{produtoMB.produto.tamanho}" required="true" requiredMessage="Informe o tamanho do produto."/>
 
 				<p:outputLabel for="peso" value="Peso" />
 				<p:inputText id="peso" value="#{produtoMB.produto.peso}" />
 
 				<p:outputLabel for="emb" value="Embalagem/Quant." />
-				<p:inputText id="emb" value="#{produtoMB.produto.qtdembalagem}" required="true" requiredMessage="Informe a quantidade por embalagem.">
-					<p:message for="emb"/>
-				</p:inputText>
+				<p:inputText id="emb" value="#{produtoMB.produto.qtdembalagem}" required="true" requiredMessage="Informe a quantidade por embalagem."/>
 
 				<p:outputLabel value="Frete CIF" />
 				<p:inputText value="#{produtoMB.produto.fretecif}" />
@@ -73,7 +64,7 @@
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
 					<p:commandButton value="Cancelar" icon="ui-icon-extlink" />
-					<p:commandButton action="#{produtoMB.salvar}" style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" update="cadastrarProduto" />
+					<p:commandButton action="#{produtoMB.salvar}" style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" update="cadastrarProduto" validateClient="true"/>
 				</f:facet>
 			</p:menubar>
 		</h:form>

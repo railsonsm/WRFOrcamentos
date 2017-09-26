@@ -38,10 +38,7 @@ public class ClienteDAO {
 		return null;
 	}
 	
-	public Cliente contarId() {
-        return manager.createQuery("select count(*) from Cliente", Cliente.class).getSingleResult();
-	}
-	
+
 	public Cliente buscarCliPorId(Integer idCliente) {
         return manager.createQuery("select c from Cliente c where c.idCliente = :idCliente", Cliente.class).
         setParameter("idCliente", idCliente).getSingleResult();

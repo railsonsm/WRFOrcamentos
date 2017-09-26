@@ -16,8 +16,6 @@
    <class>br.cairu.pi.entidade.Produto</class>
    <class>br.cairu.pi.entidade.Orcamento</class>
    <class>br.cairu.pi.entidade.OrcamentoProduto</class>
-   <class>br.cairu.pi.entidade.SequenciaClientre</class>
-   <class>br.cairu.pi.entidade.SequenciaFabricante</class>
 
    <properties>
   <!-- dados da conexao -->

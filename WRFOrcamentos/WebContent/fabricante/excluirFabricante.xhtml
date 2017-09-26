@@ -9,11 +9,15 @@
 		<h:form>
 			<h1>Excluir Fabricante</h1>
 
+			<p:messages id="msgs" autoUpdate="true"
+				style="width:95%; margin-left: 35px" />
+
 			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarId">
-				<p:outputLabel value="Código Cliente" style="width:45%" />
+				<p:outputLabel value="Código Cliente" style="width:45%" for="codFab" />
 				<h:panelGroup>
 					<p:inputText size="10"
-						value="#{fabricanteMB.fabricante.idFabricante}" />
+						value="#{fabricanteMB.fabricante.idFabricante}" id="codFab"
+						required="true" requiredMessage="Selecione o Fabricante" />
 					<p:commandButton icon="ui-icon-search" title="Pesquisar"
 						action="#{fabricanteMB.abrirDialogo}" process="@this"
 						update="@none">
@@ -105,11 +109,11 @@
 
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
-					<p:commandButton style="margin-right: 30px;" value="Excluir"
-						icon="ui-icon-extlink" actionListener="#{fabricanteMB.excluir}"
+					<p:commandButton style="margin-right: 30px;" value="Cancelar"
+						icon="ui-icon-extlink" immediate="true" action="inicio.xhtml" />
+					<p:commandButton value="Excluir" icon="ui-icon-extlink"
+						actionListener="#{fabricanteMB.excluir}"
 						update="excluirFabricante, mostrarId" />
-					<p:commandButton value="Cancelar" icon="ui-icon-extlink"
-						immediate="true" action="inicio.xhtml" />
 				</f:facet>
 			</p:menubar>
 

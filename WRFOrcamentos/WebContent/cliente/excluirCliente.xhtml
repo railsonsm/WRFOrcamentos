@@ -8,11 +8,13 @@
 	<ui:define name="corpo">
 		<h:form>
 			<h1>Excluir Cliente</h1>
+			
+			<p:messages id="msgs" autoUpdate="true" style="width:95%; margin-left: 35px"/>
 
 			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarId">
-				<p:outputLabel value="Código Cliente" style="width:45%" />
+				<p:outputLabel value="Código Cliente" style="width:45%" for="codCli"/>
 				<h:panelGroup>
-					<p:inputText size="10" value="#{clienteMB.cliente.idCliente}" />
+					<p:inputText size="10" value="#{clienteMB.cliente.idCliente}" required="true" requiredMessage="Selecione o Cliente" id="codCli"/>
 					<p:commandButton icon="ui-icon-search" title="Pesquisar"
 						action="#{clienteMB.abrirDialogo}" process="@this" update="@none">
 						<p:ajax event="dialogReturn"
@@ -95,7 +97,7 @@
 						immediate="true" action="inicio.xhtml" />
 					<p:commandButton style="margin-left: 30px;" value="Excluir"
 						icon="ui-icon-extlink" actionListener="#{clienteMB.excluir}"
-						update="excluirCliente,mostrarId" />
+						update="excluirCliente,mostrarId" validateClient="true"/>
 				</f:facet>
 			</p:menubar>
 

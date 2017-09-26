@@ -1,9 +1,7 @@
 package br.cairu.pi.entidade;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
@@ -36,6 +33,10 @@ public class Orcamento implements Serializable{
 	@ManyToMany(mappedBy="orcamentos", cascade = CascadeType.ALL)
 	private List<Produto> produtos;*/
 
+	@JoinColumn(name = "idFabricante", referencedColumnName = "idFabricante",  foreignKey = @ForeignKey(name = "fk_fabricante_orc"), nullable=false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Fabricante fabricante;
+	
 	@JoinColumn(name="idCliente",referencedColumnName= "idCliente", foreignKey = @ForeignKey (name = "fk_cliente"), nullable=false )
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Cliente cliente;
@@ -72,5 +73,11 @@ public class Orcamento implements Serializable{
 		this.cliente = cliente;
 	}
 
-	
+	public Fabricante getFabricante() {
+		return fabricante;
+	}
+
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
+	}	
 }

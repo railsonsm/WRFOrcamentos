@@ -1,5 +1,5 @@
 .bordarPanel {
-	vertical-align: top;
+	vertical-align: center;
 	border: solid 1px #A6C9E2;
 	border-radius: 5px;
 }
@@ -21,6 +21,7 @@
 }
 
 .toolbarCadastro {
+	width: 100%;
 	margin-left: 35px;
 	margin-right: 35px;
 	margin-top: 10px;
@@ -90,7 +91,7 @@ h1 {
 }
 
 .campo {
-	width: 50px;
+	width: 10px;
 }
 
 .painel {

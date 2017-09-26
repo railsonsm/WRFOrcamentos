@@ -40,10 +40,7 @@ public class ClienteMB {
 		return null;
 	}
 	
-	public void teste (ComponentSystemEvent event) {
-		cliente = getClienteDAO().contarId();
-	}
-	
+
 	public void abrirDialogo() {
 		Map<String, Object> opcoes = new HashMap<String, Object>();
 		opcoes.put("modal", true);
