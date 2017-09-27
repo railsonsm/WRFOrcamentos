@@ -1,4 +1,4 @@
-package br.cairu.pi.entidade;
+package br.cairu.pi.model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,16 +19,16 @@ public class Produto implements Serializable{
 	private Integer idProduto;
 
 	@Column(nullable = false)
-	private Integer codOriginal;
+	private String codOriginal;
 		
 	@Column(nullable = false)
 	private String descricao;
 	
 	@Column(nullable = false)
-	private Integer unidade;
+	private String unidade;
 	
 	@Column(nullable = false)
-	private Integer qtdembalagem;
+	private Double qtdembalagem;
 	
 	@Column(nullable = false)
 	private String tamanho;
@@ -71,11 +71,11 @@ public class Produto implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public Integer getUnidade() {
+	public String getUnidade() {
 		return unidade;
 	}
 
-	public void setUnidade(Integer unidade) {
+	public void setUnidade(String unidade) {
 		this.unidade = unidade;
 	}
 
@@ -107,6 +107,8 @@ public class Produto implements Serializable{
 		return fretefob;
 	}
 
+	
+	
 	public void setFretefob(Double fretefob) {
 		this.fretefob = fretefob;
 	}
@@ -134,20 +136,21 @@ public class Produto implements Serializable{
 	public void setOrcamentos(List<Orcamento> orcamentos) {
 		this.orcamentos = orcamentos;
 	}*/
-	public Integer getQtdembalagem() {
+	
+	public Double getQtdembalagem() {
 		return qtdembalagem;
 	}
 
-	public void setQtdembalagem(Integer qtdembalagem) {
-		this.qtdembalagem = qtdembalagem;
-	}
-
-	public Integer getCodOriginal() {
+	public String getCodOriginal() {
 		return codOriginal;
 	}
 
-	public void setCodOriginal(Integer codOriginal) {
+	public void setCodOriginal(String codOriginal) {
 		this.codOriginal = codOriginal;
+	}
+
+	public void setQtdembalagem(Double qtdembalagem) {
+		this.qtdembalagem = qtdembalagem;
 	}
 		
 }

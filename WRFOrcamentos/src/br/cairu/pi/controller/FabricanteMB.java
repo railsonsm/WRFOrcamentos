@@ -1,4 +1,4 @@
-package br.cairu.pi.apresentacao;
+package br.cairu.pi.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,9 +11,9 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
-import br.cairu.pi.DAO.FabricanteDAO;
-
-import br.cairu.pi.entidade.Fabricante;
+import br.cairu.pi.model.Fabricante;
+import br.cairu.pi.repository.FabricanteDAO;
+import br.cairu.pi.view.ConfirmacaoView;
 
 @ManagedBean
 @ViewScoped
@@ -23,11 +23,13 @@ public class FabricanteMB {
 	private String nomeFabricante;
 	private List<Fabricante> fabricantesFiltrados; 
 	private Integer idSelecao;
+	private ConfirmacaoView confirmacaoView;
 	
 	
 	@PostConstruct
 	public void init() {
 		this.fabricante = new Fabricante();
+		this.confirmacaoView = new ConfirmacaoView();
 	}
 	
 	public void abrirDialogo() {
@@ -55,16 +57,18 @@ public class FabricanteMB {
 		try {
 			getFabricanteDAO().salvar(fabricante);
 			fabricante = new Fabricante();
+			confirmacaoView.msgSalvaFab();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "cadastrarFabricante.xhtml";
+		return null;
 	}
 	
 	public String editar() {
 		try {
 			getFabricanteDAO().editar(fabricante);
 			fabricante = new Fabricante();
+			confirmacaoView.msgEditFab();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -75,6 +79,7 @@ public class FabricanteMB {
 		try {
 			getFabricanteDAO().excluir(fabricante.getIdFabricante());
 			fabricante = new Fabricante();
+			confirmacaoView.msgExcluiFab();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -94,6 +99,30 @@ public class FabricanteMB {
 	
 	
 	
+
+	public String getNomeFabricante() {
+		return nomeFabricante;
+	}
+
+	public void setNomeFabricante(String nomeFabricante) {
+		this.nomeFabricante = nomeFabricante;
+	}
+
+	public List<Fabricante> getFabricantesFiltrados() {
+		return fabricantesFiltrados;
+	}
+
+	public void setFabricantesFiltrados(List<Fabricante> fabricantesFiltrados) {
+		this.fabricantesFiltrados = fabricantesFiltrados;
+	}
+
+	public ConfirmacaoView getConfirmacaoView() {
+		return confirmacaoView;
+	}
+
+	public void setConfirmacaoView(ConfirmacaoView confirmacaoView) {
+		this.confirmacaoView = confirmacaoView;
+	}
 
 	public Fabricante getFabricante() {
 		return fabricante;

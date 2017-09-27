@@ -1,4 +1,4 @@
-package br.cairu.pi.entidade;
+package br.cairu.pi.model;
 
 public class Funcionario {
 	

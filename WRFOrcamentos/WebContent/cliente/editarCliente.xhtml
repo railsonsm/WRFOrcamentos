@@ -8,13 +8,15 @@
 	<ui:define name="corpo">
 		<h:form>
 			<h1>Editar Cliente</h1>
-			
-			<p:messages id="msgs" autoUpdate="true" style="width:95%; margin-left: 35px"/>
-			
+
+			<p:messages id="msgs" autoUpdate="true"
+				style="width:95%; margin-left: 35px" />
+
 			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarId">
-				<p:outputLabel value="Código Cliente" style="width:45%" for="codCli"/>
+				<p:outputLabel value="Código Cliente" style="width:45%" for="codCli" />
 				<h:panelGroup>
-					<p:inputText size="10" value="#{clienteMB.cliente.idCliente}" required="true" requiredMessage="Selecione o Cliente" id="codCli"/>
+					<p:inputText size="10" value="#{clienteMB.cliente.idCliente}"
+						required="true" requiredMessage="Selecione o Cliente" id="codCli" />
 					<p:commandButton icon="ui-icon-search" title="Pesquisar"
 						action="#{clienteMB.abrirDialogo}" process="@this" update="@none">
 						<p:ajax event="dialogReturn"
@@ -31,59 +33,59 @@
 
 				<p:outputLabel for="nome" value="Nome" />
 				<p:inputText id="nome" size="35" value="#{clienteMB.cliente.nome}"
-					required="true" requiredMessage="Nome Obrigatório"/>
+					required="true" requiredMessage="Nome Obrigatório" />
 
 				<p:outputLabel for="nomef" value="Nome Fantasia" />
 				<p:inputText id="nomef" size="35"
 					value="#{clienteMB.cliente.nomeFantasia}" required="true"
-					requiredMessage="Nome Fantasia Obrigatório"/>
+					requiredMessage="Nome Fantasia Obrigatório" />
 
 				<p:outputLabel for="cnpj" value="CNPJ" />
 				<p:inputMask id="cnpj" size="15" mask="99.999.999/9999-99"
 					value="#{clienteMB.cliente.cnpj}" required="true"
-					requiredMessage="CNPJ Obrigatório"/>
+					requiredMessage="CNPJ Obrigatório" />
 
 				<p:outputLabel for="email" value="E-mail" />
 				<p:inputText id="email" size="25" value="#{clienteMB.cliente.email}"
-					required="true" requiredMessage="E-Mail Obrigatório"/>
-					
+					required="true" requiredMessage="E-Mail Obrigatório" />
+
 				<p:outputLabel for="cep" value="CEP" />
 				<p:inputMask id="cep" size="7" mask="99999-999"
 					value="#{clienteMB.cliente.cep}" required="true"
-					requiredMessage="CEP Obrigatório"/>
+					requiredMessage="CEP Obrigatório" />
 
 				<p:outputLabel for="lrua" value="Logradouro(Rua)" />
 				<p:inputText id="lrua" size="35" value="#{clienteMB.cliente.rua}"
-					required="true" requiredMessage="Logradouro/Rua Obrigatório"/>
+					required="true" requiredMessage="Logradouro/Rua Obrigatório" />
 
 				<p:outputLabel for="num" value="Número" />
 				<p:inputText id="num" size="5" value="#{clienteMB.cliente.numero}"
-					required="true" requiredMessage="Número obrigatório"/>
+					required="true" requiredMessage="Número obrigatório" />
 
 				<p:outputLabel for="comp" value="Complemento" />
 				<p:inputText id="comp" size="35"
 					value="#{clienteMB.cliente.complemento}" required="true"
-					requiredMessage="Digite o complemento."/>
+					requiredMessage="Digite o complemento." />
 
 				<p:outputLabel for="cidade" value="Cidade" />
 				<p:inputText id="cidade" size="15"
 					value="#{clienteMB.cliente.cidade}" required="true"
-					requiredMessage="Informe a Cidade."/>
+					requiredMessage="Informe a Cidade." />
 
 				<p:outputLabel for="estado" value="Estado" />
 				<p:inputText id="estado" size="15"
 					value="#{clienteMB.cliente.estado}" required="true"
-					requiredMessage="Informe o Estado."/>
+					requiredMessage="Informe o Estado." />
 
 				<p:outputLabel for="tel1" value="Telefone 1" />
 				<p:inputMask id="tel1" size="15" mask="(99)9999-9999"
 					value="#{clienteMB.cliente.telefone1}" required="true"
-					requiredMessage="Informe pelo menos um numero de telefone."/>
+					requiredMessage="Informe pelo menos um numero de telefone." />
 
 				<p:outputLabel for="cel1" value="Celular 1" />
 				<p:inputMask id="cel1" size="15" mask="(99)99999-9999"
 					value="#{clienteMB.cliente.celular1}" required="true"
-					requiredMessage="Informe pelo menos um numero celular."/>
+					requiredMessage="Informe pelo menos um numero celular." />
 
 				<p:outputLabel for="tel2" value="Telefone 2" />
 				<p:inputMask id="tel2" size="15" mask="(99)9999-9999"
@@ -96,32 +98,49 @@
 				<p:outputLabel for="ceng" value="Contato  de engenharia" />
 				<p:inputText id="ceng" size="35"
 					value="#{clienteMB.cliente.contatoEng}" required="true"
-					requiredMessage="Informe o contato da engenharia"/>
+					requiredMessage="Informe o contato da engenharia" />
 
 				<p:outputLabel for="emaileng" value="E-mail de engenharia" />
 				<p:inputText id="emaileng" size="25"
 					value="#{clienteMB.cliente.emailEng}" required="true"
-					requiredMessage="Informe o e-mail de engenharia"/>
+					requiredMessage="Informe o e-mail de engenharia" />
 
 				<p:outputLabel for="sup" value="Contato  de suprimentos/compras" />
 				<p:inputText id="sup" size="35"
 					value="#{clienteMB.cliente.contatoSupr}" required="true"
-					requiredMessage="Informe o contato de suprimentos/compras"/>
+					requiredMessage="Informe o contato de suprimentos/compras" />
 
 				<p:outputLabel for="emailsup" value="E-mail de suprimentos/compras" />
 				<p:inputText id="emailsup" size="25"
 					value="#{clienteMB.cliente.emailSupr}" required="true"
-					requiredMessage="Informe o e-mail de suprimentos/compras"/>
+					requiredMessage="Informe o e-mail de suprimentos/compras" />
 
 			</p:panelGrid>
 
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
-					<p:commandButton value="Cancelar" icon="ui-icon-extlink"
-						immediate="true" action="inicio.xhtml" />
-					<p:commandButton style="margin-left: 30px;" value="Salvar"
-						icon="ui-icon-extlink" actionListener="#{clienteMB.editar}"
-						update="editarCliente,mostrarId" validateClient="true" />
+					<p:commandButton style="margin-left: 30px;" value="Confirmar"
+						update="@form" actionListener="#{clienteMB.editar}"
+						icon="ui-icon-person">
+						<p:confirm header="Confirmação" message="Tem certeza?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+
+					<p:commandButton style="margin-left: 30px;" value="Limpar"
+						action="editarCliente.xhtml" icon="ui-icon-pencil" ajax="false"
+						immediate="true" />
+
+					<p:commandButton style="margin-left: 30px;" value="Voltar"
+						action="/inicio.xhtml" icon="ui-icon-home" ajax="false"
+						onclick="false" immediate="true" />
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+							actionListener="#{clienteMB.editar}" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
 				</f:facet>
 			</p:menubar>
 

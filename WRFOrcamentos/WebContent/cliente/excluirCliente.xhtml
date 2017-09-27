@@ -10,7 +10,7 @@
 			<h1>Excluir Cliente</h1>
 			
 			<p:messages id="msgs" autoUpdate="true" style="width:95%; margin-left: 35px"/>
-
+			
 			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarId">
 				<p:outputLabel value="Código Cliente" style="width:45%" for="codCli"/>
 				<h:panelGroup>
@@ -92,12 +92,32 @@
 			</p:panelGrid>
 
 			<p:menubar styleClass="toolbarCadastro">
+
 				<f:facet name="options">
-					<p:commandButton value="Cancelar" icon="ui-icon-extlink"
-						immediate="true" action="inicio.xhtml" />
-					<p:commandButton style="margin-left: 30px;" value="Excluir"
-						icon="ui-icon-extlink" actionListener="#{clienteMB.excluir}"
-						update="excluirCliente,mostrarId" validateClient="true"/>
+					<p:commandButton style="margin-left: 30px;" value="Confirmar"
+						update="@form"
+						actionListener="#{clienteMB.excluir}" icon="ui-icon-person">
+						<p:confirm header="Confirmação" message="Tem certeza?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+
+					<p:commandButton style="margin-left: 30px;" value="Limpar"
+						action="cadastrarCliente.xhtml" icon="ui-icon-pencil" ajax="false"
+						immediate="true" />
+
+					<p:commandButton style="margin-left: 30px;" value="Voltar"
+						action="/inicio.xhtml" icon="ui-icon-home" ajax="false"
+						onclick="false" immediate="true" />
+					
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+							actionListener="#{clienteMB.excluir}" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+
 				</f:facet>
 			</p:menubar>
 

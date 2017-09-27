@@ -1,4 +1,4 @@
-package br.cairu.pi.apresentacao;
+package br.cairu.pi.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +14,10 @@ import javax.faces.event.ComponentSystemEvent;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
-import br.cairu.pi.DAO.ClienteDAO;
-import br.cairu.pi.entidade.Cliente;
-import br.cairu.pi.entidade.Fabricante;
+import br.cairu.pi.model.Cliente;
+import br.cairu.pi.model.Fabricante;
+import br.cairu.pi.repository.ClienteDAO;
+import br.cairu.pi.view.ConfirmacaoView;
 
 
 @ManagedBean
@@ -29,10 +30,12 @@ public class ClienteMB {
 	private String nomeCliente;
 	private List<Cliente> clientesFiltrados;
 	private Integer contadorId;
+	private ConfirmacaoView clienteview;
 
 	@PostConstruct
 	public void init() {
 		this.cliente = new Cliente();
+		this.clienteview = new ConfirmacaoView();
 	}
 	
 	public String mostrarCliPorId() {
@@ -62,19 +65,12 @@ public class ClienteMB {
 		RequestContext.getCurrentInstance().closeDialog(cliente);
 	}
 	
-	public void destroyWorld() {
-		addMessage("System Error", "Please try again later.");
-	}
-
-	public void addMessage(String summary, String detail) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
-		FacesContext.getCurrentInstance().addMessage(null, message);
-	}
-	
 	public String editar() {
 		try {
 			getClienteDAO().editar(cliente);
 			cliente = new Cliente();
+			clienteview.msgEditCli();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -85,6 +81,7 @@ public class ClienteMB {
 		try {
 			getClienteDAO().salvar(cliente);
 			cliente = new Cliente();
+			clienteview.msgSalvaCli();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -95,6 +92,7 @@ public class ClienteMB {
 		try {
 			getClienteDAO().excluir(cliente.getIdCliente());
 			cliente = new Cliente();
+			clienteview.msgExcluiCli();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -108,6 +106,14 @@ public class ClienteMB {
 	
 	
 	
+	public ConfirmacaoView getClienteview() {
+		return clienteview;
+	}
+
+	public void setClienteview(ConfirmacaoView clienteview) {
+		this.clienteview = clienteview;
+	}
+
 	public Integer getContadorId() {
 		return contadorId;
 	}

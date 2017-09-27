@@ -1,4 +1,4 @@
-package br.cairu.pi.DAO;
+package br.cairu.pi.repository;
 
 import java.util.List;
 
@@ -6,8 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-
-import br.cairu.pi.entidade.Cliente;
+import br.cairu.pi.model.Cliente;
 
 public class ClienteDAO {
 	EntityManagerFactory factory = Persistence.createEntityManagerFactory("default"); 

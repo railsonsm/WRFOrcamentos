@@ -1,4 +1,4 @@
-package br.cairu.pi.entidade;
+package br.cairu.pi.model;
 
 import java.io.Serializable;
 

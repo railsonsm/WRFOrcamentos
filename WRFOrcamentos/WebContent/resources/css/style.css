@@ -20,11 +20,6 @@
 	color: black;
 }
 
-.ui-messages-info, .ui-messages-warn, .ui-messages-error, .ui-messages-fatal, .ui-message-error{
-    color: #b94a48;
-    background-color: #ffffff;
-    border-color: #ffffff;
-}
 
 .tableSelecao{
 	font-size: 10px;

@@ -1,11 +1,11 @@
-package br.cairu.pi.DAO;
+package br.cairu.pi.repository;
 
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.cairu.pi.entidade.Produto;
+import br.cairu.pi.model.Produto;
 
 public class ProdutoDAO {
 	EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");

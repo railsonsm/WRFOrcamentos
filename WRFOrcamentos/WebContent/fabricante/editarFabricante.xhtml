@@ -126,11 +126,28 @@
 
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
-					<p:commandButton value="Cancelar" icon="ui-icon-extlink"
-						immediate="true" action="inicio.xhtml" />
-					<p:commandButton action="#{fabricanteMB.editar}"
-						style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink"
-						update="editarFabricante, mostrarId" />
+					<p:commandButton style="margin-left: 30px;" value="Confirmar"
+						update="@form" actionListener="#{fabricanteMB.editar}"
+						icon="ui-icon-suitcase">
+						<p:confirm header="Confirmação" message="Tem certeza?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+
+					<p:commandButton style="margin-left: 30px;" value="Limpar"
+						action="editarFabricante.xhtml" icon="ui-icon-pencil" ajax="false"
+						immediate="true" />
+
+					<p:commandButton style="margin-left: 30px;" value="Voltar"
+						action="/inicio.xhtml" icon="ui-icon-home" ajax="false"
+						onclick="false" immediate="true" />
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+							actionListener="#{fabricanteMB.editar}" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
 				</f:facet>
 			</p:menubar>
 

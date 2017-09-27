@@ -8,10 +8,13 @@
 	<ui:define name="corpo">
 		<h:form>
 			<h1>Cadastrar Produto</h1>
-			
-			<p:messages id="msgs" autoUpdate="true" style="width:95%; margin-left: 35px"/>
 
-			<p:panelGrid id="cadastrarProduto" columns="4" style="width:95%; margin-left: 35px; margin" columnClasses="rotulo, campo, rotulo, campo">
+			<p:messages id="msgs" autoUpdate="true"
+				style="width:95%; margin-left: 35px" />
+
+			<p:panelGrid id="cadastrarProduto" columns="4"
+				style="width:95%; margin-left: 35px; margin"
+				columnClasses="rotulo, campo, rotulo, campo">
 
 				<p:outputLabel value="Código Fabricante" />
 				<h:panelGroup>
@@ -27,29 +30,41 @@
 				</h:panelGroup>
 
 				<p:outputLabel for="nome" value="Fabricante" />
-				<p:inputText size="35" value="#{produtoMB.fabricante.nome}" readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" id="nome" 
-				required="true" requiredMessage="Selecione o fabricante."/>
-				
+				<p:inputText size="35" value="#{produtoMB.fabricante.nome}"
+					readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}"
+					id="nome" required="true" requiredMessage="Selecione o fabricante." />
+
 				<p:outputLabel value="Código original/Fabric." />
-				<p:inputText size="35" value="#{produtoMB.produto.codOriginal}"/>
+				<p:inputText size="35" value="#{produtoMB.produto.codOriginal}" />
 
 				<p:outputLabel for="descricao" value="Descrição" />
 				<p:inputText id="descricao" size="35"
 					value="#{produtoMB.produto.descricao}" required="true"
-					requiredMessage="Informe o produto a cadastrar."/>
-
+					requiredMessage="Informe o produto a cadastrar." />
 
 				<p:outputLabel for="unid" value="Unidade" />
-				<p:inputText id="unid" value="#{produtoMB.produto.unidade}"  required="true" requiredMessage="Uma unidade de medição deve ser informada."/>
+				<p:selectOneMenu id="unid" value="#{produtoMB.produto.unidade}"
+					style="width:115px" required="true"
+					requiredMessage="Uma unidade de medição deve ser informada.">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItem itemLabel="KG" itemValue="KG" />
+					<f:selectItem itemLabel="PC" itemValue="PC" />
+					<f:selectItem itemLabel="M²" itemValue="M²" />
+					<f:selectItem itemLabel="SC" itemValue="SC" />
+					<f:selectItem itemLabel="FD" itemValue="FD" />
+				</p:selectOneMenu>
 
-				<p:outputLabel for="tam" value="Tamanho" />
-				<p:inputText id="tam" value="#{produtoMB.produto.tamanho}" required="true" requiredMessage="Informe o tamanho do produto."/>
+				<p:outputLabel for="emb" value="Embalagem/Quant." />
+				<p:inputText id="emb" value="#{produtoMB.produto.qtdembalagem}"
+					required="true"
+					requiredMessage="Informe a quantidade por embalagem." />
 
 				<p:outputLabel for="peso" value="Peso" />
 				<p:inputText id="peso" value="#{produtoMB.produto.peso}" />
 
-				<p:outputLabel for="emb" value="Embalagem/Quant." />
-				<p:inputText id="emb" value="#{produtoMB.produto.qtdembalagem}" required="true" requiredMessage="Informe a quantidade por embalagem."/>
+				<p:outputLabel for="tam" value="Tamanho" />
+				<p:inputText id="tam" value="#{produtoMB.produto.tamanho}"
+					required="true" requiredMessage="Informe o tamanho do produto." />
 
 				<p:outputLabel value="Frete CIF" />
 				<p:inputText value="#{produtoMB.produto.fretecif}" />
@@ -62,9 +77,31 @@
 
 			</p:panelGrid>
 			<p:menubar styleClass="toolbarCadastro">
+
 				<f:facet name="options">
-					<p:commandButton value="Cancelar" icon="ui-icon-extlink" />
-					<p:commandButton action="#{produtoMB.salvar}" style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" update="cadastrarProduto" validateClient="true"/>
+					<p:commandButton style="margin-left: 30px;" value="Confirmar"
+						update="@form" actionListener="#{produtoMB.salvar}"
+						icon="ui-icon-cart">
+						<p:confirm header="Confirmação" message="Tem certeza?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+
+					<p:commandButton style="margin-left: 30px;" value="Limpar"
+						action="cadastrarCliente.xhtml" icon="ui-icon-pencil" ajax="false"
+						immediate="true" />
+
+					<p:commandButton style="margin-left: 30px;" value="Voltar"
+						action="/inicio.xhtml" icon="ui-icon-home" ajax="false"
+						onclick="false" immediate="true" />
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+							actionListener="#{produtoMB.salvar}" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+
 				</f:facet>
 			</p:menubar>
 		</h:form>

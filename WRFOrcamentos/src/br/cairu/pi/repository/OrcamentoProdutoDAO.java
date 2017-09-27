@@ -1,4 +1,4 @@
-package br.cairu.pi.DAO;
+package br.cairu.pi.repository;
 
 public class OrcamentoProdutoDAO {
 

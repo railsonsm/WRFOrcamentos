@@ -1,20 +1,18 @@
-package br.cairu.pi.apresentacao;
+package br.cairu.pi.controller;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
-
-import br.cairu.pi.DAO.FabricanteDAO;
-import br.cairu.pi.DAO.ProdutoDAO;
-import br.cairu.pi.entidade.Fabricante;
-import br.cairu.pi.entidade.Produto;
+import br.cairu.pi.model.Fabricante;
+import br.cairu.pi.model.Produto;
+import br.cairu.pi.repository.FabricanteDAO;
+import br.cairu.pi.repository.ProdutoDAO;
+import br.cairu.pi.view.ConfirmacaoView;
 
 @ManagedBean
 @ViewScoped
@@ -26,12 +24,13 @@ public class ProdutoMB {
 	private Integer idSelecao;
 	private List<Fabricante> fabricantesFiltrados;
 	private String nomeFabricante;
+	private ConfirmacaoView confirmacaoView;
 	
 	@PostConstruct
 	public void init() {
 		this.fabricante =  new Fabricante();
 		this.produto = new Produto();
-		
+		this.confirmacaoView = new ConfirmacaoView();	
 	}
 	
 	public void abrirDialogo() {
@@ -61,7 +60,8 @@ public class ProdutoMB {
 			produto.setFabricante(fabricante);
 			getProdutoDAO().salvar(produto);
 			fabricante =  new Fabricante();
-			produto = new Produto();		
+			produto = new Produto();	
+			confirmacaoView.msgSalvaProd();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -70,6 +70,14 @@ public class ProdutoMB {
 	
 	
 	
+	public ConfirmacaoView getConfirmacaoView() {
+		return confirmacaoView;
+	}
+
+	public void setConfirmacaoView(ConfirmacaoView confirmacaoView) {
+		this.confirmacaoView = confirmacaoView;
+	}
+
 	public FabricanteDAO getFabricanteDAO() {
 		if (fabricanteDAO == null) {
 			fabricanteDAO = new FabricanteDAO();
