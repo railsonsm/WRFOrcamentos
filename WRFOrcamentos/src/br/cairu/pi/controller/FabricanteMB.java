@@ -1,19 +1,19 @@
 package br.cairu.pi.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
-import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
+
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 import br.cairu.pi.model.Fabricante;
 import br.cairu.pi.repository.FabricanteDAO;
-import br.cairu.pi.view.ConfirmacaoView;
+import br.cairu.pi.view.MensagensView;
 
 @ManagedBean
 @ViewScoped
@@ -23,36 +23,20 @@ public class FabricanteMB {
 	private String nomeFabricante;
 	private List<Fabricante> fabricantesFiltrados; 
 	private Integer idSelecao;
-	private ConfirmacaoView confirmacaoView;
+	private MensagensView confirmacaoView;
 	
 	
 	@PostConstruct
 	public void init() {
 		this.fabricante = new Fabricante();
-		this.confirmacaoView = new ConfirmacaoView();
-	}
-	
-	public void abrirDialogo() {
-		Map<String, Object> opcoes = new HashMap<String, Object>();
-		opcoes.put("modal", true);
-		opcoes.put("resizable", false);
-		opcoes.put("contentHeight", 420);
-		RequestContext.getCurrentInstance().openDialog("selecaoFabricante", opcoes, null);
+		this.confirmacaoView = new MensagensView();
 	}
 	
 	public void fabricanteSelecionado(SelectEvent event) {
 		Fabricante fabricante = (Fabricante) event.getObject();
 		setFabricante(fabricante);
 	}
-	
-	public void pesquisarFabricante() {
-		fabricantesFiltrados = getFabricanteDAO().porNomeSemelhante(nomeFabricante);
-	}
-	
-	public void selecionarFabricante(Fabricante fabricante) {
-		RequestContext.getCurrentInstance().closeDialog(fabricante);
-	}
-	
+		
 	public String salvar() {
 		try {
 			getFabricanteDAO().salvar(fabricante);
@@ -75,30 +59,28 @@ public class FabricanteMB {
 		return null;
 	}
 	
-	public String excluir() {
+	@SuppressWarnings("finally")
+	public String excluir(){
 		try {
 			getFabricanteDAO().excluir(fabricante.getIdFabricante());
 			fabricante = new Fabricante();
 			confirmacaoView.msgExcluiFab();
-		}catch (Exception e) {
-			e.printStackTrace();
+		}catch (javax.persistence.RollbackException e) {
+			 MensagensView.msgRelFabPro();
+		}catch (javax.persistence.PersistenceException e) {
+		 System.out.println("Objeto relariocionado");
+		 fabricante = new  Fabricante();
+		 }finally {
+			return null;
 		}
-		return null;
+	}
+	
+	public void addMessage(String summary, String detail) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+		
 	}
 
-	
-	public String mostraFabricPorId() {
-		try {
-			fabricante = getFabricanteDAO().buscarFabricPorId(idSelecao);
-			System.out.println("Railson" + idSelecao);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	
-	
 
 	public String getNomeFabricante() {
 		return nomeFabricante;
@@ -116,11 +98,11 @@ public class FabricanteMB {
 		this.fabricantesFiltrados = fabricantesFiltrados;
 	}
 
-	public ConfirmacaoView getConfirmacaoView() {
+	public MensagensView getConfirmacaoView() {
 		return confirmacaoView;
 	}
 
-	public void setConfirmacaoView(ConfirmacaoView confirmacaoView) {
+	public void setConfirmacaoView(MensagensView confirmacaoView) {
 		this.confirmacaoView = confirmacaoView;
 	}
 

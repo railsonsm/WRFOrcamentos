@@ -13,14 +13,14 @@
 
 	<h:form>
     	<div style="margin-top: 5px; margin-bottom: 20px">
-    		<p:inputText id="nome" size="40" value="#{produtoMB.nomeFabricante}" placeholder="Nome do fabricante" />
+    		<p:inputText id="nome" size="40" value="#{fabricanteView.nomeFabricante}" placeholder="Nome do fabricante" />
     		
     		<p:spacer width="10px"/>
     		
-    		<p:commandButton value="Pesquisar" action="#{produtoMB.pesquisarFabricante}" update="@form" />
+    		<p:commandButton value="Pesquisar" action="#{fabricanteView.pesquisarFabricante}" update="@form" />
     	</div>
     	
-    	<p:dataTable value="#{produtoMB.fabricantesFiltrados}" var="fabricante"
+    	<p:dataTable value="#{fabricanteView.fabricantesFiltrados}" var="fabricante"
     		emptyMessage="Nenhum fabricante encontrado." rows="10"
     		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" >
     		
@@ -35,7 +35,7 @@
     		</p:column>
     		<p:column style="width: 45px; text-align: center">
     			<p:commandButton icon="ui-icon-check" title="Selecionar"
-    				action="#{produtoMB.selecionarFabricante(fabricante)}"
+    				action="#{fabricanteView.selecionarFabricante(fabricante)}"
     				process="@this" />
     		</p:column>
     		

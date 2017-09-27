@@ -7,7 +7,7 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean
 @ViewScoped
-public class ConfirmacaoView {
+public class MensagensView {
 	public void msgSalvaCli() {
 		addMessage("Cliente Adicionado com sucesso", null);
 	}
@@ -37,9 +37,19 @@ public class ConfirmacaoView {
 	public void msgExcluiProd() {
 		addMessage("Produto excluido com sucesso",null);
 	}
+	
+	public static void msgRelFabPro() {
+		erroMessage("Não é possivel excluir o fabricante. O mesmo existe em um cadastro de produto",null);
+	}
+
 
 	public void addMessage(String summary, String detail) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+		
+	}
+	public static void erroMessage(String summary, String detail) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
 		FacesContext.getCurrentInstance().addMessage(null, message);
 		
 	}

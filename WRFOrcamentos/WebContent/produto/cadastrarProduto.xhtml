@@ -21,10 +21,10 @@
 					<p:inputText size="12" id="fabricante"
 						value="#{produtoMB.fabricante.idFabricante}" />
 					<p:commandButton icon="ui-icon-search" title="Pesquisar"
-						action="#{produtoMB.abrirDialogo}" process="@this" update="@none">
+						action="#{fabricanteView.abrirDialogo}" process="@this" update="@none">
 						<p:ajax event="dialogReturn"
 							listener="#{produtoMB.fabricanteSelecionado}" process="@this"
-							update="fabricante,nome" />
+							update="@form,fabricante" />
 						<p:resetInput target="fabricante" />
 					</p:commandButton>
 				</h:panelGroup>

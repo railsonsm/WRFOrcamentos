@@ -20,11 +20,11 @@
 						value="#{fabricanteMB.fabricante.idFabricante}" required="true"
 						requiredMessage="Selecione o Fabricante" id="codFab" />
 					<p:commandButton icon="ui-icon-search" title="Pesquisar"
-						action="#{fabricanteMB.abrirDialogo}" process="@this"
+						action="#{fabricanteView.abrirDialogo}" process="@this"
 						update="@none">
 						<p:ajax event="dialogReturn"
 							listener="#{fabricanteMB.fabricanteSelecionado}" process="@this"
-							update="mostrarId, editarFabricante" />
+							update="@form" />
 						<p:resetInput target="mostrarId" />
 					</p:commandButton>
 				</h:panelGroup>

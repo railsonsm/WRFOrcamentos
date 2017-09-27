@@ -19,11 +19,11 @@
 						value="#{fabricanteMB.fabricante.idFabricante}" id="codFab"
 						required="true" requiredMessage="Selecione o Fabricante" />
 					<p:commandButton icon="ui-icon-search" title="Pesquisar"
-						action="#{fabricanteMB.abrirDialogo}" process="@this"
+						action="#{fabricanteView.abrirDialogo}" process="@this"
 						update="@none">
 						<p:ajax event="dialogReturn"
 							listener="#{fabricanteMB.fabricanteSelecionado}" process="@this"
-							update="mostrarId, excluirFabricante" />
+							update="@form" />
 						<p:resetInput target="mostrarId" />
 					</p:commandButton>
 				</h:panelGroup>
@@ -127,7 +127,7 @@
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Sim" type="button"
 							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-							actionListener="#{fabricanteMB.excluir}" />
+							actionListener="#{fabricanteMB.excluir}" update="@form"/>
 						<p:commandButton value="Não" type="button"
 							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 					</p:confirmDialog>

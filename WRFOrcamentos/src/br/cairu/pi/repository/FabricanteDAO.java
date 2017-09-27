@@ -40,7 +40,7 @@ public class FabricanteDAO {
 	public Fabricante excluir(Integer idSelecionado) {
 		Fabricante fabricanteSelecionado = manager.find(Fabricante.class, idSelecionado);
 		manager.getTransaction().begin();
-		manager.persist(fabricanteSelecionado);
+		manager.remove(fabricanteSelecionado);
 		manager.getTransaction().commit();
 		manager.close();
 		return null;

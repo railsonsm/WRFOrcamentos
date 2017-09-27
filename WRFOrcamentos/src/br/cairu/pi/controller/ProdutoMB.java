@@ -12,7 +12,7 @@ import br.cairu.pi.model.Fabricante;
 import br.cairu.pi.model.Produto;
 import br.cairu.pi.repository.FabricanteDAO;
 import br.cairu.pi.repository.ProdutoDAO;
-import br.cairu.pi.view.ConfirmacaoView;
+import br.cairu.pi.view.MensagensView;
 
 @ManagedBean
 @ViewScoped
@@ -24,34 +24,18 @@ public class ProdutoMB {
 	private Integer idSelecao;
 	private List<Fabricante> fabricantesFiltrados;
 	private String nomeFabricante;
-	private ConfirmacaoView confirmacaoView;
+	private MensagensView confirmacaoView;
 	
 	@PostConstruct
 	public void init() {
 		this.fabricante =  new Fabricante();
 		this.produto = new Produto();
-		this.confirmacaoView = new ConfirmacaoView();	
-	}
-	
-	public void abrirDialogo() {
-		Map<String, Object> opcoes = new HashMap<String, Object>();
-		opcoes.put("modal", true);
-		opcoes.put("resizable", false);
-		opcoes.put("contentHeight", 420);
-		RequestContext.getCurrentInstance().openDialog("selecaoFabricante", opcoes, null);
+		this.confirmacaoView = new MensagensView();	
 	}
 	
 	public void fabricanteSelecionado(SelectEvent event) {
 		Fabricante fabricante = (Fabricante) event.getObject();
 		setFabricante(fabricante);
-	}
-	
-	public void pesquisarFabricante() {
-		fabricantesFiltrados = getFabricanteDAO().porNomeSemelhante(nomeFabricante);
-	}
-	
-	public void selecionarFabricante(Fabricante fabricante) {
-		RequestContext.getCurrentInstance().closeDialog(fabricante);
 	}
 		
 	public String salvar() {
@@ -70,11 +54,11 @@ public class ProdutoMB {
 	
 	
 	
-	public ConfirmacaoView getConfirmacaoView() {
+	public MensagensView getConfirmacaoView() {
 		return confirmacaoView;
 	}
 
-	public void setConfirmacaoView(ConfirmacaoView confirmacaoView) {
+	public void setConfirmacaoView(MensagensView confirmacaoView) {
 		this.confirmacaoView = confirmacaoView;
 	}
 

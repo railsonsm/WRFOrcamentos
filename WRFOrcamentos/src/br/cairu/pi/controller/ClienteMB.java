@@ -17,7 +17,7 @@ import org.primefaces.event.SelectEvent;
 import br.cairu.pi.model.Cliente;
 import br.cairu.pi.model.Fabricante;
 import br.cairu.pi.repository.ClienteDAO;
-import br.cairu.pi.view.ConfirmacaoView;
+import br.cairu.pi.view.MensagensView;
 
 
 @ManagedBean
@@ -30,39 +30,17 @@ public class ClienteMB {
 	private String nomeCliente;
 	private List<Cliente> clientesFiltrados;
 	private Integer contadorId;
-	private ConfirmacaoView clienteview;
+	private MensagensView clienteview;
 
 	@PostConstruct
 	public void init() {
 		this.cliente = new Cliente();
-		this.clienteview = new ConfirmacaoView();
-	}
-	
-	public String mostrarCliPorId() {
-		cliente = getClienteDAO().buscarCliPorId(idSelecao);
-		return null;
-	}
-	
-
-	public void abrirDialogo() {
-		Map<String, Object> opcoes = new HashMap<String, Object>();
-		opcoes.put("modal", true);
-		opcoes.put("resizable", false);
-		opcoes.put("contentHeight", 420);
-		RequestContext.getCurrentInstance().openDialog("selecaoCliente", opcoes, null);
+		this.clienteview = new MensagensView();
 	}
 	
 	public void clienteSelecionado(SelectEvent event) {
 		Cliente cliente = (Cliente) event.getObject();
 		setCliente(cliente);
-	}
-	
-	public void pesquisarCliente() {
-		clientesFiltrados = getClienteDAO().porNomeSemelhante(nomeCliente);
-	}
-	
-	public void selecionarCliente(Cliente cliente) {
-		RequestContext.getCurrentInstance().closeDialog(cliente);
 	}
 	
 	public String editar() {
@@ -106,11 +84,11 @@ public class ClienteMB {
 	
 	
 	
-	public ConfirmacaoView getClienteview() {
+	public MensagensView getClienteview() {
 		return clienteview;
 	}
 
-	public void setClienteview(ConfirmacaoView clienteview) {
+	public void setClienteview(MensagensView clienteview) {
 		this.clienteview = clienteview;
 	}
 

@@ -16,10 +16,10 @@
 				<h:panelGroup>
 					<p:inputText size="10" value="#{clienteMB.cliente.idCliente}" required="true" requiredMessage="Selecione o Cliente" id="codCli"/>
 					<p:commandButton icon="ui-icon-search" title="Pesquisar"
-						action="#{clienteMB.abrirDialogo}" process="@this" update="@none">
+						action="#{clienteView.abrirDialogo}" process="@this" update="@none">
 						<p:ajax event="dialogReturn"
 							listener="#{clienteMB.clienteSelecionado}" process="@this"
-							update="mostrarId, excluirCliente" />
+							update="@form" />
 						<p:resetInput target="mostrarId" />
 					</p:commandButton>
 				</h:panelGroup>
