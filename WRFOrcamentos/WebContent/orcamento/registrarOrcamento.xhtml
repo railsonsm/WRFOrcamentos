@@ -98,11 +98,31 @@
 			</p:tab>
 		</p:tabView>
 			<p:menubar styleClass="toolbarCadastro">
+
 				<f:facet name="options">
-					<p:commandButton type="button" value="Cancelar"
-						icon="ui-icon-extlink" />
-					<p:commandButton type="button" style="margin-left: 30px;"
-						value="Salvar" icon="ui-icon-extlink" />
+					<p:commandButton style="margin-left: 30px;" value="Confirmar"
+						update="@form" actionListener="#{produtoMB.salvar}"
+						icon="ui-icon-cart">
+						<p:confirm header="Confirmação" message="Tem certeza?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+
+					<p:commandButton style="margin-left: 30px;" value="Limpar"
+						action="cadastrarCliente.xhtml" icon="ui-icon-pencil" ajax="false"
+						immediate="true" />
+
+					<p:commandButton style="margin-left: 30px;" value="Voltar"
+						action="/inicio.xhtml" icon="ui-icon-home" ajax="false"
+						onclick="false" immediate="true" />
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+							actionListener="#{produtoMB.salvar}" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+
 				</f:facet>
 			</p:menubar>
 		</h:form>

@@ -59,7 +59,7 @@ public class FabricanteMB {
 		return null;
 	}
 	
-	@SuppressWarnings("finally")
+
 	public String excluir(){
 		try {
 			getFabricanteDAO().excluir(fabricante.getIdFabricante());
@@ -67,12 +67,8 @@ public class FabricanteMB {
 			confirmacaoView.msgExcluiFab();
 		}catch (javax.persistence.RollbackException e) {
 			 MensagensView.msgRelFabPro();
-		}catch (javax.persistence.PersistenceException e) {
-		 System.out.println("Objeto relariocionado");
-		 fabricante = new  Fabricante();
-		 }finally {
-			return null;
 		}
+		return fabricante.getNome();
 	}
 	
 	public void addMessage(String summary, String detail) {
@@ -80,7 +76,6 @@ public class FabricanteMB {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 		
 	}
-
 
 	public String getNomeFabricante() {
 		return nomeFabricante;

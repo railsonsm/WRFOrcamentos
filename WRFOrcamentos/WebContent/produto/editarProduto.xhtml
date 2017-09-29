@@ -7,24 +7,30 @@
 	<ui:define name="titulo">WRFOçamentos - Editar Produto</ui:define>
 	<ui:define name="corpo">
 		<h:form>
-			<h1>Cadastrar Produto</h1>
-			
+			<h1>Editar Produto</h1>
+
 			<p:panelGrid columns="2" style="margin-left: 35px;">
 				<p:outputLabel value="Código Produto" style="width:45%" />
 				<p:inputText size="10" value="#{produtoMB.idSelecao}">
-					<p:commandButton action="#{produtoMB.mostrarProdutoPorId}" icon="ui-icon-search" update="editarProduto" />
+					<p:commandButton action="#{produtoMB.mostrarProdutoPorId}"
+						icon="ui-icon-search" update="editarProduto" />
 				</p:inputText>
 			</p:panelGrid>
-			
-			<p:panelGrid id="editarProduto" columns="4" style="width:95%; margin-left: 35px; margin" columnClasses="rotulo, campo, rotulo, campo">
-			
+
+			<p:panelGrid id="editarProduto" columns="4"
+				style="width:95%; margin-left: 35px; margin"
+				columnClasses="rotulo, campo, rotulo, campo">
+
 				<p:outputLabel value="Código Fabricante" />
 				<p:inputText size="10" value="#{produtoMB.fabricante.idFabricante}">
-					
+
 				</p:inputText>
 
 				<p:outputLabel value="Fabricante" />
-				<p:inputText size="35" value="#{produtoMB.fabricante.nomefantasia}" readonly="true"/>
+				<p:inputText size="35" value="#{produtoMB.fabricante.nomefantasia}"
+					readonly="true" />
+				<p:outputLabel value="Código original/Fabric." />
+				<p:inputText size="35" value="#{produtoMB.produto.codOriginal}" />	
 
 				<p:outputLabel value="Descrição" />
 				<p:inputText size="35" value="#{produtoMB.produto.descricao}" />
@@ -50,13 +56,41 @@
 				<p:outputLabel value="Ambiente" />
 				<p:inputText size="35" value="#{produtoMB.produto.ambiente}" />
 
+				<p:outputLabel for="vTabela" value="Valor Tabela" />
+				<p:inputText  required="true" id="vTabela"/>
+
+				
 			</p:panelGrid>
+
 			<p:menubar styleClass="toolbarCadastro">
+
 				<f:facet name="options">
-					<p:commandButton value="Cancelar" icon="ui-icon-extlink" />
-					<p:commandButton action="#{produtoMB.salvar}" style="margin-left: 30px;" value="Salvar" icon="ui-icon-extlink" update="editarProduto" />
+					<p:commandButton style="margin-left: 30px;" value="Confirmar"
+						update="@form" actionListener="#{produtoMB.salvar}"
+						icon="ui-icon-cart">
+						<p:confirm header="Confirmação" message="Tem certeza?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+
+					<p:commandButton style="margin-left: 30px;" value="Limpar"
+						action="cadastrarCliente.xhtml" icon="ui-icon-pencil" ajax="false"
+						immediate="true" />
+
+					<p:commandButton style="margin-left: 30px;" value="Voltar"
+						action="/inicio.xhtml" icon="ui-icon-home" ajax="false"
+						onclick="false" immediate="true" />
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+							actionListener="#{produtoMB.salvar}" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+
 				</f:facet>
 			</p:menubar>
+
 		</h:form>
 	</ui:define>
 </ui:composition>
