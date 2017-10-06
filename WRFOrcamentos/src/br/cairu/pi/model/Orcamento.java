@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-@SequenceGenerator(name = "orc_seq", sequenceName = "orcamento_sequencia", initialValue =1,allocationSize =1)
+//@SequenceGenerator(name = "orc_seq", sequenceName = "orcamento_sequencia", initialValue =1,allocationSize =1)
 public class Orcamento implements Serializable{
 	/**
 	 * 
@@ -22,9 +22,8 @@ public class Orcamento implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator= "orc_seq")
-	
-	@Column
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator= "orc_seq")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idOrcamento;
 	
 	@Column

@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "produto")
-@SequenceGenerator(name= "Prod_seq", sequenceName="produto_sequencia", initialValue = 1, allocationSize = 1)
+//@SequenceGenerator(name= "Prod_seq", sequenceName="produto_sequencia", initialValue = 1, allocationSize = 1)
 public class Produto implements Serializable{
 	/**
 	 * 
@@ -15,7 +15,8 @@ public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Prod_seq")
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Prod_seq")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idProduto;
 
 	@Column(nullable = false)
