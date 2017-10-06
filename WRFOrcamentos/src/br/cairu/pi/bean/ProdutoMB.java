@@ -1,4 +1,4 @@
-package br.cairu.pi.controller;
+package br.cairu.pi.bean;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,10 +8,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
+
+import br.cairu.pi.dao.FabricanteDAO;
+import br.cairu.pi.dao.ProdutoDAO;
 import br.cairu.pi.model.Fabricante;
 import br.cairu.pi.model.Produto;
-import br.cairu.pi.repository.FabricanteDAO;
-import br.cairu.pi.repository.ProdutoDAO;
 import br.cairu.pi.view.MensagensView;
 
 @ManagedBean

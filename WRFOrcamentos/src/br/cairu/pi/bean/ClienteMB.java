@@ -1,28 +1,24 @@
-package br.cairu.pi.controller;
+package br.cairu.pi.bean;
 
-import java.util.HashMap;
+import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.event.ComponentSystemEvent;
 
-import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
+import br.cairu.pi.dao.ClienteDAO;
 import br.cairu.pi.model.Cliente;
-import br.cairu.pi.model.Fabricante;
-import br.cairu.pi.repository.ClienteDAO;
 import br.cairu.pi.view.MensagensView;
 
 
 @ManagedBean
 @ViewScoped
-public class ClienteMB {
+public class ClienteMB implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private ClienteDAO clienteDAO;
 	private Cliente cliente;
 	private Integer exibirId;

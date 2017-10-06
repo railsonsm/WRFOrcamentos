@@ -1,15 +1,15 @@
-package br.cairu.pi.controller;
+package br.cairu.pi.bean;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.cairu.pi.dao.ClienteDAO;
+import br.cairu.pi.dao.FabricanteDAO;
+import br.cairu.pi.dao.OrcamentoDAO;
 import br.cairu.pi.model.Cliente;
 import br.cairu.pi.model.Fabricante;
 import br.cairu.pi.model.Orcamento;
-import br.cairu.pi.repository.ClienteDAO;
-import br.cairu.pi.repository.FabricanteDAO;
-import br.cairu.pi.repository.OrcamentoDAO;
 
 @ManagedBean
 @ViewScoped

@@ -1,4 +1,4 @@
-package br.cairu.pi.repository;
+package br.cairu.pi.dao;
 
 
 import javax.persistence.EntityManager;

@@ -10,8 +10,8 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
+import br.cairu.pi.dao.FabricanteDAO;
 import br.cairu.pi.model.Fabricante;
-import br.cairu.pi.repository.FabricanteDAO;
 
 @ManagedBean
 @ViewScoped

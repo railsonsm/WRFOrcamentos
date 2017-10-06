@@ -3,8 +3,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<h:form>
-<p:growl id="messages" />
+	<h:form>
+		<p:growl id="messages" />
 
 		<p:menubar style="min-height: 5px; ">
 			<p:menuitem value="Inicio" url="/" icon="ui-icon-close" />
@@ -15,9 +15,11 @@
 					<p:menuitem value="Excluir" url="/cliente/excluirCliente.xhtml" />
 				</p:submenu>
 				<p:submenu label="Fabricante" icon="ui-icon-contact">
-					<p:menuitem value="Novo" url="/fabricante/cadastrarFabricante.xhtml" />
+					<p:menuitem value="Novo"
+						url="/fabricante/cadastrarFabricante.xhtml" />
 					<p:menuitem value="Editar" url="/fabricante/editarFabricante.xhtml" />
-					<p:menuitem value="Excluir" url="/fabricante/excluirFabricante.xhtml" />
+					<p:menuitem value="Excluir"
+						url="/fabricante/excluirFabricante.xhtml" />
 				</p:submenu>
 				<p:submenu label="Produto" icon="ui-icon-contact">
 					<p:menuitem value="Novo" url="/produto/cadastrarProduto.xhtml" />
@@ -61,6 +63,13 @@
 
 			<p:menuitem value="Quit" url="http://www.primefaces.org"
 				icon="ui-icon-close" />
+
+			<f:facet name="options">
+				<h:outputText value="Usuário logado: #{sessionScope['usuarioLogado'].login}" style="margin-right: 10px;" />
+				<p:commandButton value="Logout" icon="ui-icon-extlink"  action="#{loginMB.deslogar}"/>
+			</f:facet>
 		</p:menubar>
-</h:form>
+
+
+	</h:form>
 </ui:composition>
