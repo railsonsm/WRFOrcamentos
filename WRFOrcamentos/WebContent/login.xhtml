@@ -17,29 +17,28 @@
 
 	<h:body styleClass="login">
 		<h:form>
-			<p:dataTable value="Teste">
-				<f:facet name="header">
-			       	     WRF - Login
-			        </f:facet>
-				<p:column>
+		
+			<p:fieldset legend="WRF - Login" style="position: absolute">
+				<p:panelGrid columns="2">
+
+
 					<p:graphicImage name="logowrf.png" styleClass="logologin"
 						library="img" />
-				</p:column>
-				<p:column>
-					<p:panelGrid>
-						<p:messages globalOnly="true"/>
-						<p:outputLabel style="margin-left: 19px;" value="Login:" />
-						<br><p:inputText style="margin-left: 19px;"
-								value="#{loginMB.usuario.login}" /></br>
-						<br><p:outputLabel style="margin-left: 19px;" value="Senha:" /></br>
-						<p:password style="margin-left: 19px;"
-							value="#{loginMB.usuario.senha}" />
-					</p:panelGrid>
-					<p:commandButton value="Entrar"
-						style="margin-top: 10px; margin-left: 120px;"
-						action="#{loginMB.efetuaLogin}" />
-				</p:column>
-			</p:dataTable>
+
+
+					<h:panelGrid>
+						
+						<p:outputLabel value="Login:" />
+						<p:inputText value="#{loginMB.usuario.login}" />
+						<p:outputLabel value="Senha:" />
+						<p:password value="#{loginMB.usuario.senha}" />
+						<p:commandButton value="Entrar"
+							style="margin-top: 10px; margin-left: 120px;"
+							action="#{loginMB.efetuaLogin}" />
+					</h:panelGrid>
+
+				</p:panelGrid>
+			</p:fieldset>
 		</h:form>
 	</h:body>
 </f:view>

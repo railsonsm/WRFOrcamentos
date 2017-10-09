@@ -14,6 +14,7 @@
    <class>br.cairu.pi.entidade.Cliente</class>
    <class>br.cairu.pi.entidade.Fabricante</class>
    <class>br.cairu.pi.entidade.Produto</class>
+   <class>br.cairu.pi.entidade.Usuario</class>
    <class>br.cairu.pi.entidade.Orcamento</class>
    <class>br.cairu.pi.entidade.OrcamentoProduto</class>
 
@@ -28,8 +29,7 @@
    <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
   <property name="hibernate.show_sql" value="true" />
   <property name="hibernate.format_sql" value="true" />
-  <property name="connection.pool_size" value="100"/>
-
+ 
   <!--  atualiza o banco, gera as tabelas se for preciso -->
   <property name="hibernate.hbm2ddl.auto" value="update" />
     

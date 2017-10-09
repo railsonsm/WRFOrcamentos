@@ -2,10 +2,8 @@ package br.cairu.pi.bean;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
@@ -14,9 +12,8 @@ import br.cairu.pi.model.Usuario;
 
 @ManagedBean
 @ViewScoped
-public class LoginMB implements Serializable{
+public class LoginMB {
 	
-	private static final long serialVersionUID = 1L;
 	
 	private Usuario usuario = new Usuario();
 	private UsuarioDAO usuarioDAO;
@@ -38,7 +35,7 @@ public class LoginMB implements Serializable{
 		context.getExternalContext().getFlash().setKeepMessages(true);
 		context.addMessage(null, new FacesMessage("Usuário e/ou senha não encontrado"));
 		
-		return "login?faces-redirect=true";	
+		return "/login?faces-redirect=true";	
 	}
 	
 	

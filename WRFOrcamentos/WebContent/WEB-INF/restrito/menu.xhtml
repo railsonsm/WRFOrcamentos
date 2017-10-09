@@ -5,9 +5,10 @@
 	xmlns:p="http://primefaces.org/ui">
 	<h:form>
 		<p:growl id="messages" />
-
+		
 		<p:menubar style="min-height: 5px; ">
-			<p:menuitem value="Inicio" url="/" icon="ui-icon-close" />
+			<p:menuitem value="Inicio" url="/"  icon="ui-icon-close" />
+			
 			<p:submenu label="Cadastro" icon="ui-icon-document">
 				<p:submenu label="Cliente" icon="ui-icon-contact">
 					<p:menuitem value="Novo" url="/cliente/cadastrarCliente.xhtml" />
@@ -61,15 +62,7 @@
 				</p:submenu>
 			</p:submenu>
 
-			<p:menuitem value="Quit" url="http://www.primefaces.org"
-				icon="ui-icon-close" />
-
-			<f:facet name="options">
-				<h:outputText value="Usuário logado: #{sessionScope['usuarioLogado'].login}" style="margin-right: 10px;" />
-				<p:commandButton value="Logout" icon="ui-icon-extlink"  action="#{loginMB.deslogar}"/>
-			</f:facet>
 		</p:menubar>
-
 
 	</h:form>
 </ui:composition>
