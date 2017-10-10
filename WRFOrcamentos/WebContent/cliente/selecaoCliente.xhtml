@@ -13,29 +13,32 @@
 
 	<h:form>
     	<div style="margin-top: 5px; margin-bottom: 20px">
-    		<p:inputText id="nome" size="40" value="#{clienteView.nomeCliente}" placeholder="Nome do cliente" />
+    		<p:inputText id="nome" size="40" value="#{clienteMB.nomeCliente}" placeholder="Nome do cliente" />
     		
     		<p:spacer width="10px"/>
     		
-    		<p:commandButton value="Pesquisar" action="#{clienteView.pesquisarCliente}" update="@form" />
+    		<p:commandButton value="Pesquisar" action="#{clienteMB.pesquisarCliente}" update="@form" />
     	</div>
     	
-    	<p:dataTable value="#{clienteView.clientesFiltrados}" var="cliente"
+    	<p:dataTable value="#{clienteMB.clientesFiltrados}" var="cliente"
     		emptyMessage="Nenhum cliente encontrado." rows="10"
     		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" >
     		
     		<p:column headerText="Código" style="text-align: center; width: 60px">
     			<h:outputText value="#{cliente.idCliente}" />
     		</p:column>
+    		
     		<p:column headerText="Nome">
     			<h:outputText value="#{cliente.nome}" />
     		</p:column>
+    		
     		<p:column headerText="CNPJ">
     			<h:outputText value="#{cliente.cnpj}" />
     		</p:column>
+    		
     		<p:column style="width: 45px; text-align: center">
     			<p:commandButton icon="ui-icon-check" title="Selecionar"
-    				action="#{clienteView.selecionarCliente(cliente)}"
+    				action="#{clienteMB.selecionarCliente(cliente)}"
     				process="@this" />
     		</p:column>
     		

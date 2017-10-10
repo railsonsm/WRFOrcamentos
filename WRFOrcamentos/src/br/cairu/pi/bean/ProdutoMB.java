@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
+import br.cairu.pi.dao.DAO;
 import br.cairu.pi.dao.FabricanteDAO;
 import br.cairu.pi.dao.ProdutoDAO;
 import br.cairu.pi.model.Fabricante;
@@ -19,51 +20,73 @@ import br.cairu.pi.view.MensagensView;
 @ViewScoped
 public class ProdutoMB {
 	private FabricanteDAO fabricanteDAO;
-	private Fabricante fabricante;
-	private Produto produto;
+	private Fabricante fabricante = new Fabricante();
+	private Produto produto = new Produto();
 	private ProdutoDAO produtoDAO;
 	private Integer idSelecao;
-	private List<Fabricante> fabricantesFiltrados;
-	private String nomeFabricante;
-	private MensagensView confirmacaoView;
-	
-	@PostConstruct
-	public void init() {
-		this.fabricante =  new Fabricante();
-		this.produto = new Produto();
-		this.confirmacaoView = new MensagensView();	
-	}
+	private List<Produto> produtosFiltrados;
+	private String descricaoProduto;
 	
 	public void fabricanteSelecionado(SelectEvent event) {
 		Fabricante fabricante = (Fabricante) event.getObject();
 		setFabricante(fabricante);
+		produto.setFabricante(fabricante);
 	}
 		
 	public String salvar() {
-		try {			
-			//fabricante.setIdFabricante(idSelecao);
+		try {		
 			produto.setFabricante(fabricante);
-			getProdutoDAO().salvar(produto);
-			fabricante =  new Fabricante();
-			produto = new Produto();	
-			confirmacaoView.msgSalvaProd();
+			new DAO<Produto>(Produto.class).salvar(this.produto);
+			this.fabricante =  new Fabricante();
+			this.produto = new Produto();	
+			MensagensView.SucessoMessage("Produto adicionado com sucesso!.", null);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;	
 	}
 	
+	public String editar() {
+		new DAO<Produto>(Produto.class).editar(produto);
+		this.produto = new Produto();
+		this.fabricante = new Fabricante();
+		MensagensView.SucessoMessage("Produto alterado com sucesso!.", null);
+		return null;
+	}
 	
+	public String excluir() {
+		new DAO<Produto>(Produto.class).excluir(produto);
+		this.produto = new Produto();
+		MensagensView.SucessoMessage("Produto removido com sucesso!.", null);
+		return null;
+	}
 	
-	public MensagensView getConfirmacaoView() {
-		return confirmacaoView;
+	public void abrirDialogo() {
+		Map<String, Object> opcoes = new HashMap<String, Object>();
+		opcoes.put("modal", true);
+		opcoes.put("resizable", false);
+		opcoes.put("contentHeight", 420);
+		RequestContext.getCurrentInstance().openDialog("selecaoProduto", opcoes, null);
 	}
 
-	public void setConfirmacaoView(MensagensView confirmacaoView) {
-		this.confirmacaoView = confirmacaoView;
+	public void pesquisarProduto() {
+		produtosFiltrados = new ProdutoDAO().porNomeSemelhante(this.descricaoProduto);
 	}
 
-	public FabricanteDAO getFabricanteDAO() {
+	public void selecionarProduto(Produto produto) {
+		RequestContext.getCurrentInstance().closeDialog(produto);
+	}
+
+	public void produtoSelecionado(SelectEvent event) {
+		Produto produto = (Produto) event.getObject();
+		setProduto(produto);
+		fabricante = produto.getFabricante();
+	}
+	
+	
+	
+	
+		public FabricanteDAO getFabricanteDAO() {
 		if (fabricanteDAO == null) {
 			fabricanteDAO = new FabricanteDAO();
 		}
@@ -108,21 +131,20 @@ public class ProdutoMB {
 		this.idSelecao = idSelecao;
 	}
 
-	public List<Fabricante> getFabricantesFiltrados() {
-		return fabricantesFiltrados;
+	public List<Produto> getProdutosFiltrados() {
+		return produtosFiltrados;
 	}
 
-	public void setFabricantesFiltrados(List<Fabricante> fabricantesFiltrados) {
-		this.fabricantesFiltrados = fabricantesFiltrados;
+	public void setProdutosFiltrados(List<Produto> produtosFiltrados) {
+		this.produtosFiltrados = produtosFiltrados;
 	}
 
-	public String getNomeFabricante() {
-		return nomeFabricante;
+	public String getDescricaoProduto() {
+		return descricaoProduto;
 	}
 
-	public void setNomeFabricante(String nomeFabricante) {
-		this.nomeFabricante = nomeFabricante;
+	public void setDescricaoProduto(String descricaoProduto) {
+		this.descricaoProduto = descricaoProduto;
 	}
 
-		
 }

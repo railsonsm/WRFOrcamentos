@@ -47,11 +47,12 @@
 
 .barrainformacao{
 	background-color: #ffffff; 
-	font-size: 10px;
+	font-size: 12px;
 	margin-left: -7px;
 	margin-right: -7px;
 	margin-top: -7px;
 	width: 101%;
+	font: Courier New;
 }
 
 h1 {

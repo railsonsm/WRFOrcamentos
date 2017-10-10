@@ -9,43 +9,92 @@
 		<h:form>
 			<h1>Editar Produto</h1>
 
+			<p:messages id="msgs" autoUpdate="true"
+				style="width:95%; margin-left: 35px" />
+
 			<p:panelGrid columns="2" style="margin-left: 35px;">
-				<p:outputLabel value="Código Produto" style="width:45%" />
-				<p:inputText size="10" value="#{produtoMB.idSelecao}">
-					<p:commandButton action="#{produtoMB.mostrarProdutoPorId}"
-						icon="ui-icon-search" update="editarProduto" />
-				</p:inputText>
+
+				<p:outputLabel value="Código Produto" style="width:45%"
+					for="codProduto" />
+
+				<h:panelGroup>
+
+					<p:inputText size="10" value="#{produtoMB.produto.idProduto}"
+						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}"
+						required="true" requiredMessage="Selecione o Produto"
+						id="codProduto" />
+
+					<p:commandButton icon="ui-icon-search" title="Pesquisar"
+						action="#{produtoMB.abrirDialogo}" process="@this" update="@none">
+
+						<p:ajax event="dialogReturn"
+							listener="#{produtoMB.produtoSelecionado}" process="@this"
+							update="@form " />
+
+						<p:resetInput target="fabricante" />
+
+					</p:commandButton>
+				</h:panelGroup>
 			</p:panelGrid>
 
 			<p:panelGrid id="editarProduto" columns="4"
 				style="width:95%; margin-left: 35px; margin"
 				columnClasses="rotulo, campo, rotulo, campo">
 
-				<p:outputLabel value="Código Fabricante" />
-				<p:inputText size="10" value="#{produtoMB.fabricante.idFabricante}">
+				<p:outputLabel value="Código Fabricante" for="codfabricante"/>
+				
+				<h:panelGroup>				
+					<p:inputText size="12" id="codfabricante" required="true" requiredMessage="Selecione o Fabricante"
+						value="#{produtoMB.fabricante.idFabricante}"
+						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}"/>
 
-				</p:inputText>
+					<p:commandButton icon="ui-icon-search" title="Pesquisar"
+						action="#{fabricanteMB.abrirDialogo}" process="@this"
+						update="@none">
 
-				<p:outputLabel value="Fabricante" />
-				<p:inputText size="35" value="#{produtoMB.fabricante.nomefantasia}"
-					readonly="true" />
+						<p:ajax event="dialogReturn"
+							listener="#{produtoMB.fabricanteSelecionado}" process="@this"
+							update="codfabricante fabricante" />
+						<p:resetInput target="fabricante" />
+					</p:commandButton>
+
+				</h:panelGroup>
+
+				<p:outputLabel value="Fabricante *" />
+				<p:inputText size="35" value="#{produtoMB.fabricante.nome}"
+					id="fabricante" readonly="true" />
+					
 				<p:outputLabel value="Código original/Fabric." />
-				<p:inputText size="35" value="#{produtoMB.produto.codOriginal}" />	
+				<p:inputText size="35" value="#{produtoMB.produto.codOriginal}" />
 
-				<p:outputLabel value="Descrição" />
-				<p:inputText size="35" value="#{produtoMB.produto.descricao}" />
+				<p:outputLabel for="descricao" value="Descrição" />
+				<p:inputText id="descricao" size="35"
+					value="#{produtoMB.produto.descricao}" required="true"
+					requiredMessage="Informe o produto a cadastrar." />
 
-				<p:outputLabel value="Unidade" />
-				<p:inputText value="#{produtoMB.produto.unidade}" />
+				<p:outputLabel for="unid" value="Unidade" />
+				<p:selectOneMenu id="unid" value="#{produtoMB.produto.unidade}"
+					style="width:115px" required="true"
+					requiredMessage="Uma unidade de medição deve ser informada.">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItem itemLabel="KG" itemValue="KG" />
+					<f:selectItem itemLabel="PC" itemValue="PC" />
+					<f:selectItem itemLabel="M²" itemValue="M²" />
+					<f:selectItem itemLabel="SC" itemValue="SC" />
+					<f:selectItem itemLabel="FD" itemValue="FD" />
+				</p:selectOneMenu>
 
-				<p:outputLabel value="Tamanho" />
-				<p:inputText value="#{produtoMB.produto.tamanho}" />
+				<p:outputLabel for="emb" value="Embalagem/Quant." />
+				<p:inputText id="emb" value="#{produtoMB.produto.qtdembalagem}"
+					required="true"
+					requiredMessage="Informe a quantidade por embalagem." />
 
-				<p:outputLabel value="Peso" />
-				<p:inputText value="#{produtoMB.produto.peso}" />
+				<p:outputLabel for="peso" value="Peso" />
+				<p:inputText id="peso" value="#{produtoMB.produto.peso}" />
 
-				<p:outputLabel value="Embalagem/Quant." />
-				<p:inputText value="#{produtoMB.produto.qtdembalagem}" />
+				<p:outputLabel for="tam" value="Tamanho" />
+				<p:inputText id="tam" value="#{produtoMB.produto.tamanho}"
+					required="true" requiredMessage="Informe o tamanho do produto." />
 
 				<p:outputLabel value="Frete CIF" />
 				<p:inputText value="#{produtoMB.produto.fretecif}" />
@@ -55,25 +104,25 @@
 
 				<p:outputLabel value="Ambiente" />
 				<p:inputText size="35" value="#{produtoMB.produto.ambiente}" />
-
-				<p:outputLabel for="vTabela" value="Valor Tabela" />
-				<p:inputText  required="true" id="vTabela"/>
-
 				
+				<p:outputLabel for="vTabela" value="Valor Tabela"/>
+				<p:inputText  required="true" id="vTabela" value="#{produtoMB.produto.valortabela}"  requiredMessage="Informe o valor de tabela do produto" />
+
+
 			</p:panelGrid>
 
 			<p:menubar styleClass="toolbarCadastro">
 
 				<f:facet name="options">
 					<p:commandButton style="margin-left: 30px;" value="Confirmar"
-						update="@form" actionListener="#{produtoMB.salvar}"
+						update="@form" actionListener="#{produtoMB.editar}"
 						icon="ui-icon-cart">
 						<p:confirm header="Confirmação" message="Tem certeza?"
 							icon="ui-icon-alert" />
 					</p:commandButton>
 
 					<p:commandButton style="margin-left: 30px;" value="Limpar"
-						action="cadastrarCliente.xhtml" icon="ui-icon-pencil" ajax="false"
+						action="editarProduto.xhtml" icon="ui-icon-pencil" process="@this" update="@form"
 						immediate="true" />
 
 					<p:commandButton style="margin-left: 30px;" value="Voltar"
@@ -83,7 +132,7 @@
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Sim" type="button"
 							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-							actionListener="#{produtoMB.salvar}" />
+							actionListener="#{produtoMB.editar}" />
 						<p:commandButton value="Não" type="button"
 							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 					</p:confirmDialog>

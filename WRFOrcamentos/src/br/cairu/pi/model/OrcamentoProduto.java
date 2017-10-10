@@ -60,6 +60,22 @@ public class OrcamentoProduto implements Serializable {
 		return produto;
 	}
 
+	public Integer getIdOrcamento() {
+		return idOrcamento;
+	}
+
+	public Double getValorOrcado() {
+		return valorOrcado;
+	}
+
+	public void setIdOrcamento(Integer idOrcamento) {
+		this.idOrcamento = idOrcamento;
+	}
+
+	public void setValorOrcado(Double valorOrcado) {
+		this.valorOrcado = valorOrcado;
+	}
+
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}

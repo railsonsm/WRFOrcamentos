@@ -1,80 +1,82 @@
 package br.cairu.pi.bean;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-
+import org.hibernate.exception.ConstraintViolationException;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
-
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
-
+import br.cairu.pi.dao.DAO;
 import br.cairu.pi.dao.FabricanteDAO;
 import br.cairu.pi.model.Fabricante;
 import br.cairu.pi.view.MensagensView;
 
 @ManagedBean
 @ViewScoped
-public class FabricanteMB {
-	private Fabricante fabricante;
-	private FabricanteDAO fabricanteDAO;
+public class FabricanteMB implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	private Fabricante fabricante = new Fabricante();
 	private String nomeFabricante;
-	private List<Fabricante> fabricantesFiltrados; 
-	private Integer idSelecao;
-	private MensagensView confirmacaoView;
-	
-	
-	@PostConstruct
-	public void init() {
-		this.fabricante = new Fabricante();
-		this.confirmacaoView = new MensagensView();
-	}
-	
-	public void fabricanteSelecionado(SelectEvent event) {
-		Fabricante fabricante = (Fabricante) event.getObject();
-		setFabricante(fabricante);
-	}
-		
+	private List<Fabricante> fabricantesFiltrados;;
+
 	public String salvar() {
 		try {
-			getFabricanteDAO().salvar(fabricante);
-			fabricante = new Fabricante();
-			confirmacaoView.msgSalvaFab();
-		}catch (Exception e) {
+			MensagensView.SucessoMessage("Fabricante adicionado com sucesso!.", null);
+			new DAO<Fabricante>(Fabricante.class).salvar(this.fabricante);
+			this.fabricante = new Fabricante();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	public String editar() {
 		try {
-			getFabricanteDAO().editar(fabricante);
-			fabricante = new Fabricante();
-			confirmacaoView.msgEditFab();
-		}catch (Exception e) {
+			MensagensView.SucessoMessage("Fabricante alterado com sucesso!.", null);
+			new DAO<Fabricante>(Fabricante.class).editar(this.fabricante);
+			this.fabricante = new Fabricante();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
 
-	public String excluir(){
+	public String excluir() {
 		try {
-			getFabricanteDAO().excluir(fabricante.getIdFabricante());
+			MensagensView.SucessoMessage("Fabricante removido com sucesso!.", null);
+			new DAO<Fabricante>(Fabricante.class).excluir(fabricante);
 			fabricante = new Fabricante();
-			confirmacaoView.msgExcluiFab();
-		}catch (javax.persistence.RollbackException e) {
-			 MensagensView.msgRelFabPro();
+		} catch (javax.persistence.RollbackException e) {
+			MensagensView.erroMessage("O fabricante não pôde ser excluido! Existe um produto registrado com o mesmo.", null);
+		} catch (ConstraintViolationException e) {
+			MensagensView.erroMessage("O fabricante não pôde ser excluido! Existe um produto registrado com o mesmo.", null);
 		}
 		return fabricante.getNome();
 	}
-	
-	public void addMessage(String summary, String detail) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
-		FacesContext.getCurrentInstance().addMessage(null, message);
-		
+
+	public void abrirDialogo() {
+		Map<String, Object> opcoes = new HashMap<String, Object>();
+		opcoes.put("modal", true);
+		opcoes.put("resizable", false);
+		opcoes.put("contentHeight", 420);
+		RequestContext.getCurrentInstance().openDialog("selecaoFabricante", opcoes, null);
+	}
+
+	public void pesquisarFabricante() {
+		fabricantesFiltrados = new FabricanteDAO().porNomeSemelhante(this.nomeFabricante);
+	}
+
+	public void selecionarFabricante(Fabricante fabricante) {
+		RequestContext.getCurrentInstance().closeDialog(fabricante);
+	}
+
+	public void fabricanteSelecionado(SelectEvent event) {
+		Fabricante fabricante = (Fabricante) event.getObject();
+		setFabricante(fabricante);
 	}
 
 	public String getNomeFabricante() {
@@ -93,39 +95,11 @@ public class FabricanteMB {
 		this.fabricantesFiltrados = fabricantesFiltrados;
 	}
 
-	public MensagensView getConfirmacaoView() {
-		return confirmacaoView;
-	}
-
-	public void setConfirmacaoView(MensagensView confirmacaoView) {
-		this.confirmacaoView = confirmacaoView;
-	}
-
 	public Fabricante getFabricante() {
 		return fabricante;
 	}
+
 	public void setFabricante(Fabricante fabricante) {
 		this.fabricante = fabricante;
 	}
-	public FabricanteDAO getFabricanteDAO() {
-		if(fabricanteDAO == null) {
-			fabricanteDAO = new FabricanteDAO();
-		}
-		return fabricanteDAO;
-	}
-	public void setFabricanteDAO(FabricanteDAO fabricanteDAO) {
-		this.fabricanteDAO = fabricanteDAO;
-	}
-
-
-	public Integer getIdSelecao() {
-		return idSelecao;
-	}
-
-	public void setIdSelecao(Integer idSelecao) {
-		this.idSelecao = idSelecao;
-	}
-	
-	
-	
 }

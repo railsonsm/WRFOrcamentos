@@ -6,10 +6,15 @@ import javax.persistence.Persistence;
 
 public class JPAUtil {
 	
-	private static EntityManagerFactory manager = Persistence.createEntityManagerFactory("default");
-	
-	public static EntityManager createEntityManager(){
-		return manager.createEntityManager();
+	private static EntityManagerFactory emf = Persistence
+			.createEntityManagerFactory("default");
+
+	public EntityManager getEntityManager() {
+		return emf.createEntityManager();
+	}
+
+	public void close(EntityManager em) {
+		em.close();
 	}
 
 	

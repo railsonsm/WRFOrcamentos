@@ -13,19 +13,23 @@
 				style="width:95%; margin-left: 35px" />
 
 			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarId">
+			
 				<p:outputLabel value="Código Fabricante" style="width:45%" for="codFab" />
+				
 				<h:panelGroup>
 					<p:inputText size="10"
 						value="#{fabricanteMB.fabricante.idFabricante}" id="codFab"
-						required="true" requiredMessage="Selecione o Fabricante" />
+						required="true" requiredMessage="Selecione o Fabricante" 
+						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}"/>
 					<p:commandButton icon="ui-icon-search" title="Pesquisar"
-						action="#{fabricanteView.abrirDialogo}" process="@this"
+						action="#{fabricanteMB.abrirDialogo}" process="@this"
 						update="@none">
 						<p:ajax event="dialogReturn"
 							listener="#{fabricanteMB.fabricanteSelecionado}" process="@this"
 							update="@form" />
 						<p:resetInput target="mostrarId" />
 					</p:commandButton>
+					
 				</h:panelGroup>
 			</p:panelGrid>
 
@@ -109,6 +113,7 @@
 
 			<p:menubar styleClass="toolbarCadastro">
 				<f:facet name="options">
+			
 					<p:commandButton style="margin-left: 30px;" value="Confirmar"
 						update="@form" actionListener="#{fabricanteMB.excluir}"
 						icon="ui-icon-suitcase">
@@ -116,13 +121,8 @@
 							icon="ui-icon-alert" />
 					</p:commandButton>
 
-					<p:commandButton style="margin-left: 30px;" value="Limpar"
-						action="excluirFabricante.xhtml" icon="ui-icon-pencil" ajax="false"
-						immediate="true" />
-
 					<p:commandButton style="margin-left: 30px;" value="Voltar"
-						action="/inicio.xhtml" icon="ui-icon-home" ajax="false"
-						onclick="false" immediate="true" />
+						action="/inicio.xhtml" icon="ui-icon-home" process="@this" update="@all" immediate="true" />
 
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Sim" type="button"
@@ -131,6 +131,7 @@
 						<p:commandButton value="Não" type="button"
 							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 					</p:confirmDialog>
+					
 				</f:facet>
 			</p:menubar>
 

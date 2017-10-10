@@ -15,18 +15,22 @@
 			<p:panelGrid columns="2" style="margin-left: 35px;" id="mostrarId">
 				<p:outputLabel value="Código Fabricante" style="width:45%"
 					for="codFab" />
-				<h:panelGroup>
+					
+				<h:panelGroup>				
 					<p:inputText size="10"
 						value="#{fabricanteMB.fabricante.idFabricante}" required="true"
-						requiredMessage="Selecione o Fabricante" id="codFab" />
+						requiredMessage="Selecione o Fabricante" id="codFab"
+						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" />
+						
 					<p:commandButton icon="ui-icon-search" title="Pesquisar"
-						action="#{fabricanteView.abrirDialogo}" process="@this"
+						action="#{fabricanteMB.abrirDialogo}" process="@this"
 						update="@none">
 						<p:ajax event="dialogReturn"
 							listener="#{fabricanteMB.fabricanteSelecionado}" process="@this"
 							update="@form" />
 						<p:resetInput target="mostrarId" />
 					</p:commandButton>
+					
 				</h:panelGroup>
 			</p:panelGrid>
 
@@ -134,7 +138,7 @@
 					</p:commandButton>
 
 					<p:commandButton style="margin-left: 30px;" value="Limpar"
-						action="editarFabricante.xhtml" icon="ui-icon-pencil" ajax="false"
+						action="editarFabricante.xhtml" icon="ui-icon-pencil" process="@this" update="@form"
 						immediate="true" />
 
 					<p:commandButton style="margin-left: 30px;" value="Voltar"

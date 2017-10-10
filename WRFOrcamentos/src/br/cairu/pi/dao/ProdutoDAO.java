@@ -1,10 +1,11 @@
 package br.cairu.pi.dao;
 
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
 import br.cairu.pi.model.Produto;
 
 public class ProdutoDAO {
@@ -24,4 +25,12 @@ public class ProdutoDAO {
 		manager.close();
 		return null;
 	}
+
+	public List<Produto> porNomeSemelhante(String descricaoProduto) {
+		return manager.createQuery("from Produto where descricao like :descricao", Produto.class)
+				.setParameter("descricao", "%" + descricaoProduto + "%")
+				.getResultList();
+	}
+
+	
 }

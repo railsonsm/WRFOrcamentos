@@ -45,6 +45,9 @@ public class Produto implements Serializable{
 	
 	@Column(nullable = false)
 	private String ambiente;	
+	
+	@Column(nullable = false)
+	private Double valortabela;
 
 	@JoinColumn(name = "idFabricante", referencedColumnName = "idFabricante",  foreignKey = @ForeignKey(name = "fk_fabricante"), nullable=false)
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -74,6 +77,14 @@ public class Produto implements Serializable{
 
 	public String getUnidade() {
 		return unidade;
+	}
+
+	public Double getValortabela() {
+		return valortabela;
+	}
+
+	public void setValortabela(Double valortabela) {
+		this.valortabela = valortabela;
 	}
 
 	public void setUnidade(String unidade) {
