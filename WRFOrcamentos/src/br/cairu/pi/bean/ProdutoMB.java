@@ -3,14 +3,10 @@ package br.cairu.pi.bean;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
-
-import br.cairu.pi.dao.DAO;
-import br.cairu.pi.dao.FabricanteDAO;
 import br.cairu.pi.dao.ProdutoDAO;
 import br.cairu.pi.model.Fabricante;
 import br.cairu.pi.model.Produto;
@@ -19,10 +15,8 @@ import br.cairu.pi.view.MensagensView;
 @ManagedBean
 @ViewScoped
 public class ProdutoMB {
-	private FabricanteDAO fabricanteDAO;
 	private Fabricante fabricante = new Fabricante();
 	private Produto produto = new Produto();
-	private ProdutoDAO produtoDAO;
 	private Integer idSelecao;
 	private List<Produto> produtosFiltrados;
 	private String descricaoProduto;
@@ -36,7 +30,7 @@ public class ProdutoMB {
 	public String salvar() {
 		try {		
 			produto.setFabricante(fabricante);
-			new DAO<Produto>(Produto.class).salvar(this.produto);
+			new ProdutoDAO(Produto.class).salvar(this.produto);
 			this.fabricante =  new Fabricante();
 			this.produto = new Produto();	
 			MensagensView.SucessoMessage("Produto adicionado com sucesso!.", null);
@@ -47,7 +41,7 @@ public class ProdutoMB {
 	}
 	
 	public String editar() {
-		new DAO<Produto>(Produto.class).editar(produto);
+		new ProdutoDAO(Produto.class).editar(produto);
 		this.produto = new Produto();
 		this.fabricante = new Fabricante();
 		MensagensView.SucessoMessage("Produto alterado com sucesso!.", null);
@@ -55,7 +49,7 @@ public class ProdutoMB {
 	}
 	
 	public String excluir() {
-		new DAO<Produto>(Produto.class).excluir(produto);
+		new ProdutoDAO(Produto.class).excluir(produto);
 		this.produto = new Produto();
 		MensagensView.SucessoMessage("Produto removido com sucesso!.", null);
 		return null;
@@ -70,7 +64,7 @@ public class ProdutoMB {
 	}
 
 	public void pesquisarProduto() {
-		produtosFiltrados = new ProdutoDAO().porNomeSemelhante(this.descricaoProduto);
+		produtosFiltrados = new ProdutoDAO(Produto.class).porNomeSemelhante(this.descricaoProduto);
 	}
 
 	public void selecionarProduto(Produto produto) {
@@ -86,28 +80,10 @@ public class ProdutoMB {
 	
 	
 	
-		public FabricanteDAO getFabricanteDAO() {
-		if (fabricanteDAO == null) {
-			fabricanteDAO = new FabricanteDAO();
-		}
-		return fabricanteDAO;
-	}
-
-	public void setFabricanteDAO(FabricanteDAO fabricanteDAO) {
-		this.fabricanteDAO = fabricanteDAO;
-	}
-
-	public ProdutoDAO getProdutoDAO() {
-		if (produtoDAO == null) {
-			produtoDAO = new ProdutoDAO();
-		}
-		return produtoDAO;
-	}
-
-	public void setProdutoDAO(ProdutoDAO produtoDAO) {
-		this.produtoDAO = produtoDAO;
-	}
 	
+
+	
+
 	public Fabricante getFabricante() {
 		return fabricante;
 	}

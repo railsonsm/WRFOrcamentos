@@ -5,16 +5,17 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class JPAUtil {
-	
-	private static EntityManagerFactory emf = Persistence
+		private static EntityManagerFactory factory = Persistence
 			.createEntityManagerFactory("default");
-
+	
 	public EntityManager getEntityManager() {
-		return emf.createEntityManager();
+		EntityManager manager = factory.createEntityManager();
+		System.out.println("persistiu");
+		return manager;	
 	}
 
-	public void close(EntityManager em) {
-		em.close();
+	public void close(EntityManager manager) {
+		manager.close();
 	}
 
 	

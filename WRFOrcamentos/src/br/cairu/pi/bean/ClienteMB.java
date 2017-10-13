@@ -9,7 +9,6 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import br.cairu.pi.dao.ClienteDAO;
-import br.cairu.pi.dao.DAO;
 import br.cairu.pi.model.Cliente;
 import br.cairu.pi.view.MensagensView;
 
@@ -24,7 +23,7 @@ public class ClienteMB implements Serializable {
 	
 	public String editar() {
 		try {
-			new DAO<Cliente>(Cliente.class).editar(this.cliente);
+			new ClienteDAO(Cliente.class).editar(this.cliente);
 			this.cliente = new Cliente();
 			MensagensView.SucessoMessage("Cliente alterado com sucesso!.", null);
 		} catch (Exception e) {
@@ -35,7 +34,7 @@ public class ClienteMB implements Serializable {
 	
 	public String salvar() {
 		try {
-			new DAO<Cliente>(Cliente.class).salvar(this.cliente);
+			new ClienteDAO(Cliente.class).salvar(this.cliente);
 			this.cliente = new Cliente();
 			MensagensView.SucessoMessage("Cliente adicionado com sucesso!.", null);
 		} catch (Exception e) {
@@ -46,7 +45,7 @@ public class ClienteMB implements Serializable {
 	
 	public String excluir() {
 		try {
-			new DAO<Cliente>(Cliente.class).excluir(cliente);
+			new ClienteDAO(Cliente.class).excluir(cliente);
 			this.cliente = new Cliente();
 			MensagensView.SucessoMessage("Cliente removido com sucesso!.", null);
 		} catch (Exception e) {
@@ -69,7 +68,7 @@ public class ClienteMB implements Serializable {
 	}
 	
 	public void pesquisarCliente() {
-		clientesFiltrados = new ClienteDAO().porNomeSemelhante(nomeCliente);
+		clientesFiltrados = new ClienteDAO(Cliente.class).porNomeSemelhante(nomeCliente);
 	}
 	
 	public void selecionarCliente(Cliente cliente) {

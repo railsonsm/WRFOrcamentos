@@ -6,114 +6,132 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="titulo">WRFOrçamentos - Registrar Orçamento</ui:define>
 	<ui:define name="corpo">
-		<h:form>
+		<h:form id="formOrc">
 			<h1>Novo Orçamento</h1>
+
+			<p:messages id="msgs" autoUpdate="true"
+				style="width:95%; margin-left: 35px" />
+
 			<p:panelGrid columns="2" style="margin-left: 35px;">
 				<p:outputLabel value="Código Orçamento" style="width:45%" />
-				<p:inputText size="12" value="123456" readonly="true" />
+				<p:inputText size="12" value="#{orcamentoMB.codDoOrcamento}"
+					readonly="true" />
 			</p:panelGrid>
-			<p:panelGrid columns="4" style="width:95%; margin-left: 35px; margin"
-				columnClasses="rotulo, campo, rotulo, campo">
-				<p:outputLabel value="Código Fabricante" />
-				<p:inputText size="10" value="">
-					<p:commandButton icon="ui-icon-search" />
-				</p:inputText>
+
+			<p:panelGrid columns="4" style="width:95%; margin-left: 35px;"
+				id="mostrarId" columnClasses="rotulo, campo, rotulo, campo">
+
+				<p:outputLabel value="Selecione o Fabricante" style="width:45%"
+					for="codFabric" />
+				<h:panelGroup>
+
+					<p:inputText size="10"
+						value="#{orcamentoMB.fabricante.idFabricante}" required="true"
+						requiredMessage="Selecione o Fabricante" id="codFabric"
+						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" />
+
+					<p:commandButton icon="ui-icon-search" title="Pesquisar"
+						action="#{fabricanteMB.abrirDialogo}" process="@this"
+						update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{orcamentoMB.fabricanteSelecionado}" process="@this"
+							update="@form" resetValues="true" />
+						<p:resetInput target="codFabric" />
+					</p:commandButton>
+				</h:panelGroup>
 
 				<p:outputLabel value="Fabricante" />
-				<p:inputText size="35" value="" readonly="true" />
+				<p:inputText value="#{orcamentoMB.fabricante.nome}" readonly="true" />
 
-				<p:outputLabel value="Código Cliente" />
-				<p:inputText size="10" value="">
-					<p:commandButton icon="ui-icon-search" style="button" />
-				</p:inputText>
+				<p:outputLabel value="Selecione o Cliente" style="width:45%"
+					for="codCli" />
+				<h:panelGroup>
+					<p:inputText size="10" value="#{orcamentoMB.cliente.idCliente}"
+						required="true" requiredMessage="Selecione o Cliente" id="codCli"
+						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" />
+
+					<p:commandButton icon="ui-icon-search" title="Pesquisar"
+						action="#{clienteMB.abrirDialogo}" process="@this" update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{orcamentoMB.clienteSelecionado}" process="@this"
+							update="@form" resetValues="true" />
+						<p:resetInput target="codCli" />
+					</p:commandButton>
+				</h:panelGroup>
 
 				<p:outputLabel value="Cliente" />
-				<p:inputText size="35" value="" readonly="true" />
+				<p:inputText size="35" value="#{orcamentoMB.cliente.nome}"
+					readonly="true" />
 
 				<p:outputLabel value="Forma de pagamento" for="formaPagamento" />
-				<p:selectOneMenu id="formaPagamento" value="" style="width:115px">
+				<p:selectOneMenu id="formaPagamento"
+					value="#{orcamentoMB.orcamento.formaPagamento}" style="width:115px"
+					required="true" requiredMessage="Forma de pagamento é obrigatório">
 					<f:selectItem itemLabel="Selecione" />
 					<f:selectItem itemLabel="Transferencia" itemValue="Transferencia" />
 					<f:selectItem itemLabel="Cartão" itemValue="Cartão" />
 				</p:selectOneMenu>
 
-				<p:outputLabel value="Prazo de entrega" />
-				<p:inputText value="" />
+				<p:outputLabel value="Prazo de entrega" for="prazoEntrega" />
+				<p:selectOneMenu id="prazoEntrega"
+					value="#{orcamentoMB.orcamento.prazoEntrega}" style="width:115px"
+					required="true" requiredMessage="Prazo de entrega é obrigatório">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItem itemLabel="3 Dias" itemValue="3 Dias" />
+					<f:selectItem itemLabel="7 Dias" itemValue="7 Dias" />
+					<f:selectItem itemLabel="30 Dias" itemValue="30 Dias" />
+				</p:selectOneMenu>
 
-				<p:outputLabel value="Frete"/>
-					<p:selectOneRadio id="console" value="#{radioView.console}">
-						<f:selectItem itemLabel="CIF" itemValue="Xbox One" />
-						<f:selectItem itemLabel="FOB" itemValue="PS4" />
-					</p:selectOneRadio>
+				<p:outputLabel value="Frete" for="frete" />
+				<p:selectOneRadio id="frete" value="#{orcamentoMB.orcamento.frete}"
+					required="true" requiredMessage="Selecione o tipo de frete">
+					<f:selectItem itemLabel="CIF" itemValue="CIF" />
+					<f:selectItem itemLabel="FOB" itemValue="FOB" />
+				</p:selectOneRadio>
 
 				<p:outputLabel value="Obra" />
-				<p:inputText size="35" value="" />
+				<p:inputText size="35" value="#{orcamentoMB.orcamento.obra}" />
 
-				<p:outputLabel value="Data" />
-				<p:inputText value="" readonly="true" />
+				<p:outputLabel value="Data" for="popup" />
+				<p:calendar id="popup"
+					value="#{orcamentoMB.orcamento.dataorcamento}" locale="pt_BR"
+					required="true" requiredMessage="Data é obrigatório"
+					readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" />
 
 			</p:panelGrid>
-			<p:tabView
-			style="margin-left: 35px; margin-right: 35px; margin-top: 10px">
-			<p:tab title="Itens">
-				<p:dataTable var="itens" value="" id="tabitens"
-					style="margin-top: 10px;">
-					<p:column headerText="Cod" style="text-align: center; width: 100px">
-						<p:inputText size="8" />
-					</p:column>
+			
+			<div id="itens">
+				<ui:insert name="itens">
+					<ui:include src="#{orcamentoMB.itensOrcamento}" />
+				</ui:insert>
+			</div>
 
-					<p:column headerText="Produto">
-						<p:autoComplete styleClass="produto-tabela" />
-					</p:column>
-
-					<p:column headerText="Valor Orç."
-						style="text-align: center; width: 100px;">
-						<p:inputText value="R$ 0,00" size="8" />
-					</p:column>
-
-					<p:column headerText="Valor Tabela"
-						style="text-align: center; width: 100px ">
-						<p:inputText size="8" />
-					</p:column>
-
-					<p:column headerText="Quantidade"
-						style="text-align: center; width: 100px ">
-						<p:inputText size="8" />
-					</p:column>
-
-					<p:column headerText="Valor Total"
-						style="text-align: center; width: 100px ">
-						<p:inputText size="8" />
-					</p:column>
-
-					<p:columnGroup type="footer">
-						<p:row>
-							<p:column colspan="5" footerText="Subtotal"
-								style="text-align: right;" />
-							<p:column footerText="R$ 0,00" style="text-align: center" />
-						</p:row>
-
-					</p:columnGroup>
-				</p:dataTable>
-			</p:tab>
-		</p:tabView>
 			<p:menubar styleClass="toolbarCadastro">
 
 				<f:facet name="options">
-					<p:commandButton style="margin-left: 30px;" value="Confirmar"
-						update="@form" actionListener="#{produtoMB.salvar}"
-						icon="ui-icon-cart">
+					<p:commandButton style="margin-left: 30px;"
+						value="Iniciar Orçamento" update="@form"
+						actionListener="#{orcamentoMB.iniciaOrcamento}" process="@form"
+						icon="ui-icon-cart" disabled="#{orcamentoMB.disabled}">
+						<p:confirm header="Confirmação" message="Tem certeza?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+					
+					<p:commandButton style="margin-left: 30px;"
+						value="Salvar" update="@form"
+						actionListener="#{orcamentoMB.iniciaOrcamento}" process="@form"
+						icon="ui-icon-cart" disabled="#{orcamentoMB.disabledsalvar}">
 						<p:confirm header="Confirmação" message="Tem certeza?"
 							icon="ui-icon-alert" />
 					</p:commandButton>
 
 					<p:commandButton style="margin-left: 30px;" value="Limpar"
 						action="cadastrarCliente.xhtml" icon="ui-icon-pencil" ajax="false"
-						immediate="true" />
+						immediate="true"/>
 
 					<p:commandButton style="margin-left: 30px;" value="Voltar"
 						action="/inicio.xhtml" icon="ui-icon-home" ajax="false"
-						onclick="false" immediate="true" />
+						onclick="false" immediate="true"/>
 
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Sim" type="button"
@@ -124,7 +142,7 @@
 					</p:confirmDialog>
 
 				</f:facet>
-			</p:menubar>
+			</p:menubar>		
 		</h:form>
 	</ui:define>
 </ui:composition>

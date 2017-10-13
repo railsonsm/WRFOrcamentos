@@ -19,7 +19,7 @@ public class LoginMB {
 	public String deslogar() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getSessionMap().remove("usuarioLogado");
-		return "login?faces-redirect=true";
+		return "/login?faces-redirect=true";
 	}
 	
 	public String efetuaLogin() {

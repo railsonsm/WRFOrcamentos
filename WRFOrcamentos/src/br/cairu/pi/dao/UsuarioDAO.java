@@ -8,10 +8,11 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import br.cairu.pi.model.Usuario;
+import br.cairu.pi.util.JPAUtil;
 
 public class UsuarioDAO {
-	EntityManagerFactory factory = Persistence.createEntityManagerFactory("default"); 
-	EntityManager manager = factory.createEntityManager();
+	
+	EntityManager manager = new JPAUtil().getEntityManager();
 
 	public boolean existe(Usuario usuario) {
 		TypedQuery<Usuario> query =  manager.createQuery("select u from Usuario u where "
@@ -23,7 +24,6 @@ public class UsuarioDAO {
 		}catch (NoResultException e) {
 			return false;
 		}
-		
 		manager.close();
 		return true;
 	}

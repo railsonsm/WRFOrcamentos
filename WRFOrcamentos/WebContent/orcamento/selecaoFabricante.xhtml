@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8"/>
+	<title>Seleção Fabricante</title>
+	
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body styleClass="tableSelecao">
+
+	<h:form>
+    	<div style="margin-top: 5px; margin-bottom: 20px">
+    		<p:inputText id="nome" size="40" value="#{fabricanteMB.nomeFabricante}" placeholder="Nome do fabricante" />
+    		
+    		<p:spacer width="10px"/>
+    		
+    		<p:commandButton value="Pesquisar" action="#{fabricanteMB.pesquisarFabricante}" update="@form" />
+    	</div>
+    	
+    	<p:dataTable value="#{fabricanteMB.fabricantesFiltrados}" var="fabricante"
+    		emptyMessage="Nenhum fabricante encontrado." rows="10"
+    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" >
+    		
+    		<p:column headerText="Código" style="text-align: center; width: 60px">
+    			<h:outputText value="#{fabricante.idFabricante}" />
+    		</p:column>
+    		<p:column headerText="Nome">
+    			<h:outputText value="#{fabricante.nome}" />
+    		</p:column>
+    		<p:column headerText="CNPJ">
+    			<h:outputText value="#{fabricante.cnpj}" />
+    		</p:column>
+    		<p:column style="width: 45px; text-align: center">
+    			<p:commandButton icon="ui-icon-check" title="Selecionar"
+    				action="#{fabricanteMB.selecionarFabricante(fabricante)}"
+    				process="@this" />
+    		</p:column>
+    		
+    	</p:dataTable>
+	</h:form>
+
+</h:body>
+</html>

@@ -9,7 +9,6 @@ import javax.faces.bean.ViewScoped;
 import org.hibernate.exception.ConstraintViolationException;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
-import br.cairu.pi.dao.DAO;
 import br.cairu.pi.dao.FabricanteDAO;
 import br.cairu.pi.model.Fabricante;
 import br.cairu.pi.view.MensagensView;
@@ -26,7 +25,7 @@ public class FabricanteMB implements Serializable {
 	public String salvar() {
 		try {
 			MensagensView.SucessoMessage("Fabricante adicionado com sucesso!.", null);
-			new DAO<Fabricante>(Fabricante.class).salvar(this.fabricante);
+			new FabricanteDAO(Fabricante.class).salvar(this.fabricante);
 			this.fabricante = new Fabricante();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -37,7 +36,7 @@ public class FabricanteMB implements Serializable {
 	public String editar() {
 		try {
 			MensagensView.SucessoMessage("Fabricante alterado com sucesso!.", null);
-			new DAO<Fabricante>(Fabricante.class).editar(this.fabricante);
+			new FabricanteDAO(Fabricante.class).editar(this.fabricante);
 			this.fabricante = new Fabricante();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -48,7 +47,7 @@ public class FabricanteMB implements Serializable {
 	public String excluir() {
 		try {
 			MensagensView.SucessoMessage("Fabricante removido com sucesso!.", null);
-			new DAO<Fabricante>(Fabricante.class).excluir(fabricante);
+			new FabricanteDAO(Fabricante.class).excluir(fabricante);
 			fabricante = new Fabricante();
 		} catch (javax.persistence.RollbackException e) {
 			MensagensView.erroMessage("O fabricante não pôde ser excluido! Existe um produto registrado com o mesmo.", null);
@@ -66,8 +65,16 @@ public class FabricanteMB implements Serializable {
 		RequestContext.getCurrentInstance().openDialog("selecaoFabricante", opcoes, null);
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
 	public void pesquisarFabricante() {
-		fabricantesFiltrados = new FabricanteDAO().porNomeSemelhante(this.nomeFabricante);
+		fabricantesFiltrados = new FabricanteDAO(Fabricante.class).porNomeSemelhante(this.nomeFabricante);
 	}
 
 	public void selecionarFabricante(Fabricante fabricante) {

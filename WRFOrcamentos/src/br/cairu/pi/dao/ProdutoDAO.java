@@ -7,27 +7,22 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import br.cairu.pi.model.Produto;
+import br.cairu.pi.util.JPAUtil;
 
-public class ProdutoDAO {
-	EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
-	EntityManager manager = factory.createEntityManager();
+public class ProdutoDAO extends GenericDAO<Produto>{
+	public ProdutoDAO(Class<Produto> classe) {
+		super(Produto.class);
+		// TODO Auto-generated constructor stub
+	}
 
 	public Produto mostraProdutoPorId(Integer idProduto) {
-        return manager.createQuery("select p from Produto p  where p.idProduto = :idProduto", Produto.class).
+        return getSessao().createQuery("select p from Produto p  where p.idProduto = :idProduto", Produto.class).
         setParameter("idProduto", idProduto).getSingleResult();
 
 	}
 	
-	public Produto salvar(Produto p) {
-		manager.getTransaction().begin();
-		manager.persist(p);
-		manager.getTransaction().commit();
-		manager.close();
-		return null;
-	}
-
 	public List<Produto> porNomeSemelhante(String descricaoProduto) {
-		return manager.createQuery("from Produto where descricao like :descricao", Produto.class)
+		return getSessao().createQuery("from Produto where descricao like :descricao", Produto.class)
 				.setParameter("descricao", "%" + descricaoProduto + "%")
 				.getResultList();
 	}
