@@ -1,54 +1,91 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+<h:body>
 	<h:form>
 		<p:growl id="messages" />
 
-		<p:tabView
-			style="margin-left: 35px; margin-right: 35px; margin-top: 10px">
-			<p:tab title="Itens">
-				<p:dataTable var="itens" value="" id="tabitens"
-					style="margin-top: 10px;">
-					<p:column headerText="Cod" style="text-align: center; width: 100px">
-						<p:inputText size="8" />
-					</p:column>
+		<p:tabView style="margin-left: 35px; margin-right: 35px; margin-top: 10px">
+				<p:tab title="Itens">
+					<p:dataTable var="itens" value="" id="tabitens"
+						style="margin-top: 10px;">
+						<p:column headerText="Cod"
+							style="text-align: center; width: 150px">
+							<h:panelGroup>
 
-					<p:column headerText="Produto">
-						<p:autoComplete styleClass="produto-tabela" />
-					</p:column>
+								<p:inputText size="10" value="#{orcamentoMB.produto.idProduto}"
+									readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}"
+									required="true" requiredMessage="Selecione o Produto"
+									id="codProduto" />
 
-					<p:column headerText="Valor OrÃ§."
-						style="text-align: center; width: 100px;">
-						<p:inputText value="R$ 0,00" size="8" />
-					</p:column>
+								<p:commandButton icon="ui-icon-search" title="Pesquisar"
+									action="#{produtoMB.abrirDialogo}" process="@this"
+									update="@none">
 
-					<p:column headerText="Valor Tabela"
-						style="text-align: center; width: 100px ">
-						<p:inputText size="8" />
-					</p:column>
+									<p:ajax event="dialogReturn"
+										listener="#{orcamentoMB.produtoSelecionado}" process="@this"
+										update="@form " />
 
-					<p:column headerText="Quantidade"
-						style="text-align: center; width: 100px ">
-						<p:inputText size="8" />
-					</p:column>
+									<p:resetInput target="codProduto" />
 
-					<p:column headerText="Valor Total"
-						style="text-align: center; width: 100px ">
-						<p:inputText size="8" />
-					</p:column>
+								</p:commandButton>
+							</h:panelGroup>
+						</p:column>
 
-					<p:columnGroup type="footer">
-						<p:row>
-							<p:column colspan="5" footerText="Subtotal"
-								style="text-align: right;" />
-							<p:column footerText="R$ 0,00" style="text-align: center" />
-						</p:row>
+						<p:column headerText="Produto">
+							<p:inputText styleClass="produto-tabela" readonly="true"
+								value="#{orcamentoMB.produto.descricao}" />
+						</p:column>
 
-					</p:columnGroup>
-				</p:dataTable>
-			</p:tab>
-		</p:tabView>
+						<p:column headerText="Valor Orç."
+							style="width: 100px;">
+							<p:inputText value="#{orcamentoMB.teste}"
+								size="8" />
+						</p:column>
+
+						<p:column headerText="Valor Tabela"
+							style="text-align: center; width: 100px ">
+							<p:inputText size="8" value="#{orcamentoMB.produto.valortabela}"
+								id="valorOrcado" />
+						</p:column>
+
+						<p:column headerText="Quantidade"
+							style="text-align: center; width: 100px ">
+							<p:inputText size="8"
+								value="#{orcamentoMB.orcamentoProduto.quantidade}">
+								<f:ajax listener="#{orcamentoMB.calculaValorProduto}"
+									render="valorTotal" />
+
+							</p:inputText>
+						</p:column>
+
+						<p:column headerText="Valor Total"
+							style="text-align: center; width: 100px ">
+							<p:inputText size="8" id="valorTotal"
+								value="#{orcamentoMB.valortotal}" />
+						</p:column>
+
+						<p:column headerText="Add"
+							style="text-align: center; width: 100px ">
+							<p:commandButton icon="fa fa-fw fa-plus" />
+						</p:column>
+
+						<p:columnGroup type="footer">
+							<p:row>
+								<p:column colspan="6" footerText="Subtotal"
+									style="text-align: right;" />
+								<p:column footerText="R$ 0,00" style="text-align: center" />
+							</p:row>
+
+						</p:columnGroup>
+					</p:dataTable>
+				</p:tab>
+			</p:tabView>
 	</h:form>
-</ui:composition>
+</h:body>
+</html>

@@ -126,8 +126,7 @@
 						immediate="true" />
 
 					<p:commandButton style="margin-left: 30px;" value="Voltar"
-						action="inicio?faces-redirect=true" icon="ui-icon-home" ajax="false"
-						onclick="false" immediate="true" />
+						action="/inicio?faces-redirect=true" icon="ui-icon-home"  process="@this" update="@all" />
 
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Sim" type="button"

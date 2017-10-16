@@ -21,8 +21,15 @@ public class OrcamentoProduto implements Serializable {
 	@Id 
 	private Integer idProduto;
 	
-	@Column 
-	private Double valorOrcado;
+	@Column(nullable=false)
+	private int quantidade;
+	
+	@Column(nullable=false)
+	private double valorNoOrc;
+	
+	@Column(nullable=false)
+	private double valorUnitario;
+	
 	
 	@JoinColumn(name = "idProduto", referencedColumnName = "idProduto",  foreignKey = @ForeignKey(name = "fk_Produto"), nullable=false)
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -32,60 +39,63 @@ public class OrcamentoProduto implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Orcamento orcamento;
 
-	public Integer getIdOcamento() {
+	public Integer getIdOrcamento() {
 		return idOrcamento;
-	}
-
-	public void setIdOcamento(Integer idOcamento) {
-		this.idOrcamento = idOcamento;
 	}
 
 	public Integer getIdProduto() {
 		return idProduto;
 	}
 
-	public void setIdProduto(Integer idProduto) {
-		this.idProduto = idProduto;
+	public int getQuantidade() {
+		return quantidade;
 	}
 
-	public Double getValororcamento() {
-		return valorOrcado;
-	}
-
-	public void setValororcamento(Double valororcamento) {
-		this.valorOrcado = valororcamento;
+	public double getValorNoOrc() {
+		return valorNoOrc;
 	}
 
 	public Produto getProduto() {
 		return produto;
 	}
 
-	public Integer getIdOrcamento() {
-		return idOrcamento;
-	}
-
-	public Double getValorOrcado() {
-		return valorOrcado;
+	public Orcamento getOrcamento() {
+		return orcamento;
 	}
 
 	public void setIdOrcamento(Integer idOrcamento) {
 		this.idOrcamento = idOrcamento;
 	}
 
-	public void setValorOrcado(Double valorOrcado) {
-		this.valorOrcado = valorOrcado;
+	public void setIdProduto(Integer idProduto) {
+		this.idProduto = idProduto;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public void setValorNoOrc(double valorNoOrc) {
+		this.valorNoOrc = valorNoOrc;
 	}
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
 
-	public Orcamento getOrcamento() {
-		return orcamento;
-	}
-
 	public void setOrcamento(Orcamento orcamento) {
 		this.orcamento = orcamento;
 	}
+
+	public double getValorUnitario() {
+		return valorUnitario;
+	}
+
+	public void setValorUnitario(double valorUnitario) {
+		this.valorUnitario = valorUnitario;
+	}
+
+	
+	
 	
 }
