@@ -47,9 +47,9 @@ public class OrcamentoMB {
 			orcamento.setValorOrcamento(valorTotal);
 			orcamento.setCliente(cliente);
 			orcamento.setFabricante(fabricante);
-			new OrcamentoDAO(Orcamento.class).salvar(orcamento);
+			new OrcamentoDAO().salvar(orcamento);
 			for (OrcamentoProduto op : orcamentoProdutos) {
-				new OrcamentoProdutoDAO(OrcamentoProduto.class).salvar(op);
+				new OrcamentoProdutoDAO().salvar(op);
 			}
 			MensagensView.SucessoMessage("Orcamento adicionado com sucesso", null);
 			fimDoOrcamento();
@@ -119,7 +119,7 @@ public class OrcamentoMB {
 	public void mostrarCodOrcamento() {
 		try {
 			orcamento = new Orcamento();
-			CodDoOrcamento = new OrcamentoDAO(Orcamento.class).mostrarCodOrcamento();
+			CodDoOrcamento = new OrcamentoDAO().mostrarCodOrcamento();
 			System.out.println("RESULTADO" + orcamento);
 		} catch (NullPointerException e) {
 			CodDoOrcamento = 1;

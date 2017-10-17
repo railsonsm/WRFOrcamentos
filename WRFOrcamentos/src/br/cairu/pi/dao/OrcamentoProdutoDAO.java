@@ -9,7 +9,7 @@ import br.cairu.pi.util.JPAUtil;
 
 public class OrcamentoProdutoDAO extends GenericDAO<OrcamentoProduto>{
 
-	public OrcamentoProdutoDAO(Class<OrcamentoProduto> classe) {
+	public OrcamentoProdutoDAO() {
 		super(OrcamentoProduto.class);
 	}
 
