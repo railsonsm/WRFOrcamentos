@@ -1,5 +1,6 @@
 package br.cairu.pi.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,10 @@ import br.cairu.pi.view.MensagensView;
 
 @ManagedBean
 @ViewScoped
-public class OrcamentoMB {
+public class OrcamentoMB  implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private Cliente cliente = new Cliente();
 	private Fabricante fabricante = new Fabricante();
 	private Orcamento orcamento = new Orcamento();
