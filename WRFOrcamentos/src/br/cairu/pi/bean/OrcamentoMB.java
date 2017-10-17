@@ -33,7 +33,9 @@ public class OrcamentoMB {
 	private boolean disabledsalvar = true;
 	private boolean disableitens = true;
 	private List<OrcamentoProduto> orcamentoProdutos = new ArrayList<OrcamentoProduto>();
-	private double valorTotal;
+	private double valorTotal= 0.0;
+	private boolean requiredProd = true; 
+	private double mostraFrete;
 
 	@PostConstruct
 	public void init() {
@@ -46,33 +48,58 @@ public class OrcamentoMB {
 			orcamento.setCliente(cliente);
 			orcamento.setFabricante(fabricante);
 			new OrcamentoDAO(Orcamento.class).salvar(orcamento);
-			salvarOrcamentoProdutos();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public String salvarOrcamentoProdutos() {
-		try {
-			for (int i = 0; i<orcamentoProdutos.size(); i++) {
-				new OrcamentoProdutoDAO(OrcamentoProduto.class).salvar(orcamentoProdutos.get(i));
+			for (OrcamentoProduto op : orcamentoProdutos) {
+				new OrcamentoProdutoDAO(OrcamentoProduto.class).salvar(op);
 			}
+			MensagensView.SucessoMessage("Orcamento adicionado com sucesso", null);
+			fimDoOrcamento();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	public void listaDeItens() {
-		orcamentoProduto.setIdProduto(produto.getIdProduto());
-		orcamentoProduto.setIdOrcamento(CodDoOrcamento);
-		orcamentoProduto.setProduto(produto);
-		orcamentoProduto.setOrcamento(orcamento);
-		orcamentoProdutos.add(orcamentoProduto);
-		this.orcamentoProduto = new OrcamentoProduto();
+	private void fimDoOrcamento() {
+		this.orcamento = new Orcamento();
 		this.produto = new Produto();
-		this.disableitens = true;
+		this.orcamentoProduto = new OrcamentoProduto();
+		this.fabricante = new Fabricante();
+		this.orcamentoProdutos = new ArrayList<OrcamentoProduto>();
+		this.cliente = new Cliente();		
+	}
+
+	public void listaDeItens() {	
+		try {
+			valorTotal = valorTotal + orcamentoProduto.getValorUnitario();
+			for(int i=0; i<orcamentoProdutos.size(); i++) {
+				if(orcamentoProdutos.get(i).getProduto().getIdProduto().equals(produto.getIdProduto())) {
+					MensagensView.erroMessage("Produto já consta no orçamento", null); 
+					return;
+				}			
+			}
+			orcamentoProduto.setProduto(produto);
+			orcamento.setIdOrcamento(CodDoOrcamento);
+			orcamentoProduto.setOrcamento(orcamento);
+			if(orcamentoProduto.getValorUnitario() <= 0.0 ){
+				MensagensView.erroMessage("Valor unitário não pode ser zero(0.0)", null);
+			}else {
+				orcamentoProdutos.add(orcamentoProduto);
+				this.orcamentoProduto = new OrcamentoProduto();
+				this.produto = new Produto();
+			}			
+			this.orcamento = new Orcamento();
+			this.disableitens = true;
+			if(orcamentoProdutos != null) {
+				requiredProd = false;
+			}
+		}catch (NullPointerException e) {
+			MensagensView.erroMessage("Insira o frete e pelo menos um produto", null);
+		}
+		
+	}
+	
+	public void removeItenLista(OrcamentoProduto op) {
+			valorTotal = valorTotal - op.getValorUnitario();
 	}
 
 	public void calculaValorProduto(AjaxBehaviorEvent evento) {
@@ -80,7 +107,6 @@ public class OrcamentoMB {
 			MensagensView.erroMessage("Valor orçado não pode ser maior que o de tabela", "erro!");
 		} else {
 			orcamentoProduto.setValorUnitario(orcamentoProduto.getValorNoOrc() * orcamentoProduto.getQuantidade());
-			valorTotal = valorTotal + orcamentoProduto.getValorNoOrc();
 		}
 	}
 
@@ -114,6 +140,23 @@ public class OrcamentoMB {
 		Produto produto = (Produto) event.getObject();
 		setProduto(produto);
 		this.disableitens = false;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public double getMostraFrete() {
+		return mostraFrete;
+	}
+
+	public void setMostraFrete(double mostraFrete) {
+		this.mostraFrete = mostraFrete;
 	}
 
 	public List<OrcamentoProduto> getOrcamentoProdutos() {
@@ -212,4 +255,12 @@ public class OrcamentoMB {
 		this.valorTotal = valorTotal;
 	}
 
+	public boolean isRequiredProd() {
+		return requiredProd;
+	}
+
+	public void setRequiredProd(boolean requiredProd) {
+		this.requiredProd = requiredProd;
+	}
+	
 }

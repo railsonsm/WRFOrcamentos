@@ -9,8 +9,7 @@
 		<h:form id="formOrc">
 			<h1>Novo Orçamento</h1>
 
-			<p:growl id="msgs" autoUpdate="true" globalOnly="true"
-				style="width:95%; margin-left: 35px" />
+			<p:growl id="msgs" autoUpdate="true" />
 
 			<p:panelGrid columns="2" style="margin-left: 35px;">
 				<p:outputLabel value="Código Orçamento" style="width:45%" />
@@ -86,6 +85,7 @@
 					required="true" requiredMessage="Selecione o tipo de frete">
 					<f:selectItem itemLabel="CIF" itemValue="CIF" />
 					<f:selectItem itemLabel="FOB" itemValue="FOB" />
+					<f:ajax />
 				</p:selectOneRadio>
 
 				<p:outputLabel value="Obra" />
@@ -99,28 +99,32 @@
 
 			</p:panelGrid>
 
-			<p:tabView style="margin-left: 35px; margin-right: 35px; margin-top: 10px">
-				<p:tab title="Itens">
+			<p:tabView
+				style="margin-left: 35px; margin-right: 35px; margin-top: 10px"
+				dynamic="true" id="tabView">
+				<p:tab title="Itens" dynamic="true">
 					<p:dataTable var="itens" value="" id="tabitens"
 						style="margin-top: 10px;">
+
 						<p:column headerText="Cod"
 							style="text-align: center; width: 110px">
 							<h:panelGroup>
 
 								<p:inputText size="6" value="#{orcamentoMB.produto.idProduto}"
 									readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}"
-									required="true" requiredMessage="Selecione o Produto"
-									id="codProduto">
+									required="#{orcamentoMB.requiredProd}"
+									requiredMessage="Selecione pelo menos um produto"
+									id="codProduto" style="text-align: center">
 									<f:ajax />
 								</p:inputText>
 
 								<p:commandButton icon="ui-icon-search" title="Pesquisar"
 									action="#{produtoMB.abrirDialogo}" process="@this"
-									update="@none">
+									update="@none" resetValues="true">
 
 									<p:ajax event="dialogReturn"
 										listener="#{orcamentoMB.produtoSelecionado}" process="@this"
-										update="@form " />
+										update="tabitens " />
 
 									<p:resetInput target="codProduto" />
 
@@ -129,13 +133,14 @@
 						</p:column>
 
 						<p:column headerText="Produto">
-							<p:inputText styleClass="produto-tabela" readonly="true"
-								value="#{orcamentoMB.produto.descricao}" />
+							<p:inputText style="width: 97%; text-align: center"
+								readonly="true" value="#{orcamentoMB.produto.descricao}" />
 						</p:column>
 
 						<p:column headerText="Valor Orç." style="width: 100px;">
 							<p:inputText disabled="#{orcamentoMB.disableitens}"
-								value="#{orcamentoMB.orcamentoProduto.valorNoOrc}" size="8">
+								value="#{orcamentoMB.orcamentoProduto.valorNoOrc}" size="8"
+								style="text-align: center">
 								<f:ajax listener="#{orcamentoMB.calculaValorProduto}"
 									render="valorUnitario" />
 							</p:inputText>
@@ -144,7 +149,7 @@
 						<p:column headerText="Valor Tabela"
 							style="text-align: center; width: 100px ">
 							<p:inputText size="8" value="#{orcamentoMB.produto.valortabela}"
-								id="valorOrcado" readonly="true">
+								id="valorOrcado" readonly="true" style="text-align: center">
 								<f:ajax />
 							</p:inputText>
 						</p:column>
@@ -152,7 +157,8 @@
 						<p:column headerText="Quantidade"
 							style="text-align: center; width: 100px ">
 							<p:inputText disabled="#{orcamentoMB.disableitens}" size="8"
-								value="#{orcamentoMB.orcamentoProduto.quantidade}">
+								value="#{orcamentoMB.orcamentoProduto.quantidade}"
+								style="text-align: center">
 								<f:ajax listener="#{orcamentoMB.calculaValorProduto}"
 									render="valorUnitario" />
 
@@ -162,52 +168,73 @@
 						<p:column headerText="Valor Unitário"
 							style="text-align: center; width: 100px ">
 							<p:inputText size="8" id="valorUnitario"
-								value="#{orcamentoMB.orcamentoProduto.valorUnitario}" readonly="true" />
+								value="#{orcamentoMB.orcamentoProduto.valorUnitario}"
+								readonly="true" />
 						</p:column>
 
 						<p:column headerText="Add"
 							style="text-align: center; width: 100px ">
 							<p:commandButton icon="fa fa-fw fa-plus"
 								action="#{orcamentoMB.listaDeItens}" process="@this"
-								update="@form tabitens" />
+								update="formOrc:tabView:tabelaItens formOrc:tabView"
+								resetValues="formOrc:tabView" />
 						</p:column>
 
 					</p:dataTable>
 
 					<p:dataTable id="tabelaItens"
 						emptyMessage="Nenhum produto inserido no orçamento #{orcamentoMB.codDoOrcamento}"
-						style="margin-top: 5px" value="#{orcamentoMB.orcamentoProdutos}"
-						var="orcamentoproduto">
-						<p:column>
+						style="margin-top: 5px; margin-bottom: 5px;"
+						value="#{orcamentoMB.orcamentoProdutos}" var="orcamentoproduto">
+						<p:column style="text-align: center; width: 110px">
 							<h:outputText value="#{orcamentoproduto.produto.idProduto}" />
 						</p:column>
 
-						<p:column>
+						<p:column style="text-align: center; width: 447px ">
 							<h:outputText value="#{orcamentoproduto.produto.descricao}" />
 						</p:column>
 
-						<p:column>
+						<p:column style="text-align: center; width: 100px ">
 							<h:outputText value="#{orcamentoproduto.valorNoOrc}" />
 						</p:column>
 
-						<p:column>
+						<p:column style="text-align: center; width: 100px ">
 							<h:outputText value="#{orcamentoproduto.produto.valortabela}" />
 						</p:column>
 
-						<p:column>
+						<p:column style="text-align: center;">
 							<h:outputText value="#{orcamentoproduto.quantidade}" />
 						</p:column>
 
-						<p:column>
+						<p:column style="text-align: center;">
 							<h:outputText value="#{orcamentoproduto.valorUnitario}" />
 						</p:column>
-						<p:columnGroup type="footer">
+
+						<p:column style="text-align: center;">
+							<p:commandButton title="Excluir" icon="fa fa-fw fa-remove"
+								action="#{orcamentoMB.removeItenLista(orcamentoproduto)}"
+								process="@this" update="tabelaItens" />
+						</p:column>
+
+
+						<p:columnGroup type="footer" id="freteTotal">
 							<p:row>
-								<p:column colspan="6" footerText="Total"
+
+								<p:column colspan="6" footerText="Frete"
 									style="text-align: right;" />
-								<p:column footerText="R$ 0,00 #{orcamentoMB.valorTotal}" style="text-align: center" />
+								<p:column footerText="R$ 0.0"
+									style="text-align: center" />
+
 							</p:row>
 
+							<p:row>
+
+								<p:column colspan="6" footerText="TOTAL DO ORÇAMENTO"
+									style="text-align: right;" />
+								<p:column footerText="R$ #{orcamentoMB.valorTotal}"
+									style="text-align: center" />
+
+							</p:row>
 						</p:columnGroup>
 
 					</p:dataTable>
@@ -228,7 +255,7 @@
 
 				<f:facet name="options">
 					<p:commandButton style="margin-left: 30px;"
-						value="Iniciar Orçamento" update="@form"
+						value="Iniciar Orçamento" update="@all"
 						actionListener="#{orcamentoMB.iniciaOrcamento}" process="@form"
 						icon="ui-icon-cart" disabled="#{orcamentoMB.disabledInitOrc}">
 						<p:confirm header="Confirmação" message="Tem certeza?"
@@ -253,7 +280,7 @@
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Sim" type="button"
 							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-							actionListener="#{produtoMB.salvarOrcamento}" />
+							actionListener="#{orcamentoMB.salvarOrcamento}" />
 						<p:commandButton value="Não" type="button"
 							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 					</p:confirmDialog>

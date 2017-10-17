@@ -33,7 +33,6 @@ public class Orcamento implements Serializable {
 	@Column(nullable = false)
 	private Double valorOrcamento;
 
-	@Column(nullable = false)
 	private String formaPagamento;
 
 	@Column(nullable = false)

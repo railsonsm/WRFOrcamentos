@@ -16,10 +16,10 @@ public class OrcamentoProduto implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Id
-	private Integer idOrcamento;
-	@Id 
-	private Integer idProduto;
+	//@Id
+	//private Integer idOrcamento;
+	//@Id 
+	//private Integer idProduto;
 	
 	@Column(nullable=false)
 	private int quantidade;
@@ -30,22 +30,15 @@ public class OrcamentoProduto implements Serializable {
 	@Column(nullable=false)
 	private double valorUnitario;
 	
-	
+	@Id
 	@JoinColumn(name = "idProduto", referencedColumnName = "idProduto",  foreignKey = @ForeignKey(name = "fk_Produto"), nullable=false)
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Produto produto;
 	
+	@Id 
 	@JoinColumn(name = "idOrcamento", referencedColumnName = "idOrcamento",  foreignKey = @ForeignKey(name = "fk_Orcamento"), nullable=false)
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Orcamento orcamento;
-
-	public Integer getIdOrcamento() {
-		return idOrcamento;
-	}
-
-	public Integer getIdProduto() {
-		return idProduto;
-	}
 
 	public int getQuantidade() {
 		return quantidade;
@@ -62,15 +55,6 @@ public class OrcamentoProduto implements Serializable {
 	public Orcamento getOrcamento() {
 		return orcamento;
 	}
-
-	public void setIdOrcamento(Integer idOrcamento) {
-		this.idOrcamento = idOrcamento;
-	}
-
-	public void setIdProduto(Integer idProduto) {
-		this.idProduto = idProduto;
-	}
-
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
@@ -95,6 +79,8 @@ public class OrcamentoProduto implements Serializable {
 		this.valorUnitario = valorUnitario;
 	}
 
+	
+	
 	
 	
 	
