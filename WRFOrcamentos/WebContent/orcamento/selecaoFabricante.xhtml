@@ -21,7 +21,7 @@
     	</div>
     	
     	<p:dataTable value="#{fabricanteMB.fabricantesFiltrados}" var="fabricante"
-    		emptyMessage="Nenhum fabricante encontrado." rows="10"
+    		emptyMessage="Nenhum fabricante encontrado." rows="10" rowKey="#{fabricante.idFabricante}"
     		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" >
     		
     		<p:column headerText="Código" style="text-align: center; width: 60px">

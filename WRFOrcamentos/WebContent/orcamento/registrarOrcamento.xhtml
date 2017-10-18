@@ -6,11 +6,16 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="titulo">WRFOrçamentos - Registrar Orçamento</ui:define>
 	<ui:define name="corpo">
+	
+	<f:event listener="#{orcamentoMB.mostrarCodOrcamento}" type="preRenderView" /> 
+	
 		<h:form id="formOrc">
 			<h1>Novo Orçamento</h1>
 
 			<p:growl id="msgs" autoUpdate="true" />
-
+			
+			
+			
 			<p:panelGrid columns="2" style="margin-left: 35px;">
 				<p:outputLabel value="Código Orçamento" style="width:45%" />
 				<p:inputText size="12" value="#{orcamentoMB.codDoOrcamento}"
@@ -26,14 +31,16 @@
 					<p:inputText size="10"
 						value="#{orcamentoMB.fabricante.idFabricante}" required="true"
 						requiredMessage="Selecione o Fabricante" id="codFabric"
-						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" />
+						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}">
+						<f:ajax/>	
+					</p:inputText>
 
 					<p:commandButton icon="ui-icon-search" title="Pesquisar"
 						action="#{fabricanteMB.abrirDialogo}" process="@this"
 						update="@none">
 						<p:ajax event="dialogReturn"
 							listener="#{orcamentoMB.fabricanteSelecionado}" process="@this"
-							update="@form" resetValues="true" />
+							update="@form"/>
 						<p:resetInput target="codFabric" />
 					</p:commandButton>
 				</h:panelGroup>
@@ -245,23 +252,10 @@
 			</p:tabView>
 
 
-			<div id="itens">
-				<ui:insert name="itens">
-					<ui:include src="#{orcamentoMB.itensOrcamento}" />
-				</ui:insert>
-			</div>
-
 			<p:menubar styleClass="toolbarCadastro">
 
 				<f:facet name="options">
-					<p:commandButton style="margin-left: 30px;"
-						value="Iniciar Orçamento" update="@all"
-						actionListener="#{orcamentoMB.iniciaOrcamento}" process="@form"
-						icon="ui-icon-cart" disabled="#{orcamentoMB.disabledInitOrc}">
-						<p:confirm header="Confirmação" message="Tem certeza?"
-							icon="ui-icon-alert" />
-					</p:commandButton>
-
+			
 					<p:commandButton style="margin-left: 30px;" value="Salvar"
 						update="@form" actionListener="#{orcamentoMB.salvarOrcamento}"
 						process="@form" icon="ui-icon-cart">

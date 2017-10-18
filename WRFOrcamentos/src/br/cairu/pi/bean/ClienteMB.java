@@ -23,7 +23,7 @@ public class ClienteMB implements Serializable {
 	
 	public String editar() {
 		try {
-			new ClienteDAO(Cliente.class).editar(this.cliente);
+			new ClienteDAO().editar(this.cliente);
 			this.cliente = new Cliente();
 			MensagensView.SucessoMessage("Cliente alterado com sucesso!.", null);
 		} catch (Exception e) {
@@ -34,7 +34,7 @@ public class ClienteMB implements Serializable {
 	
 	public String salvar() {
 		try {
-			new ClienteDAO(Cliente.class).salvar(this.cliente);
+			new ClienteDAO().salvar(this.cliente);
 			this.cliente = new Cliente();
 			MensagensView.SucessoMessage("Cliente adicionado com sucesso!.", null);
 		} catch (Exception e) {
@@ -45,7 +45,7 @@ public class ClienteMB implements Serializable {
 	
 	public String excluir() {
 		try {
-			new ClienteDAO(Cliente.class).excluir(cliente);
+			new ClienteDAO().excluir(cliente);
 			this.cliente = new Cliente();
 			MensagensView.SucessoMessage("Cliente removido com sucesso!.", null);
 		} catch (Exception e) {
@@ -68,7 +68,7 @@ public class ClienteMB implements Serializable {
 	}
 	
 	public void pesquisarCliente() {
-		clientesFiltrados = new ClienteDAO(Cliente.class).porNomeSemelhante(nomeCliente);
+		clientesFiltrados = new ClienteDAO().porNomeSemelhante(nomeCliente);
 	}
 	
 	public void selecionarCliente(Cliente cliente) {

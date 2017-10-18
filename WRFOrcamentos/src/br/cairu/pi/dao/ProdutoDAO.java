@@ -10,7 +10,7 @@ import br.cairu.pi.model.Produto;
 import br.cairu.pi.util.JPAUtil;
 
 public class ProdutoDAO extends GenericDAO<Produto>{
-	public ProdutoDAO(Class<Produto> classe) {
+	public ProdutoDAO() {
 		super(Produto.class);
 		// TODO Auto-generated constructor stub
 	}

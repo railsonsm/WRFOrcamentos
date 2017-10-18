@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ComponentSystemEvent;
 
 import org.primefaces.event.SelectEvent;
 
@@ -22,41 +23,41 @@ import br.cairu.pi.view.MensagensView;
 
 @ManagedBean
 @ViewScoped
-public class OrcamentoMB  implements Serializable{
-	
+public class OrcamentoMB implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private Cliente cliente = new Cliente();
 	private Fabricante fabricante = new Fabricante();
 	private Orcamento orcamento = new Orcamento();
 	private Produto produto = new Produto();
 	private OrcamentoProduto orcamentoProduto = new OrcamentoProduto();
 	private Integer CodDoOrcamento;
-	private boolean disabledInitOrc = false;
-	private String itensOrcamento = "";
-	private boolean disabledsalvar = true;
 	private boolean disableitens = true;
 	private List<OrcamentoProduto> orcamentoProdutos = new ArrayList<OrcamentoProduto>();
-	private double valorTotal= 0.0;
-	private boolean requiredProd = true; 
+	private double valorTotal = 0.0;
+	private boolean requiredProd = true;
 	private double mostraFrete;
-
-	@PostConstruct
-	public void init() {
-		mostrarCodOrcamento();
-	}
+	private List<Produto> produtosFiltrados;
+	private String descricaoProduto;
+	private Integer idBuscaFabric;
 
 	public String salvarOrcamento() {
 		try {
-			orcamento.setValorOrcamento(valorTotal);
-			orcamento.setCliente(cliente);
-			orcamento.setFabricante(fabricante);
-			new OrcamentoDAO().salvar(orcamento);
-			for (OrcamentoProduto op : orcamentoProdutos) {
-				new OrcamentoProdutoDAO().salvar(op);
+			if (orcamentoProdutos.isEmpty()) {
+				MensagensView.erroMessage("Insira Pelo menos um produto", null);
+			} else {
+				orcamento.setValorOrcamento(valorTotal);
+				orcamento.setCliente(cliente);
+				orcamento.setFabricante(fabricante);
+				new OrcamentoDAO().salvar(orcamento);
+				for (OrcamentoProduto op : orcamentoProdutos) {
+					new OrcamentoProdutoDAO().salvar(op);
+				}
+				MensagensView.SucessoMessage("Orcamento adicionado com sucesso", null);
+				fimDoOrcamento();
 			}
-			MensagensView.SucessoMessage("Orcamento adicionado com sucesso", null);
-			fimDoOrcamento();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -69,41 +70,42 @@ public class OrcamentoMB  implements Serializable{
 		this.orcamentoProduto = new OrcamentoProduto();
 		this.fabricante = new Fabricante();
 		this.orcamentoProdutos = new ArrayList<OrcamentoProduto>();
-		this.cliente = new Cliente();		
+		this.cliente = new Cliente();
+		valorTotal = 0.0;
 	}
 
-	public void listaDeItens() {	
+	public void listaDeItens() {
 		try {
 			valorTotal = valorTotal + orcamentoProduto.getValorUnitario();
-			for(int i=0; i<orcamentoProdutos.size(); i++) {
-				if(orcamentoProdutos.get(i).getProduto().getIdProduto().equals(produto.getIdProduto())) {
-					MensagensView.erroMessage("Produto já consta no orçamento", null); 
+			for (int i = 0; i < orcamentoProdutos.size(); i++) {
+				if (orcamentoProdutos.get(i).getProduto().getIdProduto().equals(produto.getIdProduto())) {
+					MensagensView.erroMessage("Produto já consta no orçamento", null);
 					return;
-				}			
+				}
 			}
 			orcamentoProduto.setProduto(produto);
 			orcamento.setIdOrcamento(CodDoOrcamento);
 			orcamentoProduto.setOrcamento(orcamento);
-			if(orcamentoProduto.getValorUnitario() <= 0.0 ){
+			if (orcamentoProduto.getValorUnitario() <= 0.0) {
 				MensagensView.erroMessage("Valor unitário não pode ser zero(0.0)", null);
-			}else {
+			} else {
 				orcamentoProdutos.add(orcamentoProduto);
 				this.orcamentoProduto = new OrcamentoProduto();
 				this.produto = new Produto();
-			}			
+			}
 			this.orcamento = new Orcamento();
 			this.disableitens = true;
-			if(orcamentoProdutos != null) {
+			if (orcamentoProdutos != null) {
 				requiredProd = false;
 			}
-		}catch (NullPointerException e) {
+		} catch (NullPointerException e) {
 			MensagensView.erroMessage("Insira o frete e pelo menos um produto", null);
 		}
-		
+
 	}
-	
+
 	public void removeItenLista(OrcamentoProduto op) {
-			valorTotal = valorTotal - op.getValorUnitario();
+		valorTotal = valorTotal - op.getValorUnitario();
 	}
 
 	public void calculaValorProduto(AjaxBehaviorEvent evento) {
@@ -114,13 +116,7 @@ public class OrcamentoMB  implements Serializable{
 		}
 	}
 
-	public void iniciaOrcamento() {
-		this.itensOrcamento = "/WEB-INF/restrito/itensOrcamento.xhtml";
-		this.disabledInitOrc = true;
-		this.disabledsalvar = false;
-	}
-
-	public void mostrarCodOrcamento() {
+	public void mostrarCodOrcamento(ComponentSystemEvent event) {
 		try {
 			orcamento = new Orcamento();
 			CodDoOrcamento = new OrcamentoDAO().mostrarCodOrcamento();
@@ -133,11 +129,21 @@ public class OrcamentoMB  implements Serializable{
 	public void clienteSelecionado(SelectEvent event) {
 		Cliente cliente = (Cliente) event.getObject();
 		setCliente(cliente);
+		System.out.println("CODIGO FABRICANTE cliente" + this.fabricante.getIdFabricante());
 	}
 
 	public void fabricanteSelecionado(SelectEvent event) {
 		Fabricante fabricante = (Fabricante) event.getObject();
 		setFabricante(fabricante);
+	}
+
+	public void pesquisarProduto() {
+		System.out.println("MOSTRA" + descricaoProduto);
+		// System.out.println("MOSTRA" + fabricante.getIdFabricante());
+		// System.out.println("MOSTRA" + orcamento.getFabricante().getIdFabricante());
+		// System.out.println("MOSTRA" + produto.getFabricante().getIdFabricante());
+		// orcamento.setFabricante(fabricante);
+		produtosFiltrados = new OrcamentoDAO().porNomeSemelhante(this.descricaoProduto, 2);
 	}
 
 	public void produtoSelecionado(SelectEvent event) {
@@ -146,45 +152,8 @@ public class OrcamentoMB  implements Serializable{
 		this.disableitens = false;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public double getMostraFrete() {
-		return mostraFrete;
-	}
-
-	public void setMostraFrete(double mostraFrete) {
-		this.mostraFrete = mostraFrete;
-	}
-
-	public List<OrcamentoProduto> getOrcamentoProdutos() {
-		return orcamentoProdutos;
-	}
-
-	public void setOrcamentoProdutos(List<OrcamentoProduto> orcamentoProdutos) {
-		this.orcamentoProdutos = orcamentoProdutos;
-	}
-
-	public boolean isDisableitens() {
-		return disableitens;
-	}
-
-	public void setDisableitens(boolean disableitens) {
-		this.disableitens = disableitens;
-	}
-
 	public Cliente getCliente() {
 		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
 	}
 
 	public Fabricante getFabricante() {
@@ -207,16 +176,40 @@ public class OrcamentoMB  implements Serializable{
 		return CodDoOrcamento;
 	}
 
-	public boolean isDisabledInitOrc() {
-		return disabledInitOrc;
+	public boolean isDisableitens() {
+		return disableitens;
 	}
 
-	public String getItensOrcamento() {
-		return itensOrcamento;
+	public List<OrcamentoProduto> getOrcamentoProdutos() {
+		return orcamentoProdutos;
 	}
 
-	public boolean isDisabledsalvar() {
-		return disabledsalvar;
+	public double getValorTotal() {
+		return valorTotal;
+	}
+
+	public boolean isRequiredProd() {
+		return requiredProd;
+	}
+
+	public double getMostraFrete() {
+		return mostraFrete;
+	}
+
+	public List<Produto> getProdutosFiltrados() {
+		return produtosFiltrados;
+	}
+
+	public String getDescricaoProduto() {
+		return descricaoProduto;
+	}
+
+	public Integer getIdBuscaFabric() {
+		return idBuscaFabric;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	public void setFabricante(Fabricante fabricante) {
@@ -239,32 +232,28 @@ public class OrcamentoMB  implements Serializable{
 		CodDoOrcamento = codDoOrcamento;
 	}
 
-	public void setDisabledInitOrc(boolean disabledInitOrc) {
-		this.disabledInitOrc = disabledInitOrc;
-	}
-
-	public void setItensOrcamento(String itensOrcamento) {
-		this.itensOrcamento = itensOrcamento;
-	}
-
-	public void setDisabledsalvar(boolean disabledsalvar) {
-		this.disabledsalvar = disabledsalvar;
-	}
-
-	public double getValorTotal() {
-		return valorTotal;
+	public void setDisableitens(boolean disableitens) {
+		this.disableitens = disableitens;
 	}
 
 	public void setValorTotal(double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 
-	public boolean isRequiredProd() {
-		return requiredProd;
-	}
-
 	public void setRequiredProd(boolean requiredProd) {
 		this.requiredProd = requiredProd;
 	}
-	
+
+	public void setMostraFrete(double mostraFrete) {
+		this.mostraFrete = mostraFrete;
+	}
+
+	public void setDescricaoProduto(String descricaoProduto) {
+		this.descricaoProduto = descricaoProduto;
+	}
+
+	public void setIdBuscaFabric(Integer idBuscaFabric) {
+		this.idBuscaFabric = idBuscaFabric;
+	}
+
 }

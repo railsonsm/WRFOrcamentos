@@ -13,15 +13,15 @@
 
 	<h:form>
     	<div style="margin-top: 5px; margin-bottom: 20px">
-    		<p:inputText id="nome" size="40" value="#{produtoMB.descricaoProduto}" placeholder="descrição do produto" />
+    		<p:inputText id="nome" size="40" value="#{orcamentoMB.descricaoProduto}" placeholder="descrição do produto" />
     		
     		<p:spacer width="10px"/>
     		
-    		<p:commandButton value="Pesquisar" action="#{produtoMB.pesquisarProduto}" update="@form" />
+    		<p:commandButton value="Pesquisar" action="#{orcamentoMB.pesquisarProduto}" update="@form" />
     	</div>
     	
-    	<p:dataTable value="#{produtoMB.produtosFiltrados}" var="produto"
-    		emptyMessage="Nenhum Produto encontrado." rows="10"
+    	<p:dataTable value="#{orcamentoMB.produtosFiltrados}" var="produto"
+    		emptyMessage="Nenhum Produto encontrado." rows="10" 
     		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" >
     		
     		<p:column headerText="Código" style="text-align: center; width: 60px">

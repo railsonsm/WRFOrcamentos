@@ -10,7 +10,7 @@ import br.cairu.pi.model.Cliente;
 import br.cairu.pi.util.JPAUtil;
 
 public class ClienteDAO extends GenericDAO<Cliente>{
-	public ClienteDAO(Class<Cliente> classe) {
+	public ClienteDAO() {
 		super(Cliente.class);
 	}
 	

@@ -21,16 +21,12 @@ public class ProdutoMB {
 	private List<Produto> produtosFiltrados;
 	private String descricaoProduto;
 	
-	public void fabricanteSelecionado(SelectEvent event) {
-		Fabricante fabricante = (Fabricante) event.getObject();
-		setFabricante(fabricante);
-		produto.setFabricante(fabricante);
-	}
+	
 		
 	public String salvar() {
 		try {		
 			produto.setFabricante(fabricante);
-			new ProdutoDAO(Produto.class).salvar(this.produto);
+			new ProdutoDAO().salvar(this.produto);
 			this.fabricante =  new Fabricante();
 			this.produto = new Produto();	
 			MensagensView.SucessoMessage("Produto adicionado com sucesso!.", null);
@@ -41,7 +37,7 @@ public class ProdutoMB {
 	}
 	
 	public String editar() {
-		new ProdutoDAO(Produto.class).editar(produto);
+		new ProdutoDAO().editar(produto);
 		this.produto = new Produto();
 		this.fabricante = new Fabricante();
 		MensagensView.SucessoMessage("Produto alterado com sucesso!.", null);
@@ -49,7 +45,7 @@ public class ProdutoMB {
 	}
 	
 	public String excluir() {
-		new ProdutoDAO(Produto.class).excluir(produto);
+		new ProdutoDAO().excluir(produto);
 		this.produto = new Produto();
 		MensagensView.SucessoMessage("Produto removido com sucesso!.", null);
 		return null;
@@ -64,7 +60,7 @@ public class ProdutoMB {
 	}
 
 	public void pesquisarProduto() {
-		produtosFiltrados = new ProdutoDAO(Produto.class).porNomeSemelhante(this.descricaoProduto);
+		produtosFiltrados = new ProdutoDAO().porNomeSemelhante(this.descricaoProduto);
 	}
 
 	public void selecionarProduto(Produto produto) {
@@ -77,7 +73,11 @@ public class ProdutoMB {
 		fabricante = produto.getFabricante();
 	}
 	
-	
+	public void fabricanteSelecionado(SelectEvent event) {
+		Fabricante fabricante = (Fabricante) event.getObject();
+		setFabricante(fabricante);
+		produto.setFabricante(fabricante);
+	}
 	
 	
 	
