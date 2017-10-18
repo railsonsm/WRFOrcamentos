@@ -71,6 +71,7 @@ public class OrcamentoMB implements Serializable {
 		this.fabricante = new Fabricante();
 		this.orcamentoProdutos = new ArrayList<OrcamentoProduto>();
 		this.cliente = new Cliente();
+		requiredProd = true;
 		valorTotal = 0.0;
 	}
 
@@ -80,6 +81,10 @@ public class OrcamentoMB implements Serializable {
 			for (int i = 0; i < orcamentoProdutos.size(); i++) {
 				if (orcamentoProdutos.get(i).getProduto().getIdProduto().equals(produto.getIdProduto())) {
 					MensagensView.erroMessage("Produto já consta no orçamento", null);
+					this.produto = new Produto();
+					this.orcamento = new Orcamento();
+					this.orcamentoProduto = new OrcamentoProduto();
+					this.disableitens = true;
 					return;
 				}
 			}
@@ -92,10 +97,10 @@ public class OrcamentoMB implements Serializable {
 				orcamentoProdutos.add(orcamentoProduto);
 				this.orcamentoProduto = new OrcamentoProduto();
 				this.produto = new Produto();
-			}
-			this.orcamento = new Orcamento();
-			this.disableitens = true;
-			if (orcamentoProdutos != null) {
+				this.orcamento = new Orcamento();
+				this.disableitens = true;
+			}		
+			if (!orcamentoProdutos.isEmpty()) {
 				requiredProd = false;
 			}
 		} catch (NullPointerException e) {
@@ -105,7 +110,10 @@ public class OrcamentoMB implements Serializable {
 	}
 
 	public void removeItenLista(OrcamentoProduto op) {
-		valorTotal = valorTotal - op.getValorUnitario();
+		if(!orcamentoProdutos.isEmpty()) {
+			orcamentoProdutos.remove(op);
+			valorTotal = valorTotal - op.getValorUnitario();
+		}	
 	}
 
 	public void calculaValorProduto(AjaxBehaviorEvent evento) {

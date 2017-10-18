@@ -59,7 +59,7 @@
 						action="#{clienteMB.abrirDialogo}" process="@this" update="@none">
 						<p:ajax event="dialogReturn"
 							listener="#{orcamentoMB.clienteSelecionado}" process="@this"
-							update="@form" resetValues="true" />
+							update="@form"/>
 						<p:resetInput target="codCli" />
 					</p:commandButton>
 				</h:panelGroup>
@@ -127,7 +127,7 @@
 
 								<p:commandButton icon="ui-icon-search" title="Pesquisar"
 									action="#{produtoMB.abrirDialogo}" process="@this"
-									update="@none" resetValues="true">
+									update="@none" >
 
 									<p:ajax event="dialogReturn"
 										listener="#{orcamentoMB.produtoSelecionado}" process="@this"
