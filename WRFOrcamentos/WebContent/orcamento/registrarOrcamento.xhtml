@@ -29,13 +29,12 @@
 					for="codFabric" />
 				<h:panelGroup>
 					<p:inputText size="10"
-						value="#{orcamentoMB.fabricante.idFabricante}" required="true"
+						value="#{orcamentoMB.fabricante.idFabricante}" required="true" 
 						requiredMessage="Selecione o Fabricante" id="codFabric"
 						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}">
-						<f:ajax/>	
 					</p:inputText>
 
-					<p:commandButton icon="ui-icon-search" title="Pesquisar"
+					<p:commandButton icon="ui-icon-search" title="Pesquisar" 
 						action="#{fabricanteMB.abrirDialogo}" process="@this"
 						update="@none">
 						<p:ajax event="dialogReturn"
@@ -183,7 +182,7 @@
 							style="text-align: center; width: 100px ">
 							<p:commandButton icon="fa fa-fw fa-plus"
 								action="#{orcamentoMB.listaDeItens}" process="@this"
-								update="formOrc:tabView:tabelaItens formOrc:tabView"
+								update="formOrc:tabView:tabelaItens formOrc:tabView formOrc:menuBar"
 								resetValues="formOrc:tabView" />
 						</p:column>
 
@@ -220,7 +219,7 @@
 						<p:column style="text-align: center;">
 							<p:commandButton title="Excluir" icon="fa fa-fw fa-remove"
 								action="#{orcamentoMB.removeItenLista(orcamentoproduto)}"
-								process="@this" update="tabelaItens" />
+								process="@this" update="tabelaItens formOrc:menuBar" />
 						</p:column>
 
 
@@ -252,19 +251,19 @@
 			</p:tabView>
 
 
-			<p:menubar styleClass="toolbarCadastro">
+			<p:menubar styleClass="toolbarCadastro" id="menuBar">
 
 				<f:facet name="options">
 			
 					<p:commandButton style="margin-left: 30px;" value="Salvar"
 						update="@form" actionListener="#{orcamentoMB.salvarOrcamento}"
-						process="@form" icon="ui-icon-cart">
+						process="@form" icon="ui-icon-cart" disabled="#{orcamentoMB.disablesalvar}">
 						<p:confirm header="Confirmação" message="Tem certeza?"
 							icon="ui-icon-alert" />
 					</p:commandButton>
 
 					<p:commandButton style="margin-left: 30px;" value="Limpar"
-						action="registrarOrcamento.xhtml" icon="ui-icon-pencil"
+						action="#{orcamentoMB.fimDoOrcamento}" icon="ui-icon-pencil"
 						process="@this" update="@form" immediate="true" />
 
 					<p:commandButton style="margin-left: 30px;" value="Voltar"

@@ -58,14 +58,16 @@ public class ProdutoMB {
 		opcoes.put("contentHeight", 420);
 		RequestContext.getCurrentInstance().openDialog("selecaoProduto", opcoes, null);
 	}
+	
+	public void selecionarProduto(Produto produto) {
+		RequestContext.getCurrentInstance().closeDialog(produto);
+	}
 
 	public void pesquisarProduto() {
 		produtosFiltrados = new ProdutoDAO().porNomeSemelhante(this.descricaoProduto);
 	}
 
-	public void selecionarProduto(Produto produto) {
-		RequestContext.getCurrentInstance().closeDialog(produto);
-	}
+	
 
 	public void produtoSelecionado(SelectEvent event) {
 		Produto produto = (Produto) event.getObject();

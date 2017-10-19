@@ -12,13 +12,14 @@
 <h:body styleClass="tableSelecao">
 
 	<h:form>
-    	<div style="margin-top: 5px; margin-bottom: 20px">
+		
+		<p:messages id="msgs" autoUpdate="true"/>
+	
+		<h:panelGrid style="margin-top: 5px; margin-bottom: 20px" columns="2">
     		<p:inputText id="nome" size="40" value="#{orcamentoMB.descricaoProduto}" placeholder="descrição do produto" />
     		
-    		<p:spacer width="10px"/>
-    		
-    		<p:commandButton value="Pesquisar" action="#{orcamentoMB.pesquisarProduto}" update="@form" />
-    	</div>
+    		<p:commandButton value="Pesquisar" action="#{orcamentoMB.pesquisarProduto}" update="@form" process="@form"/>
+    	</h:panelGrid>
     	
     	<p:dataTable value="#{orcamentoMB.produtosFiltrados}" var="produto"
     		emptyMessage="Nenhum Produto encontrado." rows="10" 
@@ -39,9 +40,8 @@
     		<p:column style="width: 45px; text-align: center" headerText="OK">
     			<p:commandButton icon="ui-icon-check" title="Selecionar"
     				action="#{produtoMB.selecionarProduto(produto)}"
-    				process="@this" />
+    				process="@this"/>
     		</p:column>
-    		
     	</p:dataTable>
 	</h:form>
 

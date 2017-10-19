@@ -65,14 +65,6 @@ public class FabricanteMB implements Serializable {
 		RequestContext.getCurrentInstance().openDialog("selecaoFabricante", opcoes, null);
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
 	public void pesquisarFabricante() {
 		fabricantesFiltrados = new FabricanteDAO().porNomeSemelhante(this.nomeFabricante);
 	}
