@@ -38,12 +38,6 @@ public class Produto implements Serializable{
 	private String peso;
 	
 	@Column(nullable = false)
-	private Double fretecif;
-	
-	@Column(nullable = false)
-	private Double fretefob;
-	
-	@Column(nullable = false)
 	private String ambiente;	
 	
 	@Column(nullable = false)
@@ -105,24 +99,6 @@ public class Produto implements Serializable{
 
 	public void setPeso(String peso) {
 		this.peso = peso;
-	}
-
-	public Double getFretecif() {
-		return fretecif;
-	}
-
-	public void setFretecif(Double fretecif) {
-		this.fretecif = fretecif;
-	}
-
-	public Double getFretefob() {
-		return fretefob;
-	}
-
-	
-	
-	public void setFretefob(Double fretefob) {
-		this.fretefob = fretefob;
 	}
 
 	public String getAmbiente() {

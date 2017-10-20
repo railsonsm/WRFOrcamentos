@@ -65,6 +65,9 @@ public class ProdutoMB {
 
 	public void pesquisarProduto() {
 		produtosFiltrados = new ProdutoDAO().porNomeSemelhante(this.descricaoProduto);
+		if(produtosFiltrados.isEmpty()) {
+			MensagensView.erroMessage("Nenhum produto encontrado com essa descrição", null);	
+		}
 	}
 
 	

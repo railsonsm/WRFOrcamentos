@@ -1,3 +1,5 @@
+input.upper { text-transform: uppercase; }
+
 .bordarPanel {
 	vertical-align: center;
 	border: solid 1px #A6C9E2;
@@ -99,6 +101,7 @@ h1 {
 .padrao {
 	font-size: 12px;
 	font: Courier New;
+	text-transform: uppercase;
 }
 
 .rotulo {

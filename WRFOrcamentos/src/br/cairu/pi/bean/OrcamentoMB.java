@@ -2,24 +2,15 @@ package br.cairu.pi.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ComponentSystemEvent;
 
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
-import br.cairu.pi.dao.FabricanteDAO;
 import br.cairu.pi.dao.OrcamentoDAO;
 import br.cairu.pi.dao.OrcamentoProdutoDAO;
 import br.cairu.pi.model.Cliente;
@@ -50,7 +41,8 @@ public class OrcamentoMB implements Serializable {
 	private List<Produto> produtosFiltrados;
 	private String descricaoProduto;
 	private Integer idBuscaFabric;
-	
+	private Double frete;
+
 	public String salvarOrcamento() {
 		try {
 			if (orcamentoProdutos.isEmpty()) {
@@ -66,7 +58,7 @@ public class OrcamentoMB implements Serializable {
 				MensagensView.SucessoMessage("Orcamento adicionado com sucesso", null);
 				fimDoOrcamento();
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -79,9 +71,14 @@ public class OrcamentoMB implements Serializable {
 		this.orcamentoProduto = new OrcamentoProduto();
 		this.fabricante = new Fabricante();
 		this.orcamentoProdutos = new ArrayList<OrcamentoProduto>();
+		this.produtosFiltrados = new ArrayList<Produto>();
 		this.cliente = new Cliente();
+		this.disablesalvar = true;
+		idBuscaFabric = null;
 		requiredProd = true;
 		valorTotal = 0.0;
+		frete = null;
+		
 	}
 
 	public void listaDeItens() {
@@ -101,37 +98,54 @@ public class OrcamentoMB implements Serializable {
 			orcamento.setIdOrcamento(CodDoOrcamento);
 			orcamentoProduto.setOrcamento(orcamento);
 			if (orcamentoProduto.getValorUnitario() <= 0.0) {
-				MensagensView.erroMessage("Valor unitário não pode ser zero(0.0)", null);
+				MensagensView.erroMessage("Valor unitário não pode ser menor ou igual a zero(0.0)", null);
 			} else {
 				orcamentoProdutos.add(orcamentoProduto);
 				this.orcamentoProduto = new OrcamentoProduto();
 				this.produto = new Produto();
 				this.orcamento = new Orcamento();
 				this.disableitens = true;
-			}		
+			}
 			if (!orcamentoProdutos.isEmpty()) {
 				requiredProd = false;
 				disablesalvar = false;
 			}
 		} catch (NullPointerException e) {
-			MensagensView.erroMessage("Insira o frete e pelo menos um produto", null);
+			MensagensView.erroMessage("Insira pelo menos um produto", null);
 		}
 
 	}
-
+	
+	//CALCULO DE FRETE FICTICIO
+	public void somaFrete(AjaxBehaviorEvent evento) {
+		if(orcamento.getFrete().equals("FOB")) {	
+			
+			valorTotal = valorTotal + 50.00;
+			frete = 50.00;
+		}else {
+			valorTotal = valorTotal - 50.00;
+			if(valorTotal == (-50.00)) {
+				valorTotal = 0.0;
+			}
+			frete = null;;
+		}
+	}
+	
+	//REMOVE DA LISTA E CHECA SE ESTA VAZIA
 	public void removeItenLista(OrcamentoProduto op) {
-		if(!orcamentoProdutos.isEmpty()) {
+		if (!orcamentoProdutos.isEmpty()) {
 			orcamentoProdutos.remove(op);
 			valorTotal = valorTotal - op.getValorUnitario();
 			checaLista();
 		}
 	}
 	public void checaLista() {
-		if(orcamentoProdutos.isEmpty()) {
+		if (orcamentoProdutos.isEmpty()) {
 			disablesalvar = true;
 		}
 	}
 
+	//CALCULA O VALOR UNITARIO DO PRODUTO
 	public void calculaValorProduto(AjaxBehaviorEvent evento) {
 		if (orcamentoProduto.getValorNoOrc() > produto.getValortabela()) {
 			MensagensView.erroMessage("Valor orçado não pode ser maior que o de tabela", "erro!");
@@ -140,6 +154,7 @@ public class OrcamentoMB implements Serializable {
 		}
 	}
 
+	//CODIGO FICTICIO DE ORMCAMENTO
 	public void mostrarCodOrcamento(ComponentSystemEvent event) {
 		try {
 			orcamento = new Orcamento();
@@ -150,39 +165,59 @@ public class OrcamentoMB implements Serializable {
 		}
 	}
 
+	
+	
+	//SELECIONA E BUSCA PRODUTO NA CAIXA DE DIALOGO	
 	public void selecionarFabricante(Fabricante fabricante) {
 		RequestContext.getCurrentInstance().closeDialog(fabricante);
 	}
-
-	public void pesquisarProduto() {
-		produtosFiltrados = new OrcamentoDAO().buscaProdutoFabric(this.descricaoProduto, idBuscaFabric);
-		if(produtosFiltrados.isEmpty()) {
-			MensagensView.erroMessage("nenhum produto encontrado com essa descricao", null);
-		}
+	
+	public void pesquisarProduto(){
+		try {
+			produtosFiltrados = new OrcamentoDAO().buscaProdutoFabric(this.descricaoProduto, this.idBuscaFabric);
+			if(produtosFiltrados.isEmpty()) {
+				MensagensView.erroMessage("Nenhum produto encontrado com essa descrição", null);	
+			}
+		} catch (NullPointerException e) {
+			MensagensView.erroMessage("Selecione primeiro o fabricante", null);		
+		}	
 	}
 
+	//ITENS SELECIONADOS
 	public void produtoSelecionado(SelectEvent event) {
 		Produto produto = (Produto) event.getObject();
 		setProduto(produto);
 		this.disableitens = false;
 	}
-
 	public void clienteSelecionado(SelectEvent event) {
 		Cliente cliente = (Cliente) event.getObject();
 		setCliente(cliente);
-		
-	}
 
+	}
 	public void fabricanteSelecionado(SelectEvent event) {
-		//FacesContext context = FacesContext.getCurrentInstance();
-		//context.getExternalContext().getFlash().entrySet();
 		Fabricante fabricante = (Fabricante) event.getObject();
 		setFabricante(fabricante);
 		setIdBuscaFabric(this.fabricante.getIdFabricante());
 		this.orcamentoProdutos = new ArrayList<OrcamentoProduto>();
+		this.produtosFiltrados = new ArrayList<Produto>();
+		this.produto = new Produto();
+		this.disableitens = true;
 		this.valorTotal = 0.0;
+		this.disablesalvar = true;
+		this.frete = null;
 	}
 	
+	
+	
+
+	public Double getFrete() {
+		return frete;
+	}
+
+	public void setFrete(Double frete) {
+		this.frete = frete;
+	}
+
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -294,5 +329,14 @@ public class OrcamentoMB implements Serializable {
 	public void setDisablesalvar(boolean disablesalvar) {
 		this.disablesalvar = disablesalvar;
 	}
+
+	public void setOrcamentoProdutos(List<OrcamentoProduto> orcamentoProdutos) {
+		this.orcamentoProdutos = orcamentoProdutos;
+	}
+
+	public void setProdutosFiltrados(List<Produto> produtosFiltrados) {
+		this.produtosFiltrados = produtosFiltrados;
+	}
 	
+
 }

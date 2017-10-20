@@ -45,9 +45,9 @@ public class FabricanteMB implements Serializable {
 	}
 
 	public String excluir() {
-		try {
-			MensagensView.SucessoMessage("Fabricante removido com sucesso!.", null);
+		try {		
 			new FabricanteDAO().excluir(fabricante);
+			MensagensView.SucessoMessage("Fabricante removido com sucesso!.", null);
 			fabricante = new Fabricante();
 		} catch (javax.persistence.RollbackException e) {
 			MensagensView.erroMessage("O fabricante não pôde ser excluido! Existe um produto registrado com o mesmo.", null);
@@ -67,6 +67,9 @@ public class FabricanteMB implements Serializable {
 
 	public void pesquisarFabricante() {
 		fabricantesFiltrados = new FabricanteDAO().porNomeSemelhante(this.nomeFabricante);
+		if(fabricantesFiltrados.isEmpty()) {
+			MensagensView.erroMessage("Nenhum fabricante encontrado com essa descrição", null);	
+		}
 	}
 
 	public void selecionarFabricante(Fabricante fabricante) {

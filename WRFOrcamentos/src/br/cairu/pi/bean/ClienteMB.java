@@ -69,6 +69,9 @@ public class ClienteMB implements Serializable {
 	
 	public void pesquisarCliente() {
 		clientesFiltrados = new ClienteDAO().porNomeSemelhante(nomeCliente);
+		if(clientesFiltrados.isEmpty()) {
+			MensagensView.erroMessage("Nenhum cliente encontrado com essa descrição", null);	
+		}
 	}
 	
 	public void selecionarCliente(Cliente cliente) {
