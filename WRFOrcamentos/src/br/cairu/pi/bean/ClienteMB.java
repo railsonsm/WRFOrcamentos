@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
+import org.hibernate.exception.ConstraintViolationException;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import br.cairu.pi.dao.ClienteDAO;
@@ -48,8 +50,10 @@ public class ClienteMB implements Serializable {
 			new ClienteDAO().excluir(cliente);
 			this.cliente = new Cliente();
 			MensagensView.SucessoMessage("Cliente removido com sucesso!.", null);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (javax.persistence.RollbackException e) {
+			MensagensView.erroMessage("O cliente não pôde ser excluido! Existem orcamentos registrados com o mesmo.", null);
+		} catch (ConstraintViolationException e) {
+			MensagensView.erroMessage("O cliente não pôde ser excluido! Existem orcamentos registrados com o mesmo.", null);
 		}
 		return null;
 	}

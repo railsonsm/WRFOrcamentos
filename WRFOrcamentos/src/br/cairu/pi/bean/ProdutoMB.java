@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
+import org.hibernate.exception.ConstraintViolationException;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import br.cairu.pi.dao.ProdutoDAO;
@@ -45,9 +47,15 @@ public class ProdutoMB {
 	}
 	
 	public String excluir() {
-		new ProdutoDAO().excluir(produto);
-		this.produto = new Produto();
-		MensagensView.SucessoMessage("Produto removido com sucesso!.", null);
+		try {
+			new ProdutoDAO().excluir(produto);
+			this.produto = new Produto();
+			MensagensView.SucessoMessage("Produto removido com sucesso!.", null);
+		}catch (javax.persistence.RollbackException e) {
+			MensagensView.erroMessage("O produto não pôde ser excluido! Existem orcamentos registrados com o mesmo.", null);
+		} catch (ConstraintViolationException e) {
+			MensagensView.erroMessage("O produto não pôde ser excluido! Existem orcamentos registrados com o mesmo.", null);
+		}	
 		return null;
 	}
 	

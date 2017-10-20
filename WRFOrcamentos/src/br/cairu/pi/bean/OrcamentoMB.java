@@ -78,9 +78,9 @@ public class OrcamentoMB implements Serializable {
 		requiredProd = true;
 		valorTotal = 0.0;
 		frete = null;
-		
 	}
 
+	// ITENS ORCAMENTO
 	public void listaDeItens() {
 		try {
 			valorTotal = valorTotal + orcamentoProduto.getValorUnitario();
@@ -115,23 +115,29 @@ public class OrcamentoMB implements Serializable {
 		}
 
 	}
-	
-	//CALCULO DE FRETE FICTICIO
+
+	// CALCULO DE FRETE FICTICIO
 	public void somaFrete(AjaxBehaviorEvent evento) {
-		if(orcamento.getFrete().equals("FOB")) {	
-			
+		if (orcamento.getFrete().equals("FOB")) {
+			if (frete != null) { // caso a pessoa clique no frete fob e atualize a pasta não soma mais o frete
+				return;
+			}
 			valorTotal = valorTotal + 50.00;
 			frete = 50.00;
-		}else {
+		} else if (orcamento.getFrete().equals("CIF")) {
+			if(frete == null) { //nao subtrai se o frete ja estiver null
+				return;
+			}
 			valorTotal = valorTotal - 50.00;
-			if(valorTotal == (-50.00)) {
+			if (valorTotal < 0.0) {
 				valorTotal = 0.0;
 			}
-			frete = null;;
+			frete = null;
+			;
 		}
 	}
-	
-	//REMOVE DA LISTA E CHECA SE ESTA VAZIA
+
+	// REMOVE DA LISTA E CHECA SE ESTA VAZIA
 	public void removeItenLista(OrcamentoProduto op) {
 		if (!orcamentoProdutos.isEmpty()) {
 			orcamentoProdutos.remove(op);
@@ -139,13 +145,14 @@ public class OrcamentoMB implements Serializable {
 			checaLista();
 		}
 	}
+
 	public void checaLista() {
 		if (orcamentoProdutos.isEmpty()) {
 			disablesalvar = true;
 		}
 	}
 
-	//CALCULA O VALOR UNITARIO DO PRODUTO
+	// CALCULA O VALOR UNITARIO DO PRODUTO
 	public void calculaValorProduto(AjaxBehaviorEvent evento) {
 		if (orcamentoProduto.getValorNoOrc() > produto.getValortabela()) {
 			MensagensView.erroMessage("Valor orçado não pode ser maior que o de tabela", "erro!");
@@ -154,7 +161,7 @@ public class OrcamentoMB implements Serializable {
 		}
 	}
 
-	//CODIGO FICTICIO DE ORMCAMENTO
+	// CODIGO FICTICIO DE ORMCAMENTO
 	public void mostrarCodOrcamento(ComponentSystemEvent event) {
 		try {
 			orcamento = new Orcamento();
@@ -165,35 +172,35 @@ public class OrcamentoMB implements Serializable {
 		}
 	}
 
-	
-	
-	//SELECIONA E BUSCA PRODUTO NA CAIXA DE DIALOGO	
+	// SELECIONA E BUSCA PRODUTO NA CAIXA DE DIALOGO
 	public void selecionarFabricante(Fabricante fabricante) {
 		RequestContext.getCurrentInstance().closeDialog(fabricante);
 	}
-	
-	public void pesquisarProduto(){
+
+	public void pesquisarProduto() {
 		try {
 			produtosFiltrados = new OrcamentoDAO().buscaProdutoFabric(this.descricaoProduto, this.idBuscaFabric);
-			if(produtosFiltrados.isEmpty()) {
-				MensagensView.erroMessage("Nenhum produto encontrado com essa descrição", null);	
+			if (produtosFiltrados.isEmpty()) {
+				MensagensView.erroMessage("Nenhum produto encontrado com essa descrição", null);
 			}
 		} catch (NullPointerException e) {
-			MensagensView.erroMessage("Selecione primeiro o fabricante", null);		
-		}	
+			MensagensView.erroMessage("Selecione primeiro o fabricante", null);
+		}
 	}
 
-	//ITENS SELECIONADOS
+	// ITENS SELECIONADOS
 	public void produtoSelecionado(SelectEvent event) {
 		Produto produto = (Produto) event.getObject();
 		setProduto(produto);
 		this.disableitens = false;
 	}
+
 	public void clienteSelecionado(SelectEvent event) {
 		Cliente cliente = (Cliente) event.getObject();
 		setCliente(cliente);
 
 	}
+
 	public void fabricanteSelecionado(SelectEvent event) {
 		Fabricante fabricante = (Fabricante) event.getObject();
 		setFabricante(fabricante);
@@ -206,9 +213,6 @@ public class OrcamentoMB implements Serializable {
 		this.disablesalvar = true;
 		this.frete = null;
 	}
-	
-	
-	
 
 	public Double getFrete() {
 		return frete;
@@ -337,6 +341,5 @@ public class OrcamentoMB implements Serializable {
 	public void setProdutosFiltrados(List<Produto> produtosFiltrados) {
 		this.produtosFiltrados = produtosFiltrados;
 	}
-	
 
 }

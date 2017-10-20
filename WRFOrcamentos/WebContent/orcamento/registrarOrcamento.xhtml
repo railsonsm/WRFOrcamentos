@@ -197,7 +197,7 @@
 							<h:outputText value="#{orcamentoproduto.produto.idProduto}" />
 						</p:column>
 
-						<p:column style="text-align: center; width: 447px ">
+						<p:column style="text-align: center; width: 451px ">
 							<h:outputText value="#{orcamentoproduto.produto.descricao}" />
 						</p:column>
 
@@ -224,12 +224,12 @@
 						</p:column>
 
 
-						<p:columnGroup type="footer" id="freteTotal">
-							<p:row>
+						<p:columnGroup type="footer" id="freteTotal" >
+							<p:row rendered="#{orcamentoMB.frete != null}">
 
 								<p:column colspan="6" footerText="Frete"
 									style="text-align: right;" />
-								<p:column footerText="R$ #{orcamentoMB.frete}" style="text-align: center" />
+								<p:column  footerText="R$ #{orcamentoMB.frete}" style="text-align: center" />
 
 							</p:row>
 
