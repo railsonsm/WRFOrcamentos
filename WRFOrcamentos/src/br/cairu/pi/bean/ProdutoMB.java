@@ -1,5 +1,6 @@
 package br.cairu.pi.bean;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,9 @@ import br.cairu.pi.view.MensagensView;
 
 @ManagedBean
 @ViewScoped
-public class ProdutoMB {
+public class ProdutoMB implements Serializable{	
+	private static final long serialVersionUID = 1L;
+	
 	private Fabricante fabricante = new Fabricante();
 	private Produto produto = new Produto();
 	private Integer idSelecao;
@@ -72,7 +75,7 @@ public class ProdutoMB {
 	}
 
 	public void pesquisarProduto() {
-		produtosFiltrados = new ProdutoDAO().porNomeSemelhante(this.descricaoProduto);
+		produtosFiltrados = new ProdutoDAO().porNomeSemelhante(descricaoProduto);
 		if(produtosFiltrados.isEmpty()) {
 			MensagensView.erroMessage("Nenhum produto encontrado com essa descrição", null);	
 		}

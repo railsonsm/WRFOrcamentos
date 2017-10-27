@@ -1,0 +1,178 @@
+<ui:composition template="/templates/principal.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="titulo">WRFOrçamentos - Registrar Orçamento</ui:define>
+	<ui:define name="corpo">
+
+		<h:form>
+			<p:inputText value="#{consultaMB.idSelecionado}" />
+			<p:commandButton value="Consultar"
+				action="#{consultaMB.consultaOrcamento}" update="formConsulta" />
+		</h:form>
+
+		<h:form id="formConsulta">
+
+			<h1>Emitir Orçamento</h1>
+
+			<p:messages id="msgs" autoUpdate="true"
+				style="width:95%; margin-left: 35px;" />
+
+			<p:tabView var="dados" value="#{consultaMB.consultaOrcamento}"
+				style="width:94%; margin-left: 35px;" id="monpanel" dynamic="false">
+				<p:tab title="Dados do Orçamento" dynamic="false">
+					<p:panelGrid columns="4" style="width:100%;" id="mostrarId"
+						columnClasses="rotulo, campo, rotulo, campo">
+
+						<p:outputLabel value="Código do fabricante" style="width:45%" />
+						<p:inputText size="10"
+							value="#{dados.orcamento.fabricante.idFabricante}"
+							readonly="true" />
+
+
+						<p:outputLabel value="Fabricante" />
+						<p:inputText size="35" value="#{dados.orcamento.fabricante.nome}"
+							readonly="true" />
+
+						<p:outputLabel value="Código do Cliente" style="width:45%" />
+						<p:inputText size="10"
+							value="#{dados.orcamento.cliente.idCliente}" readonly="true" />
+
+						<p:outputLabel value="Cliente" />
+						<p:inputText size="35" value="#{dados.orcamento.cliente.nome}"
+							readonly="true" />
+
+						<p:outputLabel value="Forma de pagamento" />
+						<p:inputText size="15" value="#{dados.orcamento.formaPagamento}"
+							readonly="true" />
+
+						<p:outputLabel value="Prazo de entrega" />
+						<p:inputText size="15" value="#{dados.orcamento.prazoEntrega}"
+							readonly="true" />
+
+						<p:outputLabel value="Frete" />
+						<p:inputText size="10" value="#{dados.orcamento.frete}"
+							readonly="true" />
+
+						<p:outputLabel value="Obra" />
+						<p:inputText size="35" value="#{dados.orcamento.obra}"
+							readonly="true" />
+
+						<p:outputLabel value="Data" />
+						<p:inputText size="10" value="#{dados.orcamento.dataorcamento}"
+							locale="pt_BR" readonly="true" type="date" />
+
+					</p:panelGrid>
+				</p:tab>
+			</p:tabView>
+			<p:tabView var="itens" value="#{consultaMB.consultaOrcamento}"
+				style="margin-left: 35px; margin-right: 35px; margin-top: 10px"
+				dynamic="true">
+				<p:tab title="Itens" dynamic="true">
+					<p:dataTable var="itens" value="#{consultaMB.consultaOrcamento}"
+						id="tabitens" style="margin-top: 10px;">
+
+						<p:column headerText="Cod" style="text-align: center; width: 50px">
+							<h:outputText size="6" value="#{itens.produto.idProduto}"
+								style="text-align: center" />
+						</p:column>
+
+						<p:column headerText="Produto" style="width: 250px;">
+							<h:outputText style="width: 97%; text-align: center"
+								value="#{itens.produto.descricao}" />
+						</p:column>
+
+						<p:column headerText="Valor Orç."
+							style="width: 50px;text-align: center">
+							<h:outputText value="#{itens.valorNoOrc}" size="8" />
+						</p:column>
+
+						<p:column headerText="Valor Tabela"
+							style="text-align: center; width: 50px ">
+							<h:outputText size="8" value="#{itens.produto.valortabela}" />
+						</p:column>
+
+						<p:column headerText="Quantidade"
+							style="text-align: center; width: 50px ">
+							<h:outputText size="8" value="#{itens.quantidade}" />
+						</p:column>
+
+						<p:column headerText="Valor Unitário"
+							style="text-align: center; width: 50px ">
+							<h:outputText size="8" value="#{itens.valorUnitario}" />
+						</p:column>
+
+
+						<p:columnGroup type="footer" id="freteTotal">
+							<p:row rendered="#{consultaMB.frete != 0.0}">
+
+								<p:column colspan="5" footerText="Frete"
+									style="text-align: right;" />
+								<p:column footerText="R$ #{consultaMB.frete}"
+									style="text-align: center" />
+
+							</p:row>
+
+							<p:row>
+
+								<p:column colspan="5" footerText="TOTAL DO ORÇAMENTO"
+									style="text-align: right;" />
+								<p:column footerText="R$ #{itens.orcamento.valorOrcamento}"
+									style="text-align: center" />
+
+							</p:row>
+						</p:columnGroup>
+
+					</p:dataTable>
+
+				</p:tab>
+				<p:tab title="Dados Fabricante">
+					<p:dataTable var="fabricante" value="#{consultaMB.consultaOrcamento}"
+						id="tabFabric" style="margin-top: 10px;">
+						
+						<p:column headerText="Fabricante"
+							style="text-align: center; width: 50px ">
+							<h:outputText size="8" value="#{dados.orcamento.fabricante.nome}" />
+						</p:column>
+						
+					</p:dataTable>
+				</p:tab>
+				<p:tab title="Dados Cliente"></p:tab>
+			</p:tabView>
+
+
+			<p:menubar styleClass="toolbarCadastro" id="menuBar">
+
+				<f:facet name="options">
+
+					<p:commandButton style="margin-left: 30px;" value="Salvar"
+						update="@form" actionListener="#{orcamentoMB.salvarOrcamento}"
+						process="@form" icon="ui-icon-cart"
+						disabled="#{orcamentoMB.disablesalvar}">
+						<p:confirm header="Confirmação" message="Tem certeza?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+
+					<p:commandButton style="margin-left: 30px;" value="Limpar"
+						action="#{orcamentoMB.fimDoOrcamento}" icon="ui-icon-pencil"
+						process="@this" update="@form" immediate="true" />
+
+					<p:commandButton style="margin-left: 30px;" value="Voltar"
+						action="/inicio?faces-redirect=true" icon="ui-icon-home"
+						process="@this" update="@all" />
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+							actionListener="#{orcamentoMB.salvarOrcamento}" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+
+				</f:facet>
+			</p:menubar>
+		</h:form>
+	</ui:define>
+</ui:composition>

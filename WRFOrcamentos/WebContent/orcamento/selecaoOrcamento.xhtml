@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8"/>
+	<title>Seleção Produto</title>
+	
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body styleClass="tableSelecao">
+
+	<h:form>
+		
+		<p:messages id="msgs" autoUpdate="true"/>
+	
+		<h:panelGrid style="margin-top: 5px; margin-bottom: 20px" columns="2">
+    		<p:inputText id="nome" size="40" value="#{orcamentoMB.descricaoProduto}" placeholder="descrição do produto" />
+    		
+    		<p:commandButton value="Pesquisar" action="#{orcamentoMB.pesquisarProduto}" update="@form" process="@form"/>
+    	</h:panelGrid>
+    	
+    	<p:dataTable value="#{orcamentoMB.produtosFiltrados}" var="produto"
+    		emptyMessage="Nenhum Produto encontrado." rows="10" 
+    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" >
+    		
+    		<p:column headerText="Código" style="text-align: center; width: 60px">
+    			<h:outputText value="#{produto.idProduto}" />
+    		</p:column>
+    		<p:column headerText="Descricao">
+    			<h:outputText value="#{produto.descricao}" />
+    		</p:column>
+    		<p:column headerText="Fabricante">
+    			<h:outputText value="#{produto.fabricante.nome}" />
+    		</p:column>
+    		<p:column headerText="Valor Tabela">
+    			<h:outputText value="#{produto.valortabela}" />
+    		</p:column>
+    		<p:column style="width: 45px; text-align: center" headerText="OK">
+    			<p:commandButton icon="ui-icon-check" title="Selecionar"
+    				action="#{produtoMB.selecionarProduto(produto)}"
+    				process="@this"/>
+    		</p:column>
+    	</p:dataTable>
+	</h:form>
+
+</h:body>
+</html>

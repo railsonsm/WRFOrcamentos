@@ -3,8 +3,11 @@ package br.cairu.pi.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ComponentSystemEvent;
 
@@ -21,7 +24,7 @@ import br.cairu.pi.model.Produto;
 import br.cairu.pi.view.MensagensView;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class OrcamentoMB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -31,7 +34,7 @@ public class OrcamentoMB implements Serializable {
 	private Orcamento orcamento = new Orcamento();
 	private Produto produto = new Produto();
 	private OrcamentoProduto orcamentoProduto = new OrcamentoProduto();
-	private Integer CodDoOrcamento;
+	private Integer codDoOrcamento;
 	private boolean disableitens = true;
 	private List<OrcamentoProduto> orcamentoProdutos = new ArrayList<OrcamentoProduto>();
 	private double valorTotal = 0.0;
@@ -40,9 +43,16 @@ public class OrcamentoMB implements Serializable {
 	private double mostraFrete;
 	private List<Produto> produtosFiltrados;
 	private String descricaoProduto;
+	
+
 	private Integer idBuscaFabric;
 	private Double frete;
 
+	@PostConstruct
+	public void init() {
+		mostrarCodOrcamento();
+	}
+	
 	public String salvarOrcamento() {
 		try {
 			if (orcamentoProdutos.isEmpty()) {
@@ -65,21 +75,6 @@ public class OrcamentoMB implements Serializable {
 		return null;
 	}
 
-	public void fimDoOrcamento() {
-		this.orcamento = new Orcamento();
-		this.produto = new Produto();
-		this.orcamentoProduto = new OrcamentoProduto();
-		this.fabricante = new Fabricante();
-		this.orcamentoProdutos = new ArrayList<OrcamentoProduto>();
-		this.produtosFiltrados = new ArrayList<Produto>();
-		this.cliente = new Cliente();
-		this.disablesalvar = true;
-		idBuscaFabric = null;
-		requiredProd = true;
-		valorTotal = 0.0;
-		frete = null;
-	}
-
 	// ITENS ORCAMENTO
 	public void listaDeItens() {
 		try {
@@ -95,7 +90,7 @@ public class OrcamentoMB implements Serializable {
 				}
 			}
 			orcamentoProduto.setProduto(produto);
-			orcamento.setIdOrcamento(CodDoOrcamento);
+			orcamento.setIdOrcamento(codDoOrcamento);
 			orcamentoProduto.setOrcamento(orcamento);
 			if (orcamentoProduto.getValorUnitario() <= 0.0) {
 				MensagensView.erroMessage("Valor unitário não pode ser menor ou igual a zero(0.0)", null);
@@ -162,13 +157,13 @@ public class OrcamentoMB implements Serializable {
 	}
 
 	// CODIGO FICTICIO DE ORMCAMENTO
-	public void mostrarCodOrcamento(ComponentSystemEvent event) {
+	public void mostrarCodOrcamento() {
 		try {
 			orcamento = new Orcamento();
-			CodDoOrcamento = new OrcamentoDAO().mostrarCodOrcamento();
+			codDoOrcamento = new OrcamentoDAO().mostrarCodOrcamento();
 			System.out.println("RESULTADO" + orcamento);
 		} catch (NullPointerException e) {
-			CodDoOrcamento = 1;
+			codDoOrcamento = 1;
 		}
 	}
 
@@ -214,6 +209,23 @@ public class OrcamentoMB implements Serializable {
 		this.frete = null;
 	}
 
+	
+	
+	public void fimDoOrcamento() {
+		this.orcamento = new Orcamento();
+		this.produto = new Produto();
+		this.orcamentoProduto = new OrcamentoProduto();
+		this.fabricante = new Fabricante();
+		this.orcamentoProdutos = new ArrayList<OrcamentoProduto>();
+		this.produtosFiltrados = new ArrayList<Produto>();
+		this.cliente = new Cliente();
+		this.disablesalvar = true;
+		idBuscaFabric = null;
+		requiredProd = true;
+		valorTotal = 0.0;
+		frete = null;
+		mostrarCodOrcamento();
+	}
 	public Double getFrete() {
 		return frete;
 	}
@@ -243,7 +255,7 @@ public class OrcamentoMB implements Serializable {
 	}
 
 	public Integer getCodDoOrcamento() {
-		return CodDoOrcamento;
+		return codDoOrcamento;
 	}
 
 	public boolean isDisableitens() {
@@ -299,7 +311,7 @@ public class OrcamentoMB implements Serializable {
 	}
 
 	public void setCodDoOrcamento(Integer codDoOrcamento) {
-		CodDoOrcamento = codDoOrcamento;
+		this.codDoOrcamento = codDoOrcamento;
 	}
 
 	public void setDisableitens(boolean disableitens) {

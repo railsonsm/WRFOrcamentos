@@ -52,11 +52,11 @@ public class Orcamento implements Serializable {
 	 */
 
 	@JoinColumn(name = "idFabricante", referencedColumnName = "idFabricante", foreignKey = @ForeignKey(name = "fk_fabricante_orc"), nullable = false)
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Fabricante fabricante;
 
 	@JoinColumn(name = "idCliente", referencedColumnName = "idCliente", foreignKey = @ForeignKey(name = "fk_cliente"), nullable = false)
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Cliente cliente;
 
 	public Integer getIdOrcamento() {

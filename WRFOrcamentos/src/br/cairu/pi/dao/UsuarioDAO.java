@@ -19,6 +19,7 @@ public class UsuarioDAO {
 				+ "u.login = :pLogin and u.senha = :pSenha", Usuario.class);
 				query.setParameter("pLogin", usuario.getLogin());
 				query.setParameter("pSenha", usuario.getSenha());
+				
 		try {
 			Usuario resultado = query.getSingleResult();
 		}catch (NoResultException e) {

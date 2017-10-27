@@ -75,7 +75,8 @@ public class  GenericDAO<T> {
 	}
 	
 	public EntityManager getSessao() {
-		return new JPAUtil().getEntityManager();
+		EntityManager manager = new JPAUtil().getEntityManager();
+		return manager;
 	}
 
 }

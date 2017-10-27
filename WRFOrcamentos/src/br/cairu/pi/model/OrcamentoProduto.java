@@ -32,12 +32,12 @@ public class OrcamentoProduto implements Serializable {
 	
 	@Id
 	@JoinColumn(name = "idProduto", referencedColumnName = "idProduto",  foreignKey = @ForeignKey(name = "fk_Produto"), nullable=false)
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Produto produto;
 	
 	@Id 
 	@JoinColumn(name = "idOrcamento", referencedColumnName = "idOrcamento",  foreignKey = @ForeignKey(name = "fk_Orcamento"), nullable=false)
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Orcamento orcamento;
 
 	public int getQuantidade() {

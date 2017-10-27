@@ -44,7 +44,7 @@ public class Produto implements Serializable{
 	private Double valortabela;
 
 	@JoinColumn(name = "idFabricante", referencedColumnName = "idFabricante",  foreignKey = @ForeignKey(name = "fk_fabricante"), nullable=false)
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Fabricante fabricante;
 
 	/*@ManyToMany(cascade = CascadeType.ALL)
