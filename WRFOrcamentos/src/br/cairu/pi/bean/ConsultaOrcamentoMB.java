@@ -1,11 +1,15 @@
 package br.cairu.pi.bean;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
@@ -21,26 +25,33 @@ import br.cairu.pi.view.MensagensView;
 
 @ManagedBean(name = "consultaMB")
 @ViewScoped
-public class ConsultaOrcamentoMB {
+public class ConsultaOrcamentoMB implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private Cliente cliente = new Cliente();
 	private Fabricante fabricante = new Fabricante();
 	private Orcamento orcamento = new Orcamento();
 	private Produto produto = new Produto();
 	private OrcamentoProduto orcamentoProduto = new OrcamentoProduto();
-	private List<OrcamentoProduto> consultaOrcamento;
+	private List<OrcamentoProduto> consultaOrcamentos;
 	private List<Orcamento> orcamentosFiltrados;
 	private Integer idSelecionado;
 	private double frete = 0.0;
-
-	public void consultaOrcamento() {
-		consultaOrcamento = new OrcamentoDAO().buscaItensOrcamentos(idSelecionado);
-		mostraFrete();
-	}
+	private double valorOrcamento;
+	private int limitaLista;
+	private String nomeCliente;
+	
+	@Temporal(TemporalType.DATE)
+	private Date dataInicio = new Date() ;
+	@Temporal(TemporalType.DATE)
+	private Date dataFim =  new Date();
 
 	private void mostraFrete() {
 		try {
 			for (int i = 0; i <= 1; i++) {
-				if (consultaOrcamento.get(0).getOrcamento().getFrete().equals("FOB")) {
+				valorOrcamento =  consultaOrcamentos.get(0).getOrcamento().getValorOrcamento();
+				limitaLista = consultaOrcamentos.get(0).getOrcamento().getIdOrcamento();
+				if (consultaOrcamentos.get(0).getOrcamento().getFrete().equals("FOB")) {
 					this.frete = 50.00;
 				}
 			}
@@ -62,16 +73,59 @@ public class ConsultaOrcamentoMB {
 		RequestContext.getCurrentInstance().closeDialog(orcamento);
 	}
 
-	public void pesquisarProduto() {
-		orcamentosFiltrados = new ProdutoDAO().porNomeSemelhante(this.descricaoProduto);
+	public void buscaOrcProData() {
+		orcamentosFiltrados = new OrcamentoDAO().buscaOrcamentosPorData(dataInicio, dataFim, nomeCliente);
 		if (orcamentosFiltrados.isEmpty()) {
 			MensagensView.erroMessage("Nenhum oçamento encontrado dentro deste periodo", null);
 		}
 	}
 
-	public void produtoSelecionado(SelectEvent event) {
+	public void orcamentoSelecionado(SelectEvent event) {
 		Orcamento orcamento = (Orcamento) event.getObject();
 		setOrcamento(orcamento);
+		consultaOrcamentos = new OrcamentoDAO().buscaItensOrcamentos(orcamento.getIdOrcamento());
+		mostraFrete();
+	}
+
+	
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+
+	public Date getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	public Date getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(Date dataFim) {
+		this.dataFim = dataFim;
+	}
+
+	public int getLimitaLista() {
+		return limitaLista;
+	}
+
+	public void setLimitaLista(int limitaLista) {
+		this.limitaLista = limitaLista;
+	}
+
+	public double getValorOrcamento() {
+		return valorOrcamento;
+	}
+
+	public void setValorOrcamento(double valorOrcamento) {
+		this.valorOrcamento = valorOrcamento;
 	}
 
 	public double getFrete() {
@@ -106,8 +160,8 @@ public class ConsultaOrcamentoMB {
 		return orcamentoProduto;
 	}
 
-	public List<OrcamentoProduto> getConsultaOrcamento() {
-		return consultaOrcamento;
+	public List<OrcamentoProduto> getConsultaOrcamentos() {
+		return consultaOrcamentos;
 	}
 
 	public void setCliente(Cliente cliente) {
@@ -130,8 +184,8 @@ public class ConsultaOrcamentoMB {
 		return orcamentosFiltrados;
 	}
 
-	public void setConsultaOrcamento(List<OrcamentoProduto> consultaOrcamento) {
-		this.consultaOrcamento = consultaOrcamento;
+	public void setConsultaOrcamentos(List<OrcamentoProduto> consultaOrcamentos) {
+		this.consultaOrcamentos = consultaOrcamentos;
 	}
 
 	public void setOrcamentosFiltrados(List<Orcamento> orcamentosFiltrados) {

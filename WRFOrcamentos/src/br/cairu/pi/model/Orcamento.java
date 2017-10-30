@@ -32,8 +32,12 @@ public class Orcamento implements Serializable {
 	
 	@Column(nullable = false)
 	private Double valorOrcamento;
-
+	
+	@Column
 	private String formaPagamento;
+	
+	@Column
+	private String nomeCliente;
 
 	@Column(nullable = false)
 	private String prazoEntrega;
@@ -79,9 +83,17 @@ public class Orcamento implements Serializable {
 	 * 
 	 * public void setProdutos(List<Produto> produtos) { this.produtos = produtos; }
 	 */
-
+	
 	public Cliente getCliente() {
 		return cliente;
+	}
+
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
 	}
 
 	public void setCliente(Cliente cliente) {

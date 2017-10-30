@@ -15,31 +15,47 @@
 		
 		<p:messages id="msgs" autoUpdate="true"/>
 	
-		<h:panelGrid style="margin-top: 5px; margin-bottom: 20px" columns="2">
-    		<p:inputText id="nome" size="40" value="#{orcamentoMB.descricaoProduto}" placeholder="descrição do produto" />
+		<h:panelGrid style="margin-top: 5px; margin-bottom: 20px">
+		
+			<p:outputLabel value="Busque pelo cliente"/>
+			<p:inputText id="cliente" size="35" value="#{consultaMB.nomeCliente}" placeholder="nome do cliente" />
+			<p:outputLabel value="Ou selecione a data" style="margin-top: 10px;"/>
+			<h:panelGrid columns="2">
+			<p:calendar id="dataini" size="15" value="#{consultaMB.dataInicio}" placeholder="data inicial" />
+    		<p:calendar id="datafim" size="15" value="#{consultaMB.dataFim}" placeholder="data final" />	
+    		<p:spacer/>	
+    		<p:commandButton value="Pesquisar" action="#{consultaMB.buscaOrcProData}" update="@form" process="@form" style="margin-top: 5px; float:right"/>
+    		</h:panelGrid>
     		
-    		<p:commandButton value="Pesquisar" action="#{orcamentoMB.pesquisarProduto}" update="@form" process="@form"/>
     	</h:panelGrid>
     	
-    	<p:dataTable value="#{orcamentoMB.produtosFiltrados}" var="produto"
+    	<p:dataTable value="#{consultaMB.orcamentosFiltrados}" var="orcamento"
     		emptyMessage="Nenhum Produto encontrado." rows="10" 
     		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" >
     		
-    		<p:column headerText="Código" style="text-align: center; width: 60px">
-    			<h:outputText value="#{produto.idProduto}" />
+    		<p:column headerText="Código" style="text-align: center; width: 60px" sortBy="#{orcamento.idOrcamento}">
+    			<h:outputText value="#{orcamento.idOrcamento}" />
     		</p:column>
-    		<p:column headerText="Descricao">
-    			<h:outputText value="#{produto.descricao}" />
+    		
+    		<p:column headerText="Data" sortBy="#{orcamento.dataorcamento}">
+    			<h:outputText value="#{orcamento.dataorcamento}" />
     		</p:column>
-    		<p:column headerText="Fabricante">
-    			<h:outputText value="#{produto.fabricante.nome}" />
+    		
+    		<p:column headerText="Fabricante" sortBy="#{orcamento.fabricante.nome}">
+    			<h:outputText value="#{orcamento.fabricante.nome}" />
     		</p:column>
-    		<p:column headerText="Valor Tabela">
-    			<h:outputText value="#{produto.valortabela}" />
+    		
+    		<p:column headerText="Cliente" sortBy="#{orcamento.cliente.nome}">
+    			<h:outputText value="#{orcamento.cliente.nome}" />
     		</p:column>
+    		
+    		<p:column headerText="Valor do Orç." sortBy="#{orcamento.cliente.nome}">
+    			<h:outputText value="#{orcamento.valorOrcamento}" />
+    		</p:column>
+    		
     		<p:column style="width: 45px; text-align: center" headerText="OK">
     			<p:commandButton icon="ui-icon-check" title="Selecionar"
-    				action="#{produtoMB.selecionarProduto(produto)}"
+    				action="#{consultaMB.selecionarOrcamento(orcamento)}"
     				process="@this"/>
     		</p:column>
     	</p:dataTable>

@@ -24,7 +24,7 @@ import br.cairu.pi.model.Produto;
 import br.cairu.pi.view.MensagensView;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class OrcamentoMB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -43,10 +43,10 @@ public class OrcamentoMB implements Serializable {
 	private double mostraFrete;
 	private List<Produto> produtosFiltrados;
 	private String descricaoProduto;
-	
-
 	private Integer idBuscaFabric;
 	private Double frete;
+	
+	
 
 	@PostConstruct
 	public void init() {
@@ -78,7 +78,7 @@ public class OrcamentoMB implements Serializable {
 	// ITENS ORCAMENTO
 	public void listaDeItens() {
 		try {
-			valorTotal = valorTotal + orcamentoProduto.getValorUnitario();
+			
 			for (int i = 0; i < orcamentoProdutos.size(); i++) {
 				if (orcamentoProdutos.get(i).getProduto().getIdProduto().equals(produto.getIdProduto())) {
 					MensagensView.erroMessage("Produto já consta no orçamento", null);
@@ -95,6 +95,7 @@ public class OrcamentoMB implements Serializable {
 			if (orcamentoProduto.getValorUnitario() <= 0.0) {
 				MensagensView.erroMessage("Valor unitário não pode ser menor ou igual a zero(0.0)", null);
 			} else {
+				valorTotal = valorTotal + orcamentoProduto.getValorUnitario();
 				orcamentoProdutos.add(orcamentoProduto);
 				this.orcamentoProduto = new OrcamentoProduto();
 				this.produto = new Produto();
@@ -174,15 +175,20 @@ public class OrcamentoMB implements Serializable {
 
 	public void pesquisarProduto() {
 		try {
-			produtosFiltrados = new OrcamentoDAO().buscaProdutoFabric(this.descricaoProduto, this.idBuscaFabric);
-			if (produtosFiltrados.isEmpty()) {
-				MensagensView.erroMessage("Nenhum produto encontrado com essa descrição", null);
-			}
+			if(idBuscaFabric == null) {
+				MensagensView.erroMessage("Selecione primeiro o fabricante", null);
+			}else {
+				produtosFiltrados = new OrcamentoDAO().buscaProdutoFabric(this.descricaoProduto, this.idBuscaFabric);
+				if (produtosFiltrados.isEmpty()) {
+					MensagensView.erroMessage("Nenhum produto encontrado com essa descrição", null);
+				}
+			}			
 		} catch (NullPointerException e) {
 			MensagensView.erroMessage("Selecione primeiro o fabricante", null);
 		}
 	}
 
+	
 	// ITENS SELECIONADOS
 	public void produtoSelecionado(SelectEvent event) {
 		Produto produto = (Produto) event.getObject();

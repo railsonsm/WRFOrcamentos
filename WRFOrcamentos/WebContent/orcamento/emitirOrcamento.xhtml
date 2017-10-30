@@ -7,12 +7,6 @@
 	<ui:define name="titulo">WRFOrçamentos - Registrar Orçamento</ui:define>
 	<ui:define name="corpo">
 
-		<h:form>
-			<p:inputText value="#{consultaMB.idSelecionado}" />
-			<p:commandButton value="Consultar"
-				action="#{consultaMB.consultaOrcamento}" update="formConsulta" />
-		</h:form>
-
 		<h:form id="formConsulta">
 
 			<h1>Emitir Orçamento</h1>
@@ -20,59 +14,87 @@
 			<p:messages id="msgs" autoUpdate="true"
 				style="width:95%; margin-left: 35px;" />
 
-			<p:tabView var="dados" value="#{consultaMB.consultaOrcamento}"
-				style="width:94%; margin-left: 35px;" id="monpanel" dynamic="false">
-				<p:tab title="Dados do Orçamento" dynamic="false">
-					<p:panelGrid columns="4" style="width:100%;" id="mostrarId"
-						columnClasses="rotulo, campo, rotulo, campo">
+			<p:panelGrid columns="2" style="margin-left: 35px;">
+				<h:panelGroup>
+				
+					<p:inputText size="10" value="#{consultaMB.orcamento.idOrcamento}"
+						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}"
+						required="true" requiredMessage="Selecione o Produto"
+						id="codProduto" />
 
-						<p:outputLabel value="Código do fabricante" style="width:45%" />
-						<p:inputText size="10"
-							value="#{dados.orcamento.fabricante.idFabricante}"
-							readonly="true" />
+					<p:commandButton icon="ui-icon-search" title="Pesquisar"
+						action="#{consultaMB.abrirDialogo}" process="@this" update="@none">
+
+						<p:ajax event="dialogReturn"
+							listener="#{consultaMB.orcamentoSelecionado}" process="@this"
+							update="@form " />
+
+						<p:resetInput target="codProduto" />
+					</p:commandButton>
+				</h:panelGroup>
+			</p:panelGrid>
+
+			<p:tabView
+				style="margin-left: 35px; margin-right: 35px; margin-top: 10px"
+				dynamic="true">
+				<p:tab title="Dados do Orçamento" dynamic="true">
+					<p:dataGrid var="dados" value="#{consultaMB.consultaOrcamentos}" 
+						first="#{consultaMB.limitaLista}"
+						style="margin-left: -18px; margin-right: -18px; margin-top: 5px; margin-bottom:5px;"
+						emptyMessage="Selecione o orçamento1">
+						<p:panelGrid columns="4" style="width:102%;" id="mostrarId"
+							columnClasses="rotulo, campo, rotulo, campo">
+
+							<p:outputLabel value="Código do fabricante" style="width:45%" />
+							<p:inputText size="10"
+								value="#{dados.orcamento.fabricante.idFabricante}"
+								readonly="true" />
 
 
-						<p:outputLabel value="Fabricante" />
-						<p:inputText size="35" value="#{dados.orcamento.fabricante.nome}"
-							readonly="true" />
+							<p:outputLabel value="Fabricante" />
+							<p:inputText size="35" value="#{dados.orcamento.fabricante.nome}"
+								readonly="true" />
 
-						<p:outputLabel value="Código do Cliente" style="width:45%" />
-						<p:inputText size="10"
-							value="#{dados.orcamento.cliente.idCliente}" readonly="true" />
+							<p:outputLabel value="Código do Cliente" style="width:45%" />
+							<p:inputText size="10"
+								value="#{dados.orcamento.cliente.idCliente}" readonly="true" />
 
-						<p:outputLabel value="Cliente" />
-						<p:inputText size="35" value="#{dados.orcamento.cliente.nome}"
-							readonly="true" />
+							<p:outputLabel value="Cliente" />
+							<p:inputText size="35" value="#{dados.orcamento.cliente.nome}"
+								readonly="true" />
 
-						<p:outputLabel value="Forma de pagamento" />
-						<p:inputText size="15" value="#{dados.orcamento.formaPagamento}"
-							readonly="true" />
+							<p:outputLabel value="Forma de pagamento" />
+							<p:inputText size="15" value="#{dados.orcamento.formaPagamento}"
+								readonly="true" />
 
-						<p:outputLabel value="Prazo de entrega" />
-						<p:inputText size="15" value="#{dados.orcamento.prazoEntrega}"
-							readonly="true" />
+							<p:outputLabel value="Prazo de entrega" />
+							<p:inputText size="15" value="#{dados.orcamento.prazoEntrega}"
+								readonly="true" />
 
-						<p:outputLabel value="Frete" />
-						<p:inputText size="10" value="#{dados.orcamento.frete}"
-							readonly="true" />
+							<p:outputLabel value="Frete" />
+							<p:inputText size="10" value="#{dados.orcamento.frete}"
+								readonly="true" />
 
-						<p:outputLabel value="Obra" />
-						<p:inputText size="35" value="#{dados.orcamento.obra}"
-							readonly="true" />
+							<p:outputLabel value="Obra" />
+							<p:inputText size="35" value="#{dados.orcamento.obra}"
+								readonly="true" />
 
-						<p:outputLabel value="Data" />
-						<p:inputText size="10" value="#{dados.orcamento.dataorcamento}"
-							locale="pt_BR" readonly="true" type="date" />
+							<p:outputLabel value="Data" />
+							<p:inputText size="10" value="#{dados.orcamento.dataorcamento}"
+								locale="pt_BR" readonly="true" type="date" />
 
-					</p:panelGrid>
+						</p:panelGrid>
+					</p:dataGrid>
 				</p:tab>
 			</p:tabView>
-			<p:tabView var="itens" value="#{consultaMB.consultaOrcamento}"
+
+			<p:tabView
 				style="margin-left: 35px; margin-right: 35px; margin-top: 10px"
 				dynamic="true">
 				<p:tab title="Itens" dynamic="true">
-					<p:dataTable var="itens" value="#{consultaMB.consultaOrcamento}"
-						id="tabitens" style="margin-top: 10px;">
+					<p:dataTable var="itens" value="#{consultaMB.consultaOrcamentos}"
+						id="tabitens" style="margin-left: -18px; margin-right: -18px; margin-top: 5px; margin-bottom:5px;"
+						emptyMessage="Selecione o orçamento">
 
 						<p:column headerText="Cod" style="text-align: center; width: 50px">
 							<h:outputText size="6" value="#{itens.produto.idProduto}"
@@ -119,7 +141,7 @@
 
 								<p:column colspan="5" footerText="TOTAL DO ORÇAMENTO"
 									style="text-align: right;" />
-								<p:column footerText="R$ #{itens.orcamento.valorOrcamento}"
+								<p:column footerText="R$ #{consultaMB.valorOrcamento}"
 									style="text-align: center" />
 
 							</p:row>
@@ -129,14 +151,15 @@
 
 				</p:tab>
 				<p:tab title="Dados Fabricante">
-					<p:dataTable var="fabricante" value="#{consultaMB.consultaOrcamento}"
-						id="tabFabric" style="margin-top: 10px;">
-						
+					<p:dataTable var="fabricante"
+						value="#{consultaMB.consultaOrcamentos}" id="tabFabric"
+						style="margin-top: 10px;">
+
 						<p:column headerText="Fabricante"
 							style="text-align: center; width: 50px ">
 							<h:outputText size="8" value="#{dados.orcamento.fabricante.nome}" />
 						</p:column>
-						
+
 					</p:dataTable>
 				</p:tab>
 				<p:tab title="Dados Cliente"></p:tab>
