@@ -21,13 +21,13 @@ public class OrcamentoProduto implements Serializable {
 	//@Id 
 	//private Integer idProduto;
 	
-	@Column(nullable=false)
+	@Column(name="orcprod_quantidade", nullable=false)
 	private int quantidade;
 	
-	@Column(nullable=false)
+	@Column(name="orcprod_valorNoOrc", nullable=false)
 	private double valorNoOrc;
 	
-	@Column(nullable=false)
+	@Column(name="orcprod_valorUnitario", nullable=false)
 	private double valorUnitario;
 	
 	@Id

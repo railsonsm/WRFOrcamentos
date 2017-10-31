@@ -30,24 +30,26 @@ public class Orcamento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idOrcamento;
 	
-	@Column(nullable = false)
+	@Column(name = "orc_valorOrcamento", nullable = false)
 	private Double valorOrcamento;
 	
-	@Column
+	@Column(name = "orc_formaPagamento", nullable = false)
 	private String formaPagamento;
 	
-	@Column
+	@Column(name = "orc_nomeCliente")
 	private String nomeCliente;
 
-	@Column(nullable = false)
+	@Column(name = "orc_prazoEntrega", nullable = false)
 	private String prazoEntrega;
 
-	@Column(nullable = false)
+	@Column(name = "orc_frete", nullable = false)
 	private String frete;
 
 	@Temporal(TemporalType.DATE)
+	@Column(name = "orc_dataorcamento", nullable = false)
 	private Date dataorcamento;
 
+	@Column(name = "orc_obra")
 	private String obra;
 
 	/*

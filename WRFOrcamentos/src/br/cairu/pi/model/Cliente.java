@@ -19,58 +19,58 @@ public class Cliente  implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idCliente;
 	
-	@Column(name="nome", nullable=false) //Nullable = NOT NULL
+	@Column(name="cli_nome", nullable=false) //Nullable = NOT NULL
 	private String nome;
 	
-	@Column(name="nomeFantasia", nullable=false)
+	@Column(name="cli_nomeFantasia", nullable=false)
 	private String nomeFantasia;
 	
-	@Column(name="cnpj", nullable=false)
+	@Column(name="cli_cnpj", nullable=false)
 	private String cnpj;
 	
-	@Column(name="cep", nullable=false)
+	@Column(name="cli_cep", nullable=false)
 	private String cep;
 	
-	@Column(name="rua", nullable=false)
+	@Column(name="cli_rua", nullable=false)
 	private String rua;
 	
-	@Column(name="numero", nullable=false)
+	@Column(name="cli_numero", nullable=false)
 	private Integer numero;
 	
-	@Column(name="complemento", nullable=false)
+	@Column(name="cli_complemento", nullable=false)
 	private String complemento;
 	
-	@Column(name="email", nullable = false)
+	@Column(name="cli_email", nullable = false)
 	private String email;
 	
-	@Column(nullable=false)
+	@Column(name="cli_cidade", nullable=false)
 	private String cidade;
 	
-	@Column(nullable=false)
+	@Column(name="cli_estado", nullable=false)
 	private String estado;
 	
-	@Column(nullable=false)
+	@Column(name="cli_telefone1", nullable=false)
 	private String telefone1;
 	
-	@Column(nullable=false)
+	@Column(name="cli_telefone2", nullable=false)
 	private String telefone2;
 	
-	@Column(nullable=false)
+	@Column(name="cli_celular1", nullable=false)
 	private String celular1;
 	
-	@Column(nullable=false)
+	@Column(name="cli_celular2", nullable=false)
 	private String celular2;
 	
-	@Column(nullable=false)
+	@Column(name="cli_contatoEng", nullable=false)
 	private String contatoEng;
 	
-	@Column(nullable=false)
+	@Column(name="cli_emailEng", nullable=false)
 	private String emailEng;
 	
-	@Column(nullable=false)
+	@Column(name="cli_contatoSupr", nullable=false)
 	private String contatoSupr;
 	
-	@Column(nullable=false)
+	@Column(name="cli_emailSupr", nullable=false)
 	private String emailSupr;
 
 	public Integer getIdCliente() {

@@ -19,58 +19,58 @@ public class Fabricante implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idFabricante;
 	
-	@Column(name="nome", nullable=false)
+	@Column(name="fabri_nome", nullable=false)
 	private String nome;
 	
-	@Column(nullable = false)
+	@Column(name="fabri_nomefantasia", nullable=false)
 	private String nomefantasia;
 	
-	@Column(nullable = false)
+	@Column(name="fabri_cnpj", nullable=false)
 	private String cnpj;
 	
-	@Column(nullable = false)
+	@Column(name="fabri_rua", nullable=false)
 	private String rua;
 	
-	@Column(nullable = false)
+	@Column(name="fabri_complemento", nullable=false)
 	private String complemento;
 	
-	@Column(nullable = false)
+	@Column(name="fabri_numero", nullable=false)
 	private Integer numero;
 	
-	@Column(nullable = false)
+	@Column(name="fabri_cidade", nullable=false)
 	private String cidade;
 	
-	@Column(nullable = false)
+	@Column(name="fabri_estado", nullable=false)
 	private String estado;
 	
-	@Column(nullable = false)
+	@Column(name="fabri_telefone1", nullable=false)
 	private String telefone1;
 	
-	@Column(nullable = false)
+	@Column(name="fabri_telefone2", nullable=false)
 	private String telefone2;
 	
-	@Column(nullable = false)	
+	@Column(name="fabri_celular1", nullable=false)	
 	private String celular1;
 	
-	@Column(nullable = false)	
+	@Column(name="fabri_celular2", nullable=false)	
 	private String celular2;
 	
-	@Column(nullable = false)	
+	@Column(name="fabri_contatoComer", nullable=false)	
 	private String contatoComer;
 	
-	@Column(nullable = false)
+	@Column(name="fabri_emailComer", nullable=false)
 	private String emailComer;
 	
-	@Column(nullable = false)	
+	@Column(name="fabri_contatoTec", nullable=false)	
 	private String contatoTec;
 	
-	@Column(nullable = false)
+	@Column(name="fabri_emailTec", nullable=false)
 	private String emailTec;
 
-	@Column(nullable = false)
+	@Column(name="fabri_email", nullable=false)
 	private String email;
 	
-	@Column(nullable = false)
+	@Column(name="fabri_cep", nullable=false)
 	private String cep;
 	
 	public Integer getIdFabricante() {

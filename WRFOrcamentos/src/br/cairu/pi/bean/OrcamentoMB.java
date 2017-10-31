@@ -40,12 +40,9 @@ public class OrcamentoMB implements Serializable {
 	private double valorTotal = 0.0;
 	private boolean requiredProd = true;
 	private boolean disablesalvar = true;
-	private double mostraFrete;
 	private List<Produto> produtosFiltrados;
 	private String descricaoProduto;
 	private Integer idBuscaFabric;
-	private Double frete;
-	
 	
 
 	@PostConstruct
@@ -112,26 +109,6 @@ public class OrcamentoMB implements Serializable {
 
 	}
 
-	// CALCULO DE FRETE FICTICIO
-	public void somaFrete(AjaxBehaviorEvent evento) {
-		if (orcamento.getFrete().equals("FOB")) {
-			if (frete != null) { // caso a pessoa clique no frete fob e atualize a pasta não soma mais o frete
-				return;
-			}
-			valorTotal = valorTotal + 50.00;
-			frete = 50.00;
-		} else if (orcamento.getFrete().equals("CIF")) {
-			if(frete == null) { //nao subtrai se o frete ja estiver null
-				return;
-			}
-			valorTotal = valorTotal - 50.00;
-			if (valorTotal < 0.0) {
-				valorTotal = 0.0;
-			}
-			frete = null;
-			;
-		}
-	}
 
 	// REMOVE DA LISTA E CHECA SE ESTA VAZIA
 	public void removeItenLista(OrcamentoProduto op) {
@@ -212,7 +189,6 @@ public class OrcamentoMB implements Serializable {
 		this.disableitens = true;
 		this.valorTotal = 0.0;
 		this.disablesalvar = true;
-		this.frete = null;
 	}
 
 	
@@ -229,15 +205,7 @@ public class OrcamentoMB implements Serializable {
 		idBuscaFabric = null;
 		requiredProd = true;
 		valorTotal = 0.0;
-		frete = null;
 		mostrarCodOrcamento();
-	}
-	public Double getFrete() {
-		return frete;
-	}
-
-	public void setFrete(Double frete) {
-		this.frete = frete;
 	}
 
 	public Cliente getCliente() {
@@ -278,10 +246,6 @@ public class OrcamentoMB implements Serializable {
 
 	public boolean isRequiredProd() {
 		return requiredProd;
-	}
-
-	public double getMostraFrete() {
-		return mostraFrete;
 	}
 
 	public List<Produto> getProdutosFiltrados() {
@@ -330,10 +294,6 @@ public class OrcamentoMB implements Serializable {
 
 	public void setRequiredProd(boolean requiredProd) {
 		this.requiredProd = requiredProd;
-	}
-
-	public void setMostraFrete(double mostraFrete) {
-		this.mostraFrete = mostraFrete;
 	}
 
 	public void setDescricaoProduto(String descricaoProduto) {

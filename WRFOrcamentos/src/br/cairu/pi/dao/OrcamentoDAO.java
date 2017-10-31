@@ -39,17 +39,18 @@ public class OrcamentoDAO extends GenericDAO<Orcamento> {
 	 * listaProdutos; }
 	 */
 
-	// trigger
 	/*
-	 * delimiter %% create trigger tg_nomecliente_orcamento after insert on
-	 * orcamentoproduto for each row begin declare nomeDoCliente varchar(40);
-	 * 
-	 * select distinct(c.nome) from cliente c join orcamento o join orcamentoproduto
-	 * op on o.idCliente = c.idCliente and op.idOrcamento = o.idOrcamento where
-	 * op.idOrcamento = new.idOrcamento into nomeDoCliente;
-	 * 
-	 * update orcamento set nomeCliente = nomeDoCliente where idOrcamento =
-	 * new.idOrcamento; end %%
+	 //Trigger adiciona nome do cliente na tabela orcamento
+	 delimiter %% 
+      create trigger tg_nomecliente_orcamento after insert on
+	  orcamentoproduto for each row begin declare nomeDoCliente varchar(40);
+	  
+	  select distinct(c.cli_nome) from cliente c join orcamento o join orcamentoproduto
+	  op on o.idCliente = c.idCliente and op.idOrcamento = o.idOrcamento where
+	  op.idOrcamento = new.idOrcamento into nomeDoCliente;
+	  
+	 update orcamento set orc_nomeCliente = nomeDoCliente where idOrcamento =
+	 new.idOrcamento; end %%
 	 */
 
 	public List<Produto> buscaProdutoFabric(String descricao, Integer idFabricante) {

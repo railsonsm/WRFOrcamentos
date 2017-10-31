@@ -37,7 +37,7 @@
 						update="@none">
 						<p:ajax event="dialogReturn"
 							listener="#{orcamentoMB.fabricanteSelecionado}" process="@this"
-							update="codFabric nomeFabric formOrc:tabView frete" />
+							update="codFabric nomeFabric formOrc:tabView" />
 						<p:resetInput target="codFabric " />
 					</p:commandButton>
 				</h:panelGroup>
@@ -90,7 +90,6 @@
 					required="true" requiredMessage="Selecione o tipo de frete">
 					<f:selectItem itemLabel="CIF" itemValue="CIF" />
 					<f:selectItem itemLabel="FOB" itemValue="FOB" />
-					<f:ajax listener="#{orcamentoMB.somaFrete}" render="tabView" />
 				</p:selectOneRadio>
 
 				<p:outputLabel value="Obra" />
@@ -222,16 +221,7 @@
 						</p:column>
 
 
-						<p:columnGroup type="footer" id="freteTotal">
-							<p:row rendered="#{orcamentoMB.frete != null}">
-
-								<p:column colspan="6" footerText="Frete"
-									style="text-align: right;" />
-								<p:column footerText="R$ #{orcamentoMB.frete}"
-									style="text-align: center" />
-
-							</p:row>
-
+						<p:columnGroup type="footer" id="valorTotal">
 							<p:row>
 
 								<p:column colspan="6" footerText="TOTAL DO ORÇAMENTO"

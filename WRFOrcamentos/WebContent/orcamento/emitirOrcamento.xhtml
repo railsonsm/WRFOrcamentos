@@ -39,10 +39,10 @@
 				dynamic="true">
 				<p:tab title="Dados do Orçamento" dynamic="true">
 					<p:dataGrid var="dados" value="#{consultaMB.consultaOrcamentos}" 
-						first="#{consultaMB.limitaLista}"
+						columns="1" rows="1"
 						style="margin-left: -18px; margin-right: -18px; margin-top: 5px; margin-bottom:5px;"
 						emptyMessage="Selecione o orçamento1">
-						<p:panelGrid columns="4" style="width:102%;" id="mostrarId"
+						<p:panelGrid columns="4" style="width:100%;" id="mostrarId"
 							columnClasses="rotulo, campo, rotulo, campo">
 
 							<p:outputLabel value="Código do fabricante" style="width:45%" />
@@ -127,16 +127,7 @@
 						</p:column>
 
 
-						<p:columnGroup type="footer" id="freteTotal">
-							<p:row rendered="#{consultaMB.frete != 0.0}">
-
-								<p:column colspan="5" footerText="Frete"
-									style="text-align: right;" />
-								<p:column footerText="R$ #{consultaMB.frete}"
-									style="text-align: center" />
-
-							</p:row>
-
+						<p:columnGroup type="footer" id="valorTotal">
 							<p:row>
 
 								<p:column colspan="5" footerText="TOTAL DO ORÇAMENTO"

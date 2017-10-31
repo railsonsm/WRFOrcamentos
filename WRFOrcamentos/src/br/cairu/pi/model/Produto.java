@@ -19,28 +19,28 @@ public class Produto implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idProduto;
 
-	@Column(nullable = false)
+	@Column(name = "prod_codOriginal")
 	private String codOriginal;
 		
-	@Column(nullable = false)
+	@Column(name ="prod_descricao", nullable = false)
 	private String descricao;
 	
-	@Column(nullable = false)
+	@Column(name ="prod_unidade", nullable = false)
 	private String unidade;
 	
-	@Column(nullable = false)
+	@Column(name ="prod_qtdembalagem", nullable = false)
 	private Double qtdembalagem;
 	
-	@Column(nullable = false)
+	@Column(name ="prod_tamanho", nullable = false)
 	private String tamanho;
 	
-	@Column(nullable = false)
+	@Column(name = "prod_peso")
 	private String peso;
 	
-	@Column(nullable = false)
+	@Column(name = "prod_ambiente")
 	private String ambiente;	
 	
-	@Column(nullable = false)
+	@Column(name = "prod_valortabela", nullable = false)
 	private Double valortabela;
 
 	@JoinColumn(name = "idFabricante", referencedColumnName = "idFabricante",  foreignKey = @ForeignKey(name = "fk_fabricante"), nullable=false)

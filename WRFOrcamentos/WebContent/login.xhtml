@@ -27,14 +27,14 @@
 						library="img" />
 
 					
-					<h:panelGrid>
+					<h:panelGrid columns="1">
 						
 						<p:outputLabel value="Login:" />
 						<p:inputText value="#{loginMB.usuario.login}" />
 						<p:outputLabel value="Senha:" />
 						<p:password value="#{loginMB.usuario.senha}" />
 						<p:commandButton value="Entrar"
-							style="margin-top: 10px; margin-left: 120px;"
+							style="margin-top: 10px; float:right;"
 							action="#{loginMB.efetuaLogin}" />
 					</h:panelGrid>
 

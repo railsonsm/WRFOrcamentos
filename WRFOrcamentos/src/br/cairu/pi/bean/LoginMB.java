@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 
 import br.cairu.pi.dao.UsuarioDAO;
 import br.cairu.pi.model.Usuario;
+import br.cairu.pi.view.MensagensView;
 
 @ManagedBean
 @ViewScoped
@@ -34,7 +35,7 @@ public class LoginMB implements Serializable{
 			return "/inicio?faces-redirect=true";
 		}
 		context.getExternalContext().getFlash().setKeepMessages(true);
-		context.addMessage(null, new FacesMessage("Usuário e/ou senha não encontrado"));
+		MensagensView.erroMessage("Usuário e/ou senha não encontrado", null);
 		
 		return "/login?faces-redirect=true";	
 	}

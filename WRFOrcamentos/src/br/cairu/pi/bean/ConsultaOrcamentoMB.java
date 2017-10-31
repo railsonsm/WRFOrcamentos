@@ -15,7 +15,6 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 import br.cairu.pi.dao.OrcamentoDAO;
-import br.cairu.pi.dao.ProdutoDAO;
 import br.cairu.pi.model.Cliente;
 import br.cairu.pi.model.Fabricante;
 import br.cairu.pi.model.Orcamento;
@@ -36,7 +35,6 @@ public class ConsultaOrcamentoMB implements Serializable{
 	private List<OrcamentoProduto> consultaOrcamentos;
 	private List<Orcamento> orcamentosFiltrados;
 	private Integer idSelecionado;
-	private double frete = 0.0;
 	private double valorOrcamento;
 	private int limitaLista;
 	private String nomeCliente;
@@ -45,21 +43,6 @@ public class ConsultaOrcamentoMB implements Serializable{
 	private Date dataInicio = new Date() ;
 	@Temporal(TemporalType.DATE)
 	private Date dataFim =  new Date();
-
-	private void mostraFrete() {
-		try {
-			for (int i = 0; i <= 1; i++) {
-				valorOrcamento =  consultaOrcamentos.get(0).getOrcamento().getValorOrcamento();
-				limitaLista = consultaOrcamentos.get(0).getOrcamento().getIdOrcamento();
-				if (consultaOrcamentos.get(0).getOrcamento().getFrete().equals("FOB")) {
-					this.frete = 50.00;
-				}
-			}
-		} catch (IndexOutOfBoundsException e) {
-			MensagensView.erroMessage("Orcamento não encontrado", null);
-		}
-
-	}
 
 	public void abrirDialogo() {
 		Map<String, Object> opcoes = new HashMap<String, Object>();
@@ -84,7 +67,7 @@ public class ConsultaOrcamentoMB implements Serializable{
 		Orcamento orcamento = (Orcamento) event.getObject();
 		setOrcamento(orcamento);
 		consultaOrcamentos = new OrcamentoDAO().buscaItensOrcamentos(orcamento.getIdOrcamento());
-		mostraFrete();
+		valorOrcamento =  consultaOrcamentos.get(0).getOrcamento().getValorOrcamento();
 	}
 
 	
@@ -126,14 +109,6 @@ public class ConsultaOrcamentoMB implements Serializable{
 
 	public void setValorOrcamento(double valorOrcamento) {
 		this.valorOrcamento = valorOrcamento;
-	}
-
-	public double getFrete() {
-		return frete;
-	}
-
-	public void setFrete(double frete) {
-		this.frete = frete;
 	}
 
 	public Integer getIdSelecionado() {
