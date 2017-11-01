@@ -46,6 +46,9 @@ public class Produto implements Serializable{
 	@JoinColumn(name = "idFabricante", referencedColumnName = "idFabricante",  foreignKey = @ForeignKey(name = "fk_fabricante"), nullable=false)
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Fabricante fabricante;
+	
+	@OneToMany(mappedBy="produto", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<OrcamentoProduto> orcamentoProdutos;
 
 	/*@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "OrcamentoProduto",

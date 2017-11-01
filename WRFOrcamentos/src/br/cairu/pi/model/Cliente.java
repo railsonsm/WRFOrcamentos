@@ -1,6 +1,7 @@
 package br.cairu.pi.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -73,6 +74,9 @@ public class Cliente  implements Serializable{
 	@Column(name="cli_emailSupr", nullable=false)
 	private String emailSupr;
 
+	@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Orcamento> orcamentos;
+	
 	public Integer getIdCliente() {
 		return idCliente;
 	}
