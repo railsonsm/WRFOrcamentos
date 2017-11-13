@@ -108,12 +108,12 @@
 
 						<p:column headerText="Valor Orç."
 							style="width: 50px;text-align: center">
-							<h:outputText value="#{itens.valorNoOrc}" size="8" />
+							<h:outputText value="R$ #{itens.valorNoOrc}" size="8" />
 						</p:column>
 
 						<p:column headerText="Valor Tabela"
 							style="text-align: center; width: 50px ">
-							<h:outputText size="8" value="#{itens.produto.valortabela}" />
+							<h:outputText size="8" value="R$ #{itens.produto.valortabela}" />
 						</p:column>
 
 						<p:column headerText="Quantidade"
@@ -123,7 +123,7 @@
 
 						<p:column headerText="Valor Unitário"
 							style="text-align: center; width: 50px ">
-							<h:outputText size="8" value="#{itens.valorUnitario}" />
+							<h:outputText size="8" value="R$ #{itens.valorUnitario}" />
 						</p:column>
 
 
@@ -147,12 +147,10 @@
 
 				<f:facet name="options">
 
-					<p:commandButton style="margin-left: 30px;" value="Emitir"
-						action="#{consultaMB.emitirRelatorio}" icon="ui-icon-pencil"
+					<p:commandButton style="margin-left: 30px;" value="Emitir" action="#{consultaMB.emitirRelatorio}" icon="ui-icon-pencil"
 						ajax="false" onclick="this.form.target='_blank'" disabled="#{consultaMB.orcamento.idOrcamento == null}"/>
 
-					<p:commandButton style="margin-left: 30px;" value="Limpar"
-						action="emitirOrcamento.xhtml" icon="ui-icon-pencil"
+					<p:commandButton style="margin-left: 30px;" value="Limpar" action="emitirOrcamento.xhtml" icon="ui-icon-pencil"
 						process="@this" update="@form" immediate="true" />
 
 					<p:commandButton style="margin-left: 30px;" value="Voltar"

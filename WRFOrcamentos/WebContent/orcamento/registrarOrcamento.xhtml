@@ -97,9 +97,11 @@
 
 				<p:outputLabel value="Data" for="popup" />
 				<p:calendar id="popup"
-					value="#{orcamentoMB.orcamento.dataorcamento}" locale="pt_BR"
+					value="#{orcamentoMB.orcamento.dataorcamento}" locale="pt"
 					required="true" requiredMessage="Data é obrigatório"
-					readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" />
+					readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
+				</p:calendar>
 
 			</p:panelGrid>
 
@@ -152,7 +154,7 @@
 
 						<p:column headerText="Valor Tabela"
 							style="text-align: center; width: 100px ">
-							<p:inputText size="8" value="#{orcamentoMB.produto.valortabela}"
+							<p:inputText size="8" value="R$ #{orcamentoMB.produto.valortabela}"
 								id="valorOrcado" readonly="true" style="text-align: center">
 								<f:ajax />
 							</p:inputText>
@@ -172,7 +174,7 @@
 						<p:column headerText="Valor Unitário"
 							style="text-align: center; width: 100px ">
 							<p:inputText size="8" id="valorUnitario"
-								value="#{orcamentoMB.orcamentoProduto.valorUnitario}"
+								value="R$ #{orcamentoMB.orcamentoProduto.valorUnitario}"
 								readonly="true" />
 						</p:column>
 
@@ -199,11 +201,11 @@
 						</p:column>
 
 						<p:column style="text-align: center; width: 100px ">
-							<h:outputText value="#{orcamentoproduto.valorNoOrc}" />
+							<h:outputText value="R$ #{orcamentoproduto.valorNoOrc}" />
 						</p:column>
 
 						<p:column style="text-align: center; width: 100px ">
-							<h:outputText value="#{orcamentoproduto.produto.valortabela}" />
+							<h:outputText value="R$ #{orcamentoproduto.produto.valortabela}" />
 						</p:column>
 
 						<p:column style="text-align: center;">
@@ -211,7 +213,7 @@
 						</p:column>
 
 						<p:column style="text-align: center;">
-							<h:outputText value="#{orcamentoproduto.valorUnitario}" />
+							<h:outputText value="R$ #{orcamentoproduto.valorUnitario}" />
 						</p:column>
 
 						<p:column style="text-align: center;">

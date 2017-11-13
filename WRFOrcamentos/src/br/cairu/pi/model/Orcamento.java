@@ -1,7 +1,6 @@
 package br.cairu.pi.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -64,15 +63,6 @@ public class Orcamento implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Fabricante fabricante;
 
-	@JoinColumn(name = "idCliente", referencedColumnName = "idCliente", foreignKey = @ForeignKey(name = "fk_cliente"), nullable = false)
-	@ManyToOne(fetch = FetchType.LAZY)
-    private Cliente cliente;
-	
-	@OneToMany(mappedBy="orcamento", cascade=CascadeType.REMOVE, fetch = FetchType.LAZY)
-	private List<OrcamentoProduto> orcamentoProdutos;
-	
-	
-
 	public List<OrcamentoProduto> getOrcamentoProdutos() {
 		return orcamentoProdutos;
 	}
@@ -80,6 +70,10 @@ public class Orcamento implements Serializable {
 	public void setOrcamentoProdutos(List<OrcamentoProduto> orcamentoProdutos) {
 		this.orcamentoProdutos = orcamentoProdutos;
 	}
+	private Cliente cliente;
+	
+	@OneToMany(mappedBy="orcamento", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<OrcamentoProduto> orcamentoProdutos;
 
 	public Integer getIdOrcamento() {
 		return idOrcamento;
