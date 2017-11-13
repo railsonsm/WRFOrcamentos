@@ -74,9 +74,9 @@ public class Fabricante implements Serializable {
 	@Column(name="fabri_cep", nullable=false)
 	private String cep;
 	
-	@OneToMany(mappedBy="fabricante", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="fabricante", fetch = FetchType.LAZY)
 	private List<Produto> produtos;
-	@OneToMany(mappedBy="fabricante", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="fabricante", fetch = FetchType.LAZY)
 	private List<Orcamento> orcamentos;
 
 	public List<Produto> getProdutos() {

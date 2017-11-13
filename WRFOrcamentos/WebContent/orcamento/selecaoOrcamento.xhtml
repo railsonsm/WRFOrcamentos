@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta charset="UTF-8"/>
-	<title>Seleção Produto</title>
+	<title>Seleção Orçamento</title>
 	
 	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
@@ -30,7 +30,7 @@
     	</h:panelGrid>
     	
     	<p:dataTable value="#{consultaMB.orcamentosFiltrados}" var="orcamento"
-    		emptyMessage="Nenhum Produto encontrado." rows="10" 
+    		emptyMessage="Nenhum orçamento encontrado." rows="10" 
     		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" >
     		
     		<p:column headerText="Código" style="text-align: center; width: 60px" sortBy="#{orcamento.idOrcamento}">

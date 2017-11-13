@@ -1,6 +1,7 @@
 package br.cairu.pi.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
@@ -63,6 +65,19 @@ public class ConsultaOrcamentoMB implements Serializable{
 			MensagensView.erroMessage("Nenhum oçamento encontrado dentro deste periodo", null);
 		}
 	}
+	
+	public String excluir() {
+		try {
+			new OrcamentoDAO().excluir(orcamento);
+			consultaOrcamentos = new ArrayList<OrcamentoProduto>();
+			orcamentosFiltrados = new ArrayList<Orcamento>();
+			orcamento = new Orcamento();
+			MensagensView.SucessoMessage("Orcamento excluido com sucesso!.", null);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return null;
+	}
 
 	public void orcamentoSelecionado(SelectEvent event) {
 		Orcamento orcamento = (Orcamento) event.getObject();
@@ -72,12 +87,13 @@ public class ConsultaOrcamentoMB implements Serializable{
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void emitirRelatorio() {
+	public String emitirRelatorio() {
 		Relatorio relatorio = new Relatorio();
 		
 		HashMap<String, Object> parametro = new HashMap<String, Object>();
 		parametro.put("o.idOrcamento", orcamento.getIdOrcamento());
 		relatorio.getRelatorio(parametro);
+		return "/emitirOrcamento.xhtml";		
 		
 	}
 	

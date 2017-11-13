@@ -72,21 +72,7 @@ public class OrcamentoMB implements Serializable {
 		return null;
 	}
 	
-	public String excluir() {
-		try {
-			//new OrcamentoProdutoDAO().excluir(orcamentoProduto);
-			new OrcamentoDAO().excluir(orcamento);
-			fimDoOrcamento();
-			MensagensView.SucessoMessage("Produto removido com sucesso!.", null);
-		}catch (javax.persistence.RollbackException e) {
-			MensagensView.erroMessage("O produto não pôde ser excluido! Existem orcamentos registrados com o mesmo.", null);
-		} catch (ConstraintViolationException e) {
-			MensagensView.erroMessage("O produto não pôde ser excluido! Existem orcamentos registrados com o mesmo.", null);
-		}	
-		return null;
-	}
-
-	// ITENS ORCAMENTO
+		// ITENS ORCAMENTO
 	public void listaDeItens() {
 		try {
 			

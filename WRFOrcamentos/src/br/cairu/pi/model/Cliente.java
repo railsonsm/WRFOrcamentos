@@ -74,7 +74,7 @@ public class Cliente  implements Serializable{
 	@Column(name="cli_emailSupr", nullable=false)
 	private String emailSupr;
 	
-	@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="cliente", fetch = FetchType.LAZY)
 	private List<Orcamento> orcamentos;
 	
 	public List<Orcamento> getOrcamentos() {

@@ -95,12 +95,12 @@
 				<p:outputLabel value="Obra" />
 				<p:inputText size="35" value="#{orcamentoMB.orcamento.obra}" />
 
-				<p:outputLabel value="Data" for="popup" />
-				<p:calendar id="popup"
-					value="#{orcamentoMB.orcamento.dataorcamento}" locale="pt"
+				<p:outputLabel value="Data" for="mask" />
+				<p:calendar id="mask" locale="pt_BR"
+					value="#{orcamentoMB.orcamento.dataorcamento}"
 					required="true" requiredMessage="Data é obrigatório"
 					readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" >
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
+					<f:convertDateTime pattern="dd/MM/yy" timeZone="America/Sao_Paulo" />
 				</p:calendar>
 
 			</p:panelGrid>
@@ -208,15 +208,15 @@
 							<h:outputText value="R$ #{orcamentoproduto.produto.valortabela}" />
 						</p:column>
 
-						<p:column style="text-align: center;">
+						<p:column style="text-align: center;  width: 100px">
 							<h:outputText value="#{orcamentoproduto.quantidade}" />
 						</p:column>
 
-						<p:column style="text-align: center;">
+						<p:column style="text-align: center;  width: 100px">
 							<h:outputText value="R$ #{orcamentoproduto.valorUnitario}" />
 						</p:column>
 
-						<p:column style="text-align: center;">
+						<p:column style="text-align: center;  width: 100px">
 							<p:commandButton title="Excluir" icon="fa fa-fw fa-remove"
 								action="#{orcamentoMB.removeItenLista(orcamentoproduto)}"
 								process="@this" update="tabelaItens formOrc:menuBar" />

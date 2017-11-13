@@ -41,7 +41,7 @@
 					<p:dataGrid var="dados" value="#{consultaMB.consultaOrcamentos}"
 						columns="1" rows="1"
 						style="margin-left: -18px; margin-right: -18px; margin-top: 5px; margin-bottom:5px;"
-						emptyMessage="Selecione o orçamento1">
+						emptyMessage="Selecione o orçamento">
 						<p:panelGrid columns="4" style="width:100%;" id="mostrarId"
 							columnClasses="rotulo, campo, rotulo, campo">
 
@@ -149,14 +149,14 @@
 				<f:facet name="options">
 
 					<p:commandButton style="margin-left: 30px;" value="Excluir"
-						update="@form" actionListener="#{orcamentoMB.excluir}"
+						update="@form" actionListener="#{consultaMB.excluir}"
 						process="@form" icon="ui-icon-cart">
 						<p:confirm header="Confirmação" message="Tem certeza?"
 							icon="ui-icon-alert" />
 					</p:commandButton>
 
 					<p:commandButton style="margin-left: 30px;" value="Limpar"
-						action="#{orcamentoMB.fimDoOrcamento}" icon="ui-icon-pencil"
+						action="excluirOrcamento.xhtml" icon="ui-icon-pencil"
 						process="@this" update="@form" immediate="true" />
 
 					<p:commandButton style="margin-left: 30px;" value="Voltar"
@@ -166,7 +166,7 @@
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Sim" type="button"
 							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-							actionListener="#{orcamentoMB.excluir}" />
+							actionListener="#{consultaMB.excluir}" update="@form"/>
 						<p:commandButton value="Não" type="button"
 							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 					</p:confirmDialog>

@@ -47,7 +47,7 @@ public class Produto implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Fabricante fabricante;
 	
-	@OneToMany(mappedBy="produto", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="produto", fetch = FetchType.LAZY)
 	private List<OrcamentoProduto> orcamentoProdutos;
 
 	/*@ManyToMany(cascade = CascadeType.ALL)
