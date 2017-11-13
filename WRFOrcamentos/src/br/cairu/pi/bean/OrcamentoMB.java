@@ -11,11 +11,13 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ComponentSystemEvent;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 import br.cairu.pi.dao.OrcamentoDAO;
 import br.cairu.pi.dao.OrcamentoProdutoDAO;
+import br.cairu.pi.dao.ProdutoDAO;
 import br.cairu.pi.model.Cliente;
 import br.cairu.pi.model.Fabricante;
 import br.cairu.pi.model.Orcamento;
@@ -69,6 +71,20 @@ public class OrcamentoMB implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	public String excluir() {
+		try {
+			//new OrcamentoProdutoDAO().excluir(orcamentoProduto);
+			new OrcamentoDAO().excluir(orcamento);
+			fimDoOrcamento();
+			MensagensView.SucessoMessage("Produto removido com sucesso!.", null);
+		}catch (javax.persistence.RollbackException e) {
+			MensagensView.erroMessage("O produto não pôde ser excluido! Existem orcamentos registrados com o mesmo.", null);
+		} catch (ConstraintViolationException e) {
+			MensagensView.erroMessage("O produto não pôde ser excluido! Existem orcamentos registrados com o mesmo.", null);
+		}	
 		return null;
 	}
 

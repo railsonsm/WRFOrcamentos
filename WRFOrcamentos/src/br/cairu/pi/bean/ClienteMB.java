@@ -18,7 +18,6 @@ import br.cairu.pi.view.MensagensView;
 @ViewScoped
 public class ClienteMB implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
 	private Cliente cliente = new Cliente();
 	private String nomeCliente;
 	private List<Cliente> clientesFiltrados;

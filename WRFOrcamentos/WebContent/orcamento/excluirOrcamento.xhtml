@@ -9,7 +9,7 @@
 
 		<h:form id="formConsulta">
 
-			<h1>Emitir Orçamento</h1>
+			<h1>Excluir Orçamento</h1>
 
 			<p:messages id="msgs" autoUpdate="true"
 				style="width:95%; margin-left: 35px;" />
@@ -20,7 +20,7 @@
 					<p:inputText size="10" value="#{consultaMB.orcamento.idOrcamento}"
 						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}"
 						required="true" requiredMessage="Selecione o Orcamento"
-						id="codProduto"/>
+						id="codProduto" />
 
 					<p:commandButton icon="ui-icon-search" title="Pesquisar"
 						action="#{consultaMB.abrirDialogo}" process="@this" update="@none">
@@ -102,7 +102,8 @@
 								style="text-align: center" />
 						</p:column>
 
-						<p:column headerText="Produto" style="width: 250px; text-align: center;">
+						<p:column headerText="Produto"
+							style="width: 250px; text-align: center;">
 							<h:outputText value="#{itens.produto.descricao}" />
 						</p:column>
 
@@ -147,17 +148,28 @@
 
 				<f:facet name="options">
 
-					<p:commandButton style="margin-left: 30px;" value="Emitir"
-						action="#{consultaMB.emitirRelatorio}" icon="ui-icon-pencil"
-						ajax="false" onclick="this.form.target='_blank'" disabled="#{consultaMB.orcamento.idOrcamento == null}"/>
+					<p:commandButton style="margin-left: 30px;" value="Excluir"
+						update="@form" actionListener="#{orcamentoMB.excluir}"
+						process="@form" icon="ui-icon-cart">
+						<p:confirm header="Confirmação" message="Tem certeza?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
 
 					<p:commandButton style="margin-left: 30px;" value="Limpar"
-						action="emitirOrcamento.xhtml" icon="ui-icon-pencil"
+						action="#{orcamentoMB.fimDoOrcamento}" icon="ui-icon-pencil"
 						process="@this" update="@form" immediate="true" />
 
 					<p:commandButton style="margin-left: 30px;" value="Voltar"
 						action="/inicio?faces-redirect=true" icon="ui-icon-home"
 						process="@this" update="@all" />
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+							actionListener="#{orcamentoMB.excluir}" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
 
 				</f:facet>
 			</p:menubar>

@@ -20,6 +20,7 @@ import br.cairu.pi.model.Fabricante;
 import br.cairu.pi.model.Orcamento;
 import br.cairu.pi.model.OrcamentoProduto;
 import br.cairu.pi.model.Produto;
+import br.cairu.pi.report.Relatorio;
 import br.cairu.pi.view.MensagensView;
 
 @ManagedBean(name = "consultaMB")
@@ -70,6 +71,15 @@ public class ConsultaOrcamentoMB implements Serializable{
 		valorOrcamento =  consultaOrcamentos.get(0).getOrcamento().getValorOrcamento();
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void emitirRelatorio() {
+		Relatorio relatorio = new Relatorio();
+		
+		HashMap<String, Object> parametro = new HashMap<String, Object>();
+		parametro.put("o.idOrcamento", orcamento.getIdOrcamento());
+		relatorio.getRelatorio(parametro);
+		
+	}
 	
 	public String getNomeCliente() {
 		return nomeCliente;

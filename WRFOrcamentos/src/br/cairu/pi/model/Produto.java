@@ -46,12 +46,23 @@ public class Produto implements Serializable{
 	@JoinColumn(name = "idFabricante", referencedColumnName = "idFabricante",  foreignKey = @ForeignKey(name = "fk_fabricante"), nullable=false)
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Fabricante fabricante;
+	
+	@OneToMany(mappedBy="produto", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<OrcamentoProduto> orcamentoProdutos;
 
 	/*@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "OrcamentoProduto",
 				joinColumns= {@JoinColumn(name = "idOrcamento"),}, 
 				inverseJoinColumns={@JoinColumn(name="idProduto" )})
 	private List<Orcamento> orcamentos;*/
+
+	public List<OrcamentoProduto> getOrcamentoProdutos() {
+		return orcamentoProdutos;
+	}
+
+	public void setOrcamentoProdutos(List<OrcamentoProduto> orcamentoProdutos) {
+		this.orcamentoProdutos = orcamentoProdutos;
+	}
 
 	public Integer getIdProduto() {
 		return idProduto;
