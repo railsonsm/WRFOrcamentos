@@ -7,61 +7,35 @@
 		<p:growl id="messages" />
 		
 		<p:menubar style="min-height: 5px; ">
-			<p:menuitem value="Inicio" url="/"  icon="ui-icon-close" />
+			<p:menuitem value="Inicio" url="/"  icon="ui-icon-home" />
 			
 			<p:submenu label="Cadastro" icon="ui-icon-document">
-				<p:submenu label="Cliente" icon="ui-icon-contact">
+				<p:submenu label="Cliente" icon="ui-icon-person">
 					<p:menuitem value="Novo" url="/cliente/cadastrarCliente.xhtml" />
 					<p:menuitem value="Editar" url="/cliente/editarCliente.xhtml" />
 					<p:menuitem value="Excluir" url="/cliente/excluirCliente.xhtml" />
 				</p:submenu>
-				<p:submenu label="Fabricante" icon="ui-icon-contact">
+				<p:submenu label="Fabricante" icon="ui-icon-suitcase">
 					<p:menuitem value="Novo"
 						url="/fabricante/cadastrarFabricante.xhtml" />
 					<p:menuitem value="Editar" url="/fabricante/editarFabricante.xhtml" />
 					<p:menuitem value="Excluir"
 						url="/fabricante/excluirFabricante.xhtml" />
 				</p:submenu>
-				<p:submenu label="Produto" icon="ui-icon-contact">
+				<p:submenu label="Produto" icon="ui-icon-cart">
 					<p:menuitem value="Novo" url="/produto/cadastrarProduto.xhtml" />
 					<p:menuitem value="Editar" url="/produto/editarProduto.xhtml" />
 					<p:menuitem value="Excluir" url="/produto/excluirProduto.xhtml" />
 				</p:submenu>
 			</p:submenu>
 
-			<p:submenu label="Orçamento" icon="ui-icon-document">
+			<p:submenu label="Orçamento" icon="ui-icon-cart">
 				<p:menuitem value="Novo" url="/orcamento/registrarOrcamento.xhtml" />
 				<p:menuitem value="Emitir" url="/orcamento/emitirOrcamento.xhtml" />
 				<p:menuitem value="Excluir" url="/orcamento/excluirOrcamento.xhtml" />
 			</p:submenu>
 
-			<p:submenu label="Teste" icon="ui-icon-pencil">
-				<p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />
-				<p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />
-			</p:submenu>
-
-			<p:submenu label="Teste" icon="ui-icon-help">
-				<p:menuitem value="Contents" url="#" />
-				<p:submenu label="Search" icon="ui-icon-search">
-					<p:submenu label="Text">
-						<p:menuitem value="Workspace" url="#" />
-					</p:submenu>
-					<p:menuitem value="File" url="#" />
-				</p:submenu>
-			</p:submenu>
-
-			<p:submenu label="Teste" icon="ui-icon-gear">
-				<p:submenu label="Ajax" icon="ui-icon-refresh">
-					<p:menuitem value="Save" actionListener="#{menuView.save}"
-						icon="ui-icon-disk" update="messages" />
-					<p:menuitem value="Update" actionListener="#{menuView.update}"
-						icon="ui-icon-arrowrefresh-1-w" update="messages" />
-				</p:submenu>
-				<p:submenu label="Non-Ajax" icon="ui-icon-newwin">
-					<p:menuitem value="Delete" actionListener="#{menuView.delete}"
-						icon="ui-icon-close" update="messages" ajax="false" />
-				</p:submenu>
-			</p:submenu>
+			<p:menuitem value="Tecnologias" url="/tecUsados.xhtml"  icon="ui-icon-info" />
 
 		</p:menubar>
 

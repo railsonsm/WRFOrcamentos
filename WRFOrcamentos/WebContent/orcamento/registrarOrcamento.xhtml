@@ -14,13 +14,13 @@
 
 
 
-			<p:panelGrid columns="2" style="margin-left: 35px;">
+			<p:panelGrid columns="2">
 				<p:outputLabel value="Código Orçamento" style="width:45%" />
 				<p:inputText size="12" value="#{orcamentoMB.codDoOrcamento}"
 					readonly="true" />
 			</p:panelGrid>
 
-			<p:panelGrid columns="4" style="width:95%; margin-left: 35px;"
+			<p:panelGrid columns="4" style="width:100%;"
 				id="mostrarId" columnClasses="rotulo, campo, rotulo, campo">
 
 				<p:outputLabel value="Selecione o Fabricante" style="width:45%"
@@ -106,7 +106,7 @@
 			</p:panelGrid>
 
 			<p:tabView
-				style="margin-left: 35px; margin-right: 35px; margin-top: 10px"
+				style="margin-top: 10px"
 				dynamic="true" id="tabView">
 				<p:tab title="Itens" dynamic="true">
 					<p:dataTable var="itens" value="" id="tabitens"

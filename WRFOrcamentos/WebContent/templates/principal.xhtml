@@ -15,14 +15,14 @@
 	<title><ui:insert name="titulo"></ui:insert></title>
 </h:head>
 
-<p:panelGrid styleClass="barrainformacao" columns="4"
-	columnClasses="rotulo,campo,rotulo,campo">
+<h:panelGrid styleClass="barrainformacao" columns="4"
+	columnClasses="rotulo,campo,rotulo,campo" >
 
-	<h:outputText
+	<p:outputLabel
 		value="Usuário logado: #{sessionScope['usuarioLogado'].login}"
-		style="margin-left: 10px;" />
+		style="margin-left: 10px;"/>
 
-	<h:outputText value="Escolha seu tema " style="float: right"/>
+	<p:outputLabel value="Escolha seu tema " style="float: right;"/>
 
 	<h:form>
 		<p:themeSwitcher id="basic" style="width:165px"
@@ -38,7 +38,7 @@
 			action="#{loginMB.deslogar}" style="right: 10px; float: right" process="@this" update="@all"/>
 	</h:form>
 
-</p:panelGrid>
+</h:panelGrid>
 
 <h:body style="background-color: #CDE8FF" styleClass="padrao">
 

@@ -62,7 +62,7 @@ public class ConsultaOrcamentoMB implements Serializable{
 	public void buscaOrcProData() {
 		orcamentosFiltrados = new OrcamentoDAO().buscaOrcamentosPorData(dataInicio, dataFim, nomeCliente);
 		if (orcamentosFiltrados.isEmpty()) {
-			MensagensView.erroMessage("Nenhum oçamento encontrado dentro deste periodo", null);
+			MensagensView.erroMessage("Nenhum orçamento encontrado dentro deste periodo", null);
 		}
 	}
 	
@@ -87,14 +87,13 @@ public class ConsultaOrcamentoMB implements Serializable{
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public String emitirRelatorio() {
+	public void emitirRelatorio() {
 		Relatorio relatorio = new Relatorio();
 		
 		HashMap<String, Object> parametro = new HashMap<String, Object>();
 		parametro.put("o.idOrcamento", orcamento.getIdOrcamento());
 		relatorio.getRelatorio(parametro);
-		return "/emitirOrcamento.xhtml";		
-		
+
 	}
 	
 	public String getNomeCliente() {

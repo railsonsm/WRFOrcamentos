@@ -11,10 +11,9 @@
 
 			<h1>Excluir Orçamento</h1>
 
-			<p:messages id="msgs" autoUpdate="true"
-				style="width:95%; margin-left: 35px;" />
+			<p:messages id="msgs" autoUpdate="true" />
 
-			<p:panelGrid columns="2" style="margin-left: 35px;">
+			<p:panelGrid columns="2">
 				<h:panelGroup>
 
 					<p:inputText size="10" value="#{consultaMB.orcamento.idOrcamento}"
@@ -35,7 +34,7 @@
 			</p:panelGrid>
 
 			<p:tabView
-				style="margin-left: 35px; margin-right: 35px; margin-top: 10px"
+				style="margin-top: 10px"
 				dynamic="true">
 				<p:tab title="Dados do Orçamento" dynamic="true">
 					<p:dataGrid var="dados" value="#{consultaMB.consultaOrcamentos}"
@@ -89,7 +88,7 @@
 			</p:tabView>
 
 			<p:tabView
-				style="margin-left: 35px; margin-right: 35px; margin-top: 10px"
+				style="margin-top: 10px"
 				dynamic="true">
 				<p:tab title="Itens" dynamic="true">
 					<p:dataTable var="itens" value="#{consultaMB.consultaOrcamentos}"
@@ -109,12 +108,12 @@
 
 						<p:column headerText="Valor Orç."
 							style="width: 50px;text-align: center">
-							<h:outputText value="#{itens.valorNoOrc}" size="8" />
+							<h:outputText value="R$ #{itens.valorNoOrc}" size="8" />
 						</p:column>
 
 						<p:column headerText="Valor Tabela"
 							style="text-align: center; width: 50px ">
-							<h:outputText size="8" value="#{itens.produto.valortabela}" />
+							<h:outputText size="8" value="R$ #{itens.produto.valortabela}" />
 						</p:column>
 
 						<p:column headerText="Quantidade"
@@ -124,7 +123,7 @@
 
 						<p:column headerText="Valor Unitário"
 							style="text-align: center; width: 50px ">
-							<h:outputText size="8" value="#{itens.valorUnitario}" />
+							<h:outputText size="8" value="R$ #{itens.valorUnitario}" />
 						</p:column>
 
 

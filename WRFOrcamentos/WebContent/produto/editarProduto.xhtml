@@ -9,10 +9,9 @@
 		<h:form>
 			<h1>Editar Produto</h1>
 
-			<p:messages id="msgs" autoUpdate="true"
-				style="width:95%; margin-left: 35px" />
+			<p:messages id="msgs" autoUpdate="true" style="width:100%;" />
 
-			<p:panelGrid columns="2" style="margin-left: 35px;">
+			<p:panelGrid columns="2">
 
 				<p:outputLabel value="Código Produto" style="width:45%"
 					for="codProduto" />
@@ -38,15 +37,16 @@
 			</p:panelGrid>
 
 			<p:panelGrid id="editarProduto" columns="4"
-				style="width:95%; margin-left: 35px; margin"
+				style="width:100%;"
 				columnClasses="rotulo, campo, rotulo, campo">
 
-				<p:outputLabel value="Código Fabricante" for="codfabricante"/>
-				
-				<h:panelGroup>				
-					<p:inputText size="12" id="codfabricante" required="true" requiredMessage="Selecione o Fabricante"
+				<p:outputLabel value="Código Fabricante" for="codfabricante" />
+
+				<h:panelGroup>
+					<p:inputText size="12" id="codfabricante" required="true"
+						requiredMessage="Selecione o Fabricante"
 						value="#{produtoMB.fabricante.idFabricante}"
-						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}"/>
+						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" />
 
 					<p:commandButton icon="ui-icon-search" title="Pesquisar"
 						action="#{fabricanteMB.abrirDialogo}" process="@this"
@@ -63,7 +63,7 @@
 				<p:outputLabel value="Fabricante *" />
 				<p:inputText size="35" value="#{produtoMB.fabricante.nome}"
 					id="fabricante" readonly="true" />
-					
+
 				<p:outputLabel value="Código original/Fabric." />
 				<p:inputText size="35" value="#{produtoMB.produto.codOriginal}" />
 
@@ -98,9 +98,11 @@
 
 				<p:outputLabel value="Ambiente" />
 				<p:inputText size="35" value="#{produtoMB.produto.ambiente}" />
-				
-				<p:outputLabel for="vTabela" value="Valor Tabela"/>
-				<p:inputText  required="true" id="vTabela" value="#{produtoMB.produto.valortabela}"  requiredMessage="Informe o valor de tabela do produto" />
+
+				<p:outputLabel for="vTabela" value="Valor Tabela" />
+				<p:inputText required="true" id="vTabela"
+					value="#{produtoMB.produto.valortabela}"
+					requiredMessage="Informe o valor de tabela do produto" />
 
 
 			</p:panelGrid>
@@ -116,11 +118,12 @@
 					</p:commandButton>
 
 					<p:commandButton style="margin-left: 30px;" value="Limpar"
-						action="editarProduto.xhtml" icon="ui-icon-pencil" process="@this" update="@form"
-						immediate="true" />
+						action="editarProduto.xhtml" icon="ui-icon-pencil" process="@this"
+						update="@form" immediate="true" />
 
 					<p:commandButton style="margin-left: 30px;" value="Voltar"
-						action="/inicio?faces-redirect=true" icon="ui-icon-home"  process="@this" update="@all" />
+						action="/inicio?faces-redirect=true" icon="ui-icon-home"
+						process="@this" update="@all" />
 
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Sim" type="button"

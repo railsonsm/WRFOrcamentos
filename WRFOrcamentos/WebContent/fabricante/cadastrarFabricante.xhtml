@@ -9,11 +9,9 @@
 		<h:form>
 			<h1>Cadastrar Fabricante</h1>
 
-			<p:messages id="msgs" autoUpdate="true"
-				style="width:95%; margin-left: 35px" />
+			<p:messages id="msgs" autoUpdate="true" />
 
-			<p:panelGrid id="cadastroFabricante" columns="4"
-				style="width:95%; margin-left: 35px;"
+			<p:panelGrid id="cadastroFabricante" columns="4" style="width:100%;"
 				columnClasses="rotulo, campo, rotulo, campo">
 
 				<p:outputLabel for="nome" value="Nome" />
@@ -116,12 +114,12 @@
 					</p:commandButton>
 
 					<p:commandButton style="margin-left: 30px;" value="Limpar"
-						action="cadastrarFabricante.xhtml" icon="ui-icon-pencil" aprocess="@this" update="@form"
-						immediate="true"/>
+						action="cadastrarFabricante.xhtml" icon="ui-icon-pencil"
+						aprocess="@this" update="@form" immediate="true" />
 
 					<p:commandButton style="margin-left: 30px;" value="Voltar"
-						action="/inicio?faces-redirect=true" icon="ui-icon-home" ajax="false"
-						onclick="false" immediate="true" />
+						action="/inicio?faces-redirect=true" icon="ui-icon-home"
+						ajax="false" onclick="false" immediate="true" />
 
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Sim" type="button"

@@ -9,21 +9,22 @@
 		<h:form>
 			<h1>Cadastrar Produto</h1>
 
-			<p:messages id="msgs" autoUpdate="true"
-				style="width:95%; margin-left: 35px" />
+			<p:messages id="msgs" autoUpdate="true" />
 
-			<p:panelGrid id="cadastrarProduto" columns="4"
-				style="width:95%; margin-left: 35px; margin"
+			<p:panelGrid id="cadastrarProduto" columns="4" style="width:100%;"
 				columnClasses="rotulo, campo, rotulo, campo">
 
-				<p:outputLabel value="Código Fabricante" for="fabricante"/>
-				
+				<p:outputLabel value="Código Fabricante" for="fabricante" />
+
 				<h:panelGroup>
-					<p:inputText size="12" id="fabricante" readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}"
-						value="#{produtoMB.fabricante.idFabricante}" required="true"  requiredMessage="Selecione o fabricante." />
-						
+					<p:inputText size="12" id="fabricante"
+						readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}"
+						value="#{produtoMB.fabricante.idFabricante}" required="true"
+						requiredMessage="Selecione o fabricante." />
+
 					<p:commandButton icon="ui-icon-search" title="Pesquisar"
-						action="#{fabricanteMB.abrirDialogo}" process="@this" update="@none">
+						action="#{fabricanteMB.abrirDialogo}" process="@this"
+						update="@none">
 						<p:ajax event="dialogReturn"
 							listener="#{produtoMB.fabricanteSelecionado}" process="@this"
 							update="@form,fabricante" />
@@ -34,7 +35,7 @@
 				<p:outputLabel for="nome" value="Fabricante *" />
 				<p:inputText size="35" value="#{produtoMB.fabricante.nome}"
 					readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}"
-					id="nome"/>
+					id="nome" />
 
 				<p:outputLabel value="Código original/Fabric." />
 				<p:inputText size="35" value="#{produtoMB.produto.codOriginal}" />
@@ -70,9 +71,11 @@
 
 				<p:outputLabel value="Ambiente" />
 				<p:inputText size="35" value="#{produtoMB.produto.ambiente}" />
-				
-				<p:outputLabel for="vTabela" value="Valor Tabela"/>
-				<p:inputText  required="true" id="vTabela" value="#{produtoMB.produto.valortabela}"  requiredMessage="Informe o valor de tabela do produto" />
+
+				<p:outputLabel for="vTabela" value="Valor Tabela" />
+				<p:inputText required="true" id="vTabela"
+					value="#{produtoMB.produto.valortabela}"
+					requiredMessage="Informe o valor de tabela do produto" />
 
 			</p:panelGrid>
 			<p:menubar styleClass="toolbarCadastro">
@@ -86,11 +89,12 @@
 					</p:commandButton>
 
 					<p:commandButton style="margin-left: 30px;" value="Limpar"
-						action="cadastrarProduto.xhtml" icon="ui-icon-pencil" process="@this" update="@form"
-						immediate="true" />
+						action="cadastrarProduto.xhtml" icon="ui-icon-pencil"
+						process="@this" update="@form" immediate="true" />
 
 					<p:commandButton style="margin-left: 30px;" value="Voltar"
-						action="inicio?faces-redirect=true" icon="ui-icon-home" process="@this" update="@all" immediate="true" />
+						action="inicio?faces-redirect=true" icon="ui-icon-home"
+						process="@this" update="@all" immediate="true" />
 
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Sim" type="button"
