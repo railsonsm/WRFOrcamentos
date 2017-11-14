@@ -9,7 +9,7 @@ import com.sun.jndi.ldap.ManageReferralControl;
 
 import br.cairu.pi.util.JPAUtil;
 
-public class  GenericDAO<T> {
+public abstract class  GenericDAO<T> {
 
 	private final Class<T> classe;
 
