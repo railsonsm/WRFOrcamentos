@@ -105,6 +105,12 @@
 							style="width: 250px; text-align: center;">
 							<h:outputText value="#{itens.produto.descricao}" />
 						</p:column>
+						
+						<p:column headerText="Unid."
+							style="text-align: center; width: 50px ">
+							<h:outputText size="8" id="unidade"
+								value="#{itens.produto.unidade}" style="text-align: center"/>
+						</p:column>
 
 						<p:column headerText="Valor Orç."
 							style="width: 50px;text-align: center">
@@ -123,14 +129,14 @@
 
 						<p:column headerText="Valor Unitário"
 							style="text-align: center; width: 50px ">
-							<h:outputText size="8" value="R$ #{itens.valorUnitario}" />
+							<h:outputText size="8" value="R$ #{itens.valorUnitario}" style="text-align: center"/>
 						</p:column>
 
 
 						<p:columnGroup type="footer" id="valorTotal">
 							<p:row>
 
-								<p:column colspan="5" footerText="TOTAL DO ORÇAMENTO"
+								<p:column colspan="6" footerText="TOTAL DO ORÇAMENTO"
 									style="text-align: right;" />
 								<p:column footerText="R$ #{consultaMB.valorOrcamento}"
 									style="text-align: center" />

@@ -22,14 +22,17 @@
     	</h:panelGrid>
     	
     	<p:dataTable value="#{orcamentoMB.produtosFiltrados}" var="produto"
-    		emptyMessage="Nenhum Produto encontrado." rows="10" 
+    		emptyMessage="Nenhum Produto encontrado." rows="9" 
     		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" >
     		
-    		<p:column headerText="Código" style="text-align: center; width: 60px">
+    		<p:column headerText="Código" style="text-align: center; width: 30px">
     			<h:outputText value="#{produto.idProduto}" />
     		</p:column>
     		<p:column headerText="Descricao">
     			<h:outputText value="#{produto.descricao}" />
+    		</p:column>
+    		<p:column headerText="Unid.">
+    			<h:outputText value="#{produto.unidade}" />
     		</p:column>
     		<p:column headerText="Fabricante">
     			<h:outputText value="#{produto.fabricante.nome}" />

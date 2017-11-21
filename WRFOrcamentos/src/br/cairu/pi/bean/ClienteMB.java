@@ -50,9 +50,9 @@ public class ClienteMB implements Serializable {
 			this.cliente = new Cliente();
 			MensagensView.SucessoMessage("Cliente removido com sucesso!.", null);
 		} catch (javax.persistence.RollbackException e) {
-			MensagensView.erroMessage("O cliente não pôde ser excluido! Existem orcamentos registrados com o mesmo.", null);
+			MensagensView.erroMessage("O cliente não pôde ser excluido! Existem orçamentos registrados com o mesmo.", null);
 		} catch (ConstraintViolationException e) {
-			MensagensView.erroMessage("O cliente não pôde ser excluido! Existem orcamentos registrados com o mesmo.", null);
+			MensagensView.erroMessage("O cliente não pôde ser excluido! Existem orçamentos registrados com o mesmo.", null);
 		}
 		return null;
 	}

@@ -50,9 +50,9 @@ public class FabricanteMB implements Serializable {
 			MensagensView.SucessoMessage("Fabricante removido com sucesso!.", null);
 			fabricante = new Fabricante();
 		} catch (javax.persistence.RollbackException e) {
-			MensagensView.erroMessage("O fabricante não pôde ser excluido! Existe um produto registrado com o mesmo.", null);
+			MensagensView.erroMessage("O fabricante não pôde ser excluido! Existe um produto ou orçamento registrado com o mesmo.", null);
 		} catch (ConstraintViolationException e) {
-			MensagensView.erroMessage("O fabricante não pôde ser excluido! Existe um produto registrado com o mesmo.", null);
+			MensagensView.erroMessage("O fabricante não pôde ser excluido! Existe um produto ou orçamento registrado com o mesmo.", null);
 		}
 		return fabricante.getNome();
 	}
